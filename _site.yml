@@ -5,7 +5,9 @@ navbar:
   left:
     - text: "About"
       href: index.html
-
+    - text: "Back to AquatiQuE"
+      href: https://github.com/aterui/aquaecolab
+  
   right:
     - icon: fa-code fa-lg
       href: https://github.com/aterui/seminar-in-ecology
@@ -13,4 +15,4 @@ navbar:
 output:
   html_document:
     css: style_web.css
-    theme: cosmo
+    theme: paper
