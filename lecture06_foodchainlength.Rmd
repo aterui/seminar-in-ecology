@@ -1,0 +1,536 @@
+---
+title: "Food chain length"
+date: BIO605 FA20
+output:
+  revealjs::revealjs_presentation:
+    self_contained: false
+    highlight: haddock
+    css: style_slide.css
+    theme: white
+    reveal_plugins: ["menu", "chalkboard"]
+    reveal_options:
+      slideNumber: true
+      chalkboard:
+        theme: whiteboard
+        toggleNotesButton: true
+      menu:
+        numbers: true
+---
+
+```{r setup, include = F}
+knitr::opts_chunk$set(echo = F, message = F,
+                      fig.width = 5, fig.height = 4, fig.align = "center")
+CEX <- LWD <- 2
+source("function01_fw.R")
+library(patchwork)
+
+```
+
+# Define food chain length
+
+## Trophic position
+
+**Trophic position** (TP) is the vertical position in a food web
+
+- Basal species have a value of one (e.g., plants)
+- Primary consumers have a value of two (e.g., hevivores)
+
+```{r}
+set.seed(0)
+g <- fw.plot(node.size = 8)
+g
+```
+
+## Trophic position
+
+**Trophic position** (TP) is the vertical position in a food web
+
+- Predators have continuous values (1 < TP)
+- How would you define them?
+
+```{r}
+set.seed(0)
+g <- fw.plot(node.size = 8)
+g
+```
+
+## Fractional trophic position
+
+$$
+TP_i = 1 + \sum_{i}^{S}{F_{j}TP_{j}}
+$$
+**Consumer**
+
+- $TP_{i}$ Trophic position of species $i$
+
+**Prey**
+
+- $F_{j}$ Fraction of species j in the diet
+- $TP_{j}$ Trophic position of species j
+
+<small>Pauly and Palomales 2005, Bulletin of Marine Science</small>
+
+## Fractional trophic position
+
+$$
+TP_i = 1 + \sum_{i}^{S}{F_{j}TP_{j}}
+$$
+
+```{r}
+set.seed(0)
+g <- fw.plot(node.size = 8)
+g
+```
+
+## Food chain length
+
+Food chian length is the TP of the apex predator
+
+```{r}
+set.seed(0)
+fw.plot(node.size = 8)
+```
+
+## Why food chain length is important
+
+Food chain length is a summary measure of a food web
+
+Why is it important?
+
+## Why food chain length is important
+
+Food chain length influences
+
+- Energy flows$^1$
+- Top down control$^2$
+- Primary production$^2$
+- Atomospheric carbon exchange$^2$
+- Contaminant concentrations in top predators$^3$
+
+<small>
+$^1$Wang et al. 2018 Ecology Letters
+$^2$Pace et al. 1998 TREE
+$^3$Kidd et al. 1998 CFJAS
+</small>
+
+
+# Measuring food chain length
+
+## Methods
+
+There are many methods, but stable isotopes (nitrogen) is the most common approach
+
+
+## Method 1
+
+**Connectance web**
+
+- Binary interactions (0 or 1)
+- Ignores energy flow
+  
+```{r}
+set.seed(0)
+g <- fw.plot(node.size = 8)
+g
+```
+
+
+## Method 2
+
+**Energy web**
+
+- Quntitative interactions
+- Extremely time consuming
+  
+```{r}
+set.seed(0)
+fw.plot(node.size = 8, energy = T)
+```
+
+
+## Method 3
+
+**Stable isotopes**
+
+- Composite measure of food chain length
+- (Relatively) easy to measure
+- Food web structure itself is unknown
+
+## Food chain length with stable isotopes
+
+<div if="right">
+Collect stable isotope data (nitrogen) for the baseline and top predator
+
+Baseline can be producer or primary consumer
+</div>
+
+<div id="left>
+```{r}
+set.seed(1)
+fw.plot()
+```
+</div>
+
+## Equation
+
+Food chain length (top predator's TP) is calculated as:
+
+$$
+FCL = \frac{\delta ^{15}N_{predator} - \delta ^{15}N_{base}}{\Delta_N} + TP_{base}
+$$
+\
+\
+$\Delta_N$ is TEF for nitrogen, and $TP_{base}$ is the trophic position of the base species (1.0 or 2.0)
+
+## The advantage
+
+Recall: stable isotopes are the **mixed signature** of prey resources
+
+It can account for complicated food web structure without knowing the specifics
+
+
+## Tottabetsu river
+
+Tottabetsu River, Japan
+
+<img src="image_slide/img07.jpg" width="70%"></img>
+
+## Ground beetles
+
+Ground beetle - generalist predator
+
+<div id="left">
+<img src="image_slide/img02.jpg"></img>
+*Brachinus stenoderus*
+</div>
+
+<div id="right">
+<img src="image_slide/img08.jpg"></img>
+*Lithochlaenius noguchii*
+</div>
+
+## R exercise: data
+
+Download `sample_data.csv` and read it into R
+
+```{r, echo=T}
+dat <- read.csv("data/sample_data.csv")
+head(dat)
+```
+
+## R exercise: data formatting
+
+Check `species` column
+
+```{r, echo = T, message=F}
+unique(dat$species)
+```
+
+`grasshopper` is the base species
+
+## R exercise: mean N
+
+Calculate mean $\delta ^{15}N$ for each taxon
+
+```{r, echo=T}
+library(tidyverse)
+
+datN = dat %>%
+  group_by(species) %>% # grouping by 'species'
+  summarize(meanN = mean(d15N)) # calculate means for each group
+
+datN
+```
+
+## R exercise: trophic position
+
+$$
+TP_{predator} = \frac{\delta ^{15}N_{predator} - \delta ^{15}N_{base}}{\Delta_N} + TP_{base}
+$$
+
+Calculate trophic positions of *L. noguchii* and *B.stenoderus*
+
+<small>*$\Delta_{N} = 3.4$ and $TP_{base} = 2$ for this example</small>
+
+```{r, echo = T}
+Nbase <- datN$meanN[which(datN$species == "grasshopper")]
+Nln <- datN$meanN[which(datN$species == "L_noguchii")]
+Nbs <- datN$meanN[which(datN$species == "B_stenoderus")]
+```
+
+
+```{r}
+TPln <- (Nln - Nbase)/3.4 + 2
+TPbs <- (Nbs - Nbase)/3.4 + 2
+```
+
+## R exercise: trophic position
+
+Check values
+
+*L. noguchii*: TP = `r round(TPln, 2)`\
+*B. stenoderus*: TP = `r round(TPbs, 2)`
+
+```{r, echo = T}
+TPln
+TPbs
+```
+
+
+## Long lasting debate
+
+Food chain length varies in nature
+
+What determines food chain length?
+
+
+# H1: basal resource
+
+## Basal resource availability
+
+The productivity hypothesis predicts that food chain length should increase with increasing resource availability - why? 
+
+## Rationale
+
+Energy would be lost through predation
+
+Post (2002) summarized energetic efficiency in predator-prey interactions
+
+- Average: 10%
+- Range: 5 - 50%
+
+<small>Post 2002, TREE 6: 269-277</small>
+
+## Diminishing energy
+
+Energy available to the top predator will be limited by basal resource availability or energetic efficiency
+
+<div id="left">
+```{r}
+g <- fw.plot(S = 3, type = "linear", segment = F)
+g
+```
+</div>
+
+<div id="right">
+```{r}
+g <- fw.plot(S = 5, type = "linear", segment = F)
+g
+```
+</div>
+
+## Empirical evidence
+
+Highly controlled microbial system
+
+<div id="left">
+As nutrient supply increased, population abundance of predatory ciliate increased
+
+- Basal bacterium *Serratia marcescens*
+- Bacterivorous ciliate *Colpidium striatum*
+- Predatory ciliate *Didinium nasutum*
+
+</div>
+
+<div id="right">
+<img src="image_slide/img10.jpg" width="60%"></img>
+</div>
+
+<small>Kaunzinger and Morin 1998, Nature</small>
+
+
+## Counter evidence
+
+Natural lakes
+
+<div id="left">
+No response of food chain length to nutrient levels
+
+- Top predators vary by lakes
+- Greater diversity
+
+</div>
+
+<div id="right">
+<img src="image_slide/img11.jpg" width="100%"></img>
+</div>
+
+<small>Post et al. 2000, Nature</small>
+
+
+## Theory impaired?
+
+Contradicting results in experimental and natural systems
+
+Why does the difference emerge?
+
+
+## Food web structure
+
+Intraguild predation
+
+<div id="left">
+
+Predation on the species that shares a prey item(s)
+
+</div>
+
+<div id="right">
+```{r}
+g <- fw.plot(S = 3, P = 1, segment = F)
+g
+```
+</div>
+
+
+
+## Intraguild predation
+
+Intraguild predation can drive intraguild prey extinction
+
+<div id="left">
+
+Resource availability
+
+- Low: predator and/or consumer cannot invade into the system
+- Medium: predator and consumer coexist
+- High: predator extirpate consumer
+
+</div>
+
+<div id="right">
+<img src="image_slide/img12.jpg" width="90%"></img>
+</div>
+
+<small>Post & Takimoto. 2007, Oikos</small>
+
+
+## Theoretical evidence
+
+<img src="image_slide/img13.jpg" width="70%"></img>
+
+<small> Ward et al. 2017, Nature Communications</small>
+
+
+# H2: disturbance
+
+## The dynamic stability hypothesis
+
+The dynamic stability hypothesis predicts that food chain length will decrease with increasing disturbance frequency/intensity - why?
+
+<small>Pimm and Lawton 1977, Nature</small>
+
+## Rationale
+
+Long food chains take time to recover - frequent/intense disturbance will inhibit recovery
+
+<small>Pimm and Lawton 1977, Nature</small>
+
+## Empirical evidence
+
+Often tested in rivers
+
+<div id="left">
+
+US river ecosystem
+
+- River flows stongly influences ecological communities
+- Flow variation was quantified with long-term discharge records
+
+</div>
+
+<div id="right">
+<img src="image_slide/img14.jpg" width="100%"></img>
+</div>
+
+<small>Sabo et al. 2010, Science</small>
+
+## Counter evidence
+
+Often tested in rivers
+
+<div id="left">
+
+Australian river ecosystem
+
+- River flows stongly influences ecological communities
+- Flow regimes were categorized into three levels
+
+</div>
+
+<div id="right">
+<img src="image_slide/img15.jpg" width="100%"></img>
+</div>
+
+<small>Warfe et al. 2013, Plos One</small>
+
+## Theory impaired?
+
+Contradicting results in different regions
+
+Why does the difference emerge?
+
+
+## Intraguild predation
+
+Again, theory suggests intraguild predation may mediate the effect of disturbance
+
+Disturbance
+
+- Low: coexistence of IG-prey and IG-predator depends on the strength of IG predation
+- Medium: IG-prey and IG-predator coexist
+- High: no species can invade into the system
+
+<small>Takimoto et al. 2012, Ecological Research</small>
+
+# H3: ecosystem size
+
+## The ecosystem size hypothesis
+
+The ecosystem size hypothesis predicts long food chains in large ecosystems (area or volume) - why?
+
+## Rationale
+
+Multiple possibilities
+
+- More space, more refugia
+- Habitat heterogeneity
+- More species
+- and more...
+
+i.e., mechanisms are unclear
+
+## Metapopulation-based theory
+
+Consumers live on the patches of prey species - this builds up nested metapopulations
+
+<small>
+$$
+\begin{align}
+\frac{dp_1}{dt} &= mp_1(h-p_1) - ep_1 &&\text{basal only}\\
+\frac{dp_2}{dt} &= mp_2(p_1-p_2) - 2ep_2 &&\text{basal & consumer}\\
+\frac{dp_3}{dt} &= mp_3(p_2-p_3) - 3ep_3 &&\text{all}\\
+\end{align}
+$$
+</small>
+
+$h (0 \le h \le 1)$ is the fraction of habitat patches livable to the basal species
+
+<small>Modified from Holt 2002, Ecological Research</small>
+
+## Metapopulation-based theory
+
+Metapopulation-based theory suggets the effect of ecosystem size is less sensitive to local food web structure (strength of intraguild predation) 
+
+<small>Takimoto et al. 2012, Ecological Research</small>
+
+## Empirical evidence
+
+Ample empirical evidence - lakes, ponds, and islands
+
+<img src="image_slide/img16.jpg" width="70%"></img>
+
+<small>Post et al. 2000, Nature</small>
+
+
+

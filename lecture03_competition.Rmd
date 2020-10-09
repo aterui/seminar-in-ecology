@@ -1,0 +1,616 @@
+---
+title: "Competition"
+date: BIO605 FA20
+output:
+  revealjs::revealjs_presentation:
+    self_contained: false
+    highlight: haddock
+    css: style_slide.css
+    theme: white
+    reveal_plugins: ["menu", "chalkboard"]
+    reveal_options:
+      slideNumber: true
+      chalkboard:
+        theme: whiteboard
+        toggleNotesButton: true
+      menu:
+        numbers: true
+---
+
+
+```{r setup, include = F}
+
+knitr::opts_chunk$set(echo = F, fig.width = 5, fig.height = 4, fig.align = "center")
+CEX <- LWD <- 2
+
+```
+
+# Community Ecology
+
+## What is a community?
+
+A group of species that interact in a given space
+
+  - Communities have structure, including **species richness**, **relative abundance** etc.
+  - Different types of interactions
+  - Why is it important to study interactions in a community?
+
+## Interctions matter
+
+Species interactions can be a determinant of:
+
+  - persistence of constituent species
+  - stability of a community
+  - ecosystem functions
+  
+## Types of interactions
+
+List species interactions
+
+> - <span style="color:steelblue;">Competition</span>
+> - Predation
+> - Mutualism
+> - Parasitism
+> - Commensalism
+> - and more...
+
+## Competition
+
+Competition is considered to be a dominant (perhaps THE dominant) type of species interactions in a community*.
+
+<small>*I doubt it</small>
+
+**Contest competition**
+
+One or few individuals dominate resources
+
+**Scramble competition**
+
+Depletes resources and all competitors are affected
+
+
+# Competition models
+
+## Recall: logistic model
+
+One species model (Logistic model):
+
+$$
+\begin{align}
+\frac{dN}{dt} &= rN(1-\frac{N}{K}) &&\text{Logistic model}\\
+\end{align}
+$$
+
+
+## Include competition
+
+Add $N_2$ to the equation:
+
+$$
+\begin{align}
+\frac{dN_1}{dt} &= r_1N_1(1-\frac{N_1+N_2}{K_1})\\
+\end{align}
+$$
+
+How does $N_2$ impact $\frac{dN_1}{dt}$?
+
+## R exercise: set parameters
+
+Visualize how $N_2$ impacts $\frac{dN_1}{dt}$
+
+Set $r$, $K_1$, $N_1$, and $N_2$
+
+<small>$N_2$ is set to be $0$ for reference</small>
+
+```{r, echo = TRUE}
+r1 <- 1.5
+K1 <- 100
+N1 <- seq(from = 0, to = 150, length = 100)
+N2 <- 0 # set 0 as a reference
+```
+
+## R exercise: equation
+
+Write equation
+
+$$
+\frac{dN_1}{dt} = r_1N_1(1-\frac{N_1+N_2}{K_1})\\
+$$
+
+```{r, echo = TRUE}
+
+dN1_0 <- r1*N1*(1 - (N1 + N2)/K1)
+
+```
+
+
+## R exercise: visualize
+
+```{r, echo = TRUE}
+
+plot(dN1_0 ~ N1, type = "l", ylab = "dN1/dt") # N2 = 0
+abline(h = 0, col = grey(0, 0.2))
+points(100, 0, cex = CEX)
+```
+
+
+## R exercise: visualize
+
+```{r, echo = TRUE, eval = F}
+
+dN1_10 <- r1*N1*(1 - (N1 + 10)/K1) # N2 = 10
+plot(dN1_0 ~ N1, type = "l", ylab = "dN1/dt")
+abline(h = 0, col = grey(0, 0.2))
+lines(dN1_10 ~ N1, col = "blue")
+
+```
+
+## R exercise: visualize
+
+```{r, echo = TRUE, eval = T}
+
+dN1_10 <- r1*N1*(1 - (N1 + 10)/K1) # N2 = 10
+plot(dN1_0 ~ N1, type = "l", ylab = "dN1/dt")
+abline(h = 0, col = grey(0, 0.2))
+lines(dN1_10 ~ N1, col = "blue")
+
+```
+
+## R exercise: visualize
+
+```{r, echo = TRUE, eval= F}
+
+dN1_50 <- r1*N1*(1 - (N1 + 50)/K1) # N2 = 50
+plot(dN1_0 ~ N1, type = "l", ylab = "dN1/dt")
+abline(h = 0, col = grey(0, 0.2))
+lines(dN1_10 ~ N1, col = "blue")
+lines(dN1_50 ~ N1, col = "red")
+
+```
+
+## R exercise: visualize
+
+```{r, echo = TRUE, eval= T}
+
+dN1_50 <- r1*N1*(1 - (N1 + 50)/K1) # N2 = 50
+plot(dN1_0 ~ N1, type = "l", ylab = "dN1/dt")
+abline(h = 0, col = grey(0, 0.2))
+lines(dN1_10 ~ N1, col = "blue")
+lines(dN1_50 ~ N1, col = "red")
+
+```
+
+## Impact of competition
+
+Logistic model + species 2 ($N_2$)
+
+$$
+\frac{dN_1}{dt} = r_1N_1(1-\frac{N_1+N_2}{K_1})\\
+$$
+
+- As $N_2$ increases, the population growth of $N_1$ becomes negative more quickly
+- Population size of species 1 reaches its equilibrium below $K_1$, the carrying capacity in the absence of species 2
+
+
+## Assumptions
+
+Logistic model + species 2 ($N_2$)
+
+$$
+\frac{dN_1}{dt} = r_1N_1(1-\frac{N_1+N_2}{K_1})\\
+$$
+
+The above model assumes per-capita impacts are equal b/w species 1 and 2
+
+
+## Competition coefficient
+
+Logistic model + species 2 ($N_2$)
+
+$$
+\frac{dN_1}{dt} = r_1N_1(1-\frac{N_1+ \alpha N_2}{K_1})\\
+$$
+
+Multiply $\alpha$ to model different impacts of species 2
+
+$\alpha$ is referred to as the **competition coefficient**
+
+- $\alpha < 0$ ... effect of species 2 is less than species 1
+- $\alpha > 0$ ... effect of species 2 is greater than species 1
+
+
+## Assumptions
+
+Logistic model + species 2 ($N_2$)
+
+$$
+\frac{dN_1}{dt} = r_1N_1(1-\frac{N_1+ \alpha N_2}{K_1})\\
+$$
+
+The above model assumes
+
+- $N_2$ is constant
+- $N_1$ has no impacts on $N_2$
+
+
+## Lotka-Volterra model
+
+Lotka-Volterra model
+
+$$
+\frac{dN_1}{dt} = r_1N_1(1-\frac{N_1+ \alpha_{12} N_2}{K_1})\\
+\frac{dN_2}{dt} = r_2N_2(1-\frac{N_2+ \alpha_{21} N_1}{K_2})\\
+$$
+
+The above equation models dynamic interactions of the two competing species
+
+
+## Lotka-Volterra model
+
+Lotka-Volterra model (different form)
+
+$$
+\frac{dN_1}{dt} = N_1(r_1-\beta_1 N_1 - \gamma_{12}N_2)\\
+\frac{dN_2}{dt} = N_2(r_2-\beta_2 N_2 - \gamma_{21}N_1)\\
+$$
+
+- $\beta_i$ **Intraspecific** competition coefficient
+- $\gamma_{ji}$ **Interspecific** competition coefficient
+
+
+## Relate parameters
+
+$$
+\begin{align}
+\frac{dN_1}{dt} &= r_1N_1(1-\frac{N_1+ \alpha_{12} N_2}{K_1})\\
+                &= N_1(r_1 - \frac{r_1}{K_1}N_1 - \frac{r_1 \alpha_{12}}{K_1} N_2)\\
+                &= N_1(r_1 - \beta_1 N_1 - \beta_1 \alpha_{12} N_2)\\
+                &=  N_1(r_1 - \beta_1 N_1 - \gamma_{12} N_2)\\
+\end{align}
+$$
+
+where $\beta_1 = \frac{r_1}{K_1}$ and $\alpha_{12} = \frac{\gamma_{12}}{\beta_1}$
+
+$\alpha_{12}$ is the **ratio of inta- and interspecific competition coefficitents**
+
+
+# Predict consequences of competition
+
+## Model prediction
+
+<div id="left">
+
+```{r}
+par(mar= c(0,0,0,0), oma = c(0,0,0,0))
+plot(0, type = "n", xlim = c(0,1), ylim = c(0,1), ann = F, axes = F)
+text(0.5, 0.8, "Mechanism", cex = CEX)
+text(0.5, 0.2, "Pattern\n(observation)", cex = CEX)
+arrows(x0 = 0.7, y0 = 0.3, y1 = 0.7, col = "gray", lwd = LWD); text(0.3, 0.5, "Theoretical\nmodel", cex = CEX)
+arrows(x0 = 0.3, y0 = 0.7, y1 = 0.3, col = "gray", lwd = LWD); text(0.7, 0.5, "Statistical\nmodel", cex = CEX)
+
+```
+
+</div>
+
+<div id="right">
+
+**Theory**
+
+- Generate predictions with given mechanisms
+
+</div>
+
+
+## Model prediction
+
+Much of interests in community ecology is the coexistence of competiting species
+
+What does the Lotka-Volterra model predict?
+
+
+## Discrete version
+
+Make the discrete version of the Lotka-Volterra model
+
+In analogy of trasformation from the logistic to Beverton-Holt model
+
+$$
+N_{1,t+1} = (\frac{\lambda_1}{1 + \beta_1 N_{1,t} + \gamma_{12}N_{2,t}}) N_{1,t}\\
+N_{2,t+1} = (\frac{\lambda_2}{1 + \beta_2 N_{2,t} + \gamma_{21}N_{1,t}}) N_{2,t}
+$$
+
+
+## R exercise: set parameters
+
+Set $\lambda$, $\beta_i$, and $\gamma_{ji}$
+
+```{r,echo=TRUE}
+
+# Set equal values of lambda for species 1 and 2
+lambda <- 3
+
+b1 <- 0.1   # Intra-specific competition
+g21 <- 0.05 # Impact of sp1 on sp2
+
+b2 <- 0.3   # Intra-specific competition
+g12 <- 0.15 # Impact of sp2 on sp1
+
+```
+
+
+## R exercise: initial abundance
+
+Set initial abundance `N1[1]` and `N2[1]`
+
+```{r,echo=TRUE}
+
+N1 <- N2 <- NULL # create "NULL" objects
+N1[1] <- 10  # initial abundance 10
+N2[1] <- 5 # initial abundance 5
+
+```
+
+## R exercise: equation
+
+Write the equations
+
+$$
+N_{1,t+1} = (\frac{\lambda_1}{1 + \beta_1 N_{1,t} + \gamma_{12}N_{2,t}}) N_{1,t}\\
+N_{2,t+1} = (\frac{\lambda_2}{1 + \beta_2 N_{2,t} + \gamma_{21}N_{1,t}}) N_{2,t}
+$$
+
+```{r,echo=TRUE}
+
+for(t in 1:99){ # simulate 100 time steps
+  N1[t+1] <- (lambda*N1[t])/(1 + b1*N1[t] + g12*N2[t])
+  N2[t+1] <- (lambda*N2[t])/(1 + b2*N2[t] + g21*N1[t])
+}
+
+```
+
+## R exercise: print
+
+Check the first 5 time steps
+
+```{r,echo=TRUE}
+
+print(N1[1:5])
+print(N2[1:5])
+
+```
+
+
+## R exercise: visualize
+
+```{r, echo = TRUE, eval= F}
+
+t <- 1:length(N1)
+
+plot(N1 ~ t, type = "l", col = "blue", ylab = "N1 or N2",
+     ylim = c(0, max(N1, N2) ) )
+lines(N2 ~ t, col = "red")
+
+```
+
+## R exercise: visualize
+
+```{r, echo = TRUE}
+
+t <- 1:length(N1)
+
+plot(N1 ~ t, type = "l", col = "blue", ylab = "N1 or N2",
+     ylim = c(0, max(N1, N2) ) )
+lines(N2 ~ t, col = "red")
+
+```
+
+
+## Model prediction
+
+$$
+N_{1,t+1} = (\frac{\lambda_1}{1 + \beta_1 N_{1,t} + \gamma_{12}N_{2,t}}) N_{1,t}\\
+N_{2,t+1} = (\frac{\lambda_2}{1 + \beta_2 N_{2,t} + \gamma_{21}N_{1,t}}) N_{2,t}
+$$
+
+In the previous exercise, we set:
+
+> - $\lambda_1 = \lambda_2$ = `r lambda`
+> - $\beta_1$ = `r b1` and $\gamma_{21}$ = `r g21`
+> - $\beta_2$ = `r b2` and $\gamma_{12}$ = `r g12`
+
+What does this mean?
+
+## Competition: scenario 1
+
+Try the following conditions
+
+**Scenario 1**
+
+Intraspecific competition $\beta_{i}$ is **stronger** than interspecific competition $\gamma_{ji}$ for both species
+($\beta_i > \gamma_{ji}$)
+
+
+## R exercise: scenario 1
+
+```{r,echo=TRUE}
+
+# Set equal values of lambda for species 1 and 2
+lambda <- 3
+
+b1 <- 0.1   # Intra-specific competition
+g21 <- 0.05 # Impact of sp1 on sp2
+
+b2 <- 0.3   # Intra-specific competition
+g12 <- 0.15 # Impact of sp2 on sp1
+
+# initial abundance
+N1 <- N2 <- NULL # create "NULL" objects
+N1[1] <- 5  # set initial abundance 5
+N2[1] <- 10 # set initial abundance 10
+
+# simulate
+for(t in 1:99){ # simulate 100 time steps
+  N1[t+1] <- (lambda*N1[t])/(1 + b1*N1[t] + g12*N2[t])
+  N2[t+1] <- (lambda*N2[t])/(1 + b2*N2[t] + g21*N1[t])
+}
+
+```
+
+## R exercise: scenario 1
+
+```{r, echo = TRUE, fig.height=3, fig.width=5}
+
+t <- 1:length(N1)
+
+plot(N1 ~ t, type = "l", col = "blue", ylab = "N1 or N2",
+     ylim = c(0, max(N1,N2) ) )
+lines(N2 ~ t, col = "red")
+
+```
+
+## Prediction: scenario 1
+
+When $\beta_i > \gamma_{ji}$,
+
+the **two species coexist** (initial abundance does not matter)
+
+## Competition: scenario 2
+
+Try the following conditions
+
+**Scenario 2**
+
+Intraspecific competition $\beta_{i}$ is **stronger** than interspecific competition $\gamma_{ji}$ for species 1
+($\beta_1 > \gamma_{21}$)
+
+&
+
+Intraspecific competition $\beta_{i}$ is **weaker** than interspecific competition $\gamma_{ji}$ for species 2
+($\beta_2 < \gamma_{12}$)
+
+
+## R exercise: scenario 2
+
+Set initial abundance as you like
+
+```{r,echo=TRUE}
+
+# Set equal values of lambda for species 1 and 2
+lambda <- 3 
+
+# in sp.1 equation
+b1 <- 1.5
+g21 <- 1.0
+
+# in sp.2 equation
+b2 <- 0.1
+g12 <- 0.8
+
+# initial abundance
+N1 <- N2 <- NULL # create "NULL" objects
+N1[1] <- 10
+N2[1] <- 8
+
+# simulate
+for(t in 1:99){ # simulate 100 time steps
+  N1[t+1] <- (lambda*N1[t])/(1 + b1*N1[t] + g12*N2[t])
+  N2[t+1] <- (lambda*N2[t])/(1 + b2*N2[t] + g21*N1[t])
+}
+
+```
+
+## R exercise: scenario 2
+
+```{r, echo = TRUE, fig.height=3, fig.width=5}
+
+t <- 1:length(N1)
+
+plot(N1 ~ t, type = "l", col = "blue", ylab = "N1 or N2",
+     ylim = c(0, max(N1, N2) ) )
+lines(N2 ~ t, col = "red")
+
+```
+
+## Prediction: scenario 2
+
+When $\beta_i > \gamma_{ji} \cap \beta_j < \gamma_{ij}$ (or $\beta_i < \gamma_{ji} \cap \beta_j > \gamma_{ij}$),
+
+the **two species cannot coexist**
+
+- Winner has greater impacts on the competitor than themselves ($\beta_i < \gamma_{ji}$ or $\beta_j < \gamma_{ij}$)
+- Loser has greater impacts on themselves than the competitor ($\beta_i > \gamma_{ji}$ or $\beta_j > \gamma_{ij}$)
+
+## Competition: scenario 3
+
+Try the following conditions
+
+**Scenario 3**
+
+Intraspecific competition $\beta_{i}$ is **weaker** than interspecific competition $\gamma_{ji}$ for species 1
+($\beta_1 < \gamma_{21}$)
+
+&
+
+Intraspecific competition $\beta_{i}$ is **weaker** than interspecific competition $\gamma_{ji}$ for species 2
+($\beta_2 < \gamma_{12}$)
+
+
+## R exercise: scenario 3
+
+Set initial abundance as you like
+
+```{r,echo=TRUE}
+
+# Set equal values of lambda for species 1 and 2
+lambda <- 3 
+
+# in sp.1 equation
+b1 <- 0.1
+g21 <- 0.2
+
+# in sp.2 equation
+b2 <- 0.2
+g12 <- 0.4
+
+# initial abundance
+N1 <- N2 <- NULL # create "NULL" objects
+N1[1] <- 1
+N2[1] <- 1.5
+
+# simulate
+for(t in 1:99){ # simulate 100 time steps
+  N1[t+1] <- (lambda*N1[t])/(1 + b1*N1[t] + g12*N2[t])
+  N2[t+1] <- (lambda*N2[t])/(1 + b2*N2[t] + g21*N1[t])
+}
+
+```
+
+## R exercise: scenario 3
+
+```{r, echo = TRUE, fig.height=3, fig.width=5}
+
+t <- 1:length(N1)
+
+plot(N1 ~ t, type = "l", col = "blue", ylab = "N1 or N2",
+     ylim = c(0, max(N1, N2) ) )
+lines(N2 ~ t, col = "red")
+
+```
+
+## Prediction: scenario 3
+
+When $\beta_i < \gamma_{ji}$,\
+the **two species cannot coexist** (winner is the species with higher initial abundance)
+
+## Summary
+
+Lotka-Volterra model predicts three consequences
+
+**Stable coexistence**\
+$\beta_i > \gamma_{ji}$
+
+**Competitive dominance (exclusion)**\
+$\beta_i > \gamma_{ji} \cap \beta_j < \gamma_{ij}$ (or $\beta_i < \gamma_{ji} \cap \beta_j > \gamma_{ij}$)
+
+**Destabilizing competition**\
+$\beta_i < \gamma_{ji}$

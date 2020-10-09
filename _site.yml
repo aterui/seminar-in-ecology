@@ -1,0 +1,16 @@
+name: "Seminar in Ecology"
+output_dir: "docs"
+navbar:
+  title: "Seminar in Ecology"
+  left:
+    - text: "About"
+      href: index.html
+
+  right:
+    - icon: fa-code fa-lg
+      href: https://github.com/aterui/seminar-in-ecology
+
+output:
+  html_document:
+    css: style_web.css
+    theme: cosmo

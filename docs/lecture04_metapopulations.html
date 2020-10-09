@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <title>Metapopulations</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="site_libs/reveal.js-3.3.0.1/css/reveal.css"/>
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; } /* Alert */
+code span.an { color: #008000; } /* Annotation */
+code span.at { } /* Attribute */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #0000ff; } /* ControlFlow */
+code span.ch { color: #008080; } /* Char */
+code span.cn { } /* Constant */
+code span.co { color: #008000; } /* Comment */
+code span.cv { color: #008000; } /* CommentVar */
+code span.do { color: #008000; } /* Documentation */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.im { } /* Import */
+code span.in { color: #008000; } /* Information */
+code span.kw { color: #0000ff; } /* Keyword */
+code span.op { } /* Operator */
+code span.ot { color: #ff4000; } /* Other */
+code span.pp { color: #ff4000; } /* Preprocessor */
+code span.sc { color: #008080; } /* SpecialChar */
+code span.ss { color: #008080; } /* SpecialString */
+code span.st { color: #008080; } /* String */
+code span.va { } /* Variable */
+code span.vs { color: #008080; } /* VerbatimString */
+code span.wa { color: #008000; font-weight: bold; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="site_libs/reveal.js-3.3.0.1/css/theme/white.css" id="theme">
+
+
+  <!-- some tweaks to reveal css -->
+  <style type="text/css">
+    .reveal h1 { font-size: 2.0em; }
+    .reveal h2 { font-size: 1.5em;  }
+    .reveal h3 { font-size: 1.25em;	}
+    .reveal h4 { font-size: 1em;	}
+
+    .reveal .slides>section,
+    .reveal .slides>section>section {
+      padding: 0px 0px;
+    }
+
+
+
+    .reveal table {
+      border-width: 1px;
+      border-spacing: 2px;
+      border-style: dotted;
+      border-color: gray;
+      border-collapse: collapse;
+      font-size: 0.7em;
+    }
+
+    .reveal table th {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      font-weight: bold;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+    .reveal table td {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+    .reveal .slide-menu-button {
+      left: 105px !important;
+    }
+
+  </style>
+
+    <style type="text/css">code{white-space: pre;}</style>
+
+    <link rel="stylesheet" href="style_slide.css"/>
+
+<!-- Printing and PDF exports -->
+<script id="paper-css" type="application/dynamic-css">
+
+/* Default Print Stylesheet Template
+   by Rob Glazebrook of CSSnewbie.com
+   Last Updated: June 4, 2008
+
+   Feel free (nay, compelled) to edit, append, and
+   manipulate this file as you see fit. */
+
+
+@media print {
+
+	/* SECTION 1: Set default width, margin, float, and
+	   background. This prevents elements from extending
+	   beyond the edge of the printed page, and prevents
+	   unnecessary background images from printing */
+	html {
+		background: #fff;
+		width: auto;
+		height: auto;
+		overflow: visible;
+	}
+	body {
+		background: #fff;
+		font-size: 20pt;
+		width: auto;
+		height: auto;
+		border: 0;
+		margin: 0 5%;
+		padding: 0;
+		overflow: visible;
+		float: none !important;
+	}
+
+	/* SECTION 2: Remove any elements not needed in print.
+	   This would include navigation, ads, sidebars, etc. */
+	.nestedarrow,
+	.controls,
+	.fork-reveal,
+	.share-reveal,
+	.state-background,
+	.reveal .progress,
+	.reveal .backgrounds {
+		display: none !important;
+	}
+
+	/* SECTION 3: Set body font face, size, and color.
+	   Consider using a serif font for readability. */
+	body, p, td, li, div {
+		font-size: 20pt!important;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		color: #000;
+	}
+
+	/* SECTION 4: Set heading font face, sizes, and color.
+	   Differentiate your headings from your body text.
+	   Perhaps use a large sans-serif for distinction. */
+	h1,h2,h3,h4,h5,h6 {
+		color: #000!important;
+		height: auto;
+		line-height: normal;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		text-shadow: 0 0 0 #000 !important;
+		text-align: left;
+		letter-spacing: normal;
+	}
+	/* Need to reduce the size of the fonts for printing */
+	h1 { font-size: 28pt !important;  }
+	h2 { font-size: 24pt !important; }
+	h3 { font-size: 22pt !important; }
+	h4 { font-size: 22pt !important; font-variant: small-caps; }
+	h5 { font-size: 21pt !important; }
+	h6 { font-size: 20pt !important; font-style: italic; }
+
+	/* SECTION 5: Make hyperlinks more usable.
+	   Ensure links are underlined, and consider appending
+	   the URL to the end of the link for usability. */
+	a:link,
+	a:visited {
+		color: #000 !important;
+		font-weight: bold;
+		text-decoration: underline;
+	}
+	/*
+	.reveal a:link:after,
+	.reveal a:visited:after {
+		content: " (" attr(href) ") ";
+		color: #222 !important;
+		font-size: 90%;
+	}
+	*/
+
+
+	/* SECTION 6: more reveal.js specific additions by @skypanther */
+	ul, ol, div, p {
+		visibility: visible;
+		position: static;
+		width: auto;
+		height: auto;
+		display: block;
+		overflow: visible;
+		margin: 0;
+		text-align: left !important;
+	}
+	.reveal pre,
+	.reveal table {
+		margin-left: 0;
+		margin-right: 0;
+	}
+	.reveal pre code {
+		padding: 20px;
+		border: 1px solid #ddd;
+	}
+	.reveal blockquote {
+		margin: 20px 0;
+	}
+	.reveal .slides {
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 0 !important;
+		zoom: 1 !important;
+
+		overflow: visible !important;
+		display: block !important;
+
+		text-align: left !important;
+		-webkit-perspective: none;
+		   -moz-perspective: none;
+		    -ms-perspective: none;
+		        perspective: none;
+
+		-webkit-perspective-origin: 50% 50%;
+		   -moz-perspective-origin: 50% 50%;
+		    -ms-perspective-origin: 50% 50%;
+		        perspective-origin: 50% 50%;
+	}
+	.reveal .slides section {
+		visibility: visible !important;
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+		display: block !important;
+		overflow: visible !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 60px 20px !important;
+		z-index: auto !important;
+
+		opacity: 1 !important;
+
+		page-break-after: always !important;
+
+		-webkit-transform-style: flat !important;
+		   -moz-transform-style: flat !important;
+		    -ms-transform-style: flat !important;
+		        transform-style: flat !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+
+		-webkit-transition: none !important;
+		   -moz-transition: none !important;
+		    -ms-transition: none !important;
+		        transition: none !important;
+	}
+	.reveal .slides section.stack {
+		padding: 0 !important;
+	}
+	.reveal section:last-of-type {
+		page-break-after: avoid !important;
+	}
+	.reveal section .fragment {
+		opacity: 1 !important;
+		visibility: visible !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+	}
+	.reveal section img {
+		display: block;
+		margin: 15px 0px;
+		background: rgba(255,255,255,1);
+		border: 1px solid #666;
+		box-shadow: none;
+	}
+
+	.reveal section small {
+		font-size: 0.8em;
+	}
+
+}  
+</script>
+
+
+<script id="pdf-css" type="application/dynamic-css">
+    
+/**
+ * This stylesheet is used to print reveal.js
+ * presentations to PDF.
+ *
+ * https://github.com/hakimel/reveal.js#pdf-export
+ */
+
+* {
+	-webkit-print-color-adjust: exact;
+}
+
+body {
+	margin: 0 auto !important;
+	border: 0;
+	padding: 0;
+	float: none !important;
+	overflow: visible;
+}
+
+html {
+	width: 100%;
+	height: 100%;
+	overflow: visible;
+}
+
+/* Remove any elements not needed in print. */
+.nestedarrow,
+.reveal .controls,
+.reveal .progress,
+.reveal .playback,
+.reveal.overview,
+.fork-reveal,
+.share-reveal,
+.state-background {
+	display: none !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	text-shadow: 0 0 0 #000 !important;
+}
+
+.reveal pre code {
+	overflow: hidden !important;
+	font-family: Courier, 'Courier New', monospace !important;
+}
+
+ul, ol, div, p {
+	visibility: visible;
+	position: static;
+	width: auto;
+	height: auto;
+	display: block;
+	overflow: visible;
+	margin: auto;
+}
+.reveal {
+	width: auto !important;
+	height: auto !important;
+	overflow: hidden !important;
+}
+.reveal .slides {
+	position: static;
+	width: 100%;
+	height: auto;
+
+	left: auto;
+	top: auto;
+	margin: 0 !important;
+	padding: 0 !important;
+
+	overflow: visible;
+	display: block;
+
+	-webkit-perspective: none;
+	   -moz-perspective: none;
+	    -ms-perspective: none;
+	        perspective: none;
+
+	-webkit-perspective-origin: 50% 50%; /* there isn't a none/auto value but 50-50 is the default */
+	   -moz-perspective-origin: 50% 50%;
+	    -ms-perspective-origin: 50% 50%;
+	        perspective-origin: 50% 50%;
+}
+
+.reveal .slides section {
+	page-break-after: always !important;
+
+	visibility: visible !important;
+	position: relative !important;
+	display: block !important;
+	position: relative !important;
+
+	margin: 0 !important;
+	padding: 0 !important;
+	box-sizing: border-box !important;
+	min-height: 1px;
+
+	opacity: 1 !important;
+
+	-webkit-transform-style: flat !important;
+	   -moz-transform-style: flat !important;
+	    -ms-transform-style: flat !important;
+	        transform-style: flat !important;
+
+	-webkit-transform: none !important;
+	   -moz-transform: none !important;
+	    -ms-transform: none !important;
+	        transform: none !important;
+}
+
+.reveal section.stack {
+	margin: 0 !important;
+	padding: 0 !important;
+	page-break-after: avoid !important;
+	height: auto !important;
+	min-height: auto !important;
+}
+
+.reveal img {
+	box-shadow: none;
+}
+
+.reveal .roll {
+	overflow: visible;
+	line-height: 1em;
+}
+
+/* Slide backgrounds are placed inside of their slide when exporting to PDF */
+.reveal section .slide-background {
+	display: block !important;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: -1;
+}
+
+/* All elements should be above the slide-background */
+.reveal section>* {
+	position: relative;
+	z-index: 1;
+}
+
+/* Display slide speaker notes when 'showNotes' is enabled */
+.reveal .speaker-notes-pdf {
+	display: block;
+	width: 100%;
+	max-height: none;
+	left: auto;
+	top: auto;
+	z-index: 100;
+}
+
+/* Display slide numbers when 'slideNumber' is enabled */
+.reveal .slide-number-pdf {
+	display: block;
+	position: absolute;
+	font-size: 14px;
+}
+
+</script>
+
+
+<script>
+var style = document.createElement( 'style' );
+style.type = 'text/css';
+var style_script_id = window.location.search.match( /print-pdf/gi ) ? 'pdf-css' : 'paper-css';
+var style_script = document.getElementById(style_script_id).text;
+style.innerHTML = style_script;
+document.getElementsByTagName('head')[0].appendChild(style);
+</script>
+
+    <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+    <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section>
+    <h1 class="title">Metapopulations</h1>
+    <h3 class="date">BIO605 FA20</h3>
+</section>
+
+<section><section id="population-ecology" class="title-slide slide level1"><h1>Population ecology</h1></section><section id="population-ecology-1" class="slide level2">
+<h2>Population ecology</h2>
+<p>What do population ecologists study?</p>
+<p><strong>Population dynamics</strong> — how population size/density changes over time in a single habitat</p>
+<p><strong>Distributions</strong> — how populations are distributed over space</p>
+<p><strong>Landscape-level dynamics</strong> — how populations are maintained at the landscape level (<strong>metapopulation</strong>)</p>
+</section><section id="examples" class="slide level2">
+<h2>Examples</h2>
+<div id="left">
+<p><strong>Population dynamics</strong></p>
+<p><img src="lecture04_metapopulations_files/figure-revealjs/unnamed-chunk-1-1.png" width="480" style="display: block; margin: auto;" /></p>
+<p>birth &amp; death<br />
+(immigration, emigration)</p>
+</div>
+<div id="right">
+<p><strong>Spatial distribution</strong></p>
+<p><img src="lecture04_metapopulations_files/figure-revealjs/unnamed-chunk-2-1.png" width="480" style="display: block; margin: auto;" /></p>
+<p>local environments, dispersal</p>
+</div>
+</section></section>
+<section><section id="classical-metapopulation" class="title-slide slide level1"><h1>Classical metapopulation</h1></section><section id="what-is-a-metapopulation" class="slide level2">
+<h2>What is a metapopulation?</h2>
+<p><span style="color:steelblue"><strong>Population of populations</strong></span></p>
+<ul>
+<li>Populations are connected by dispersal</li>
+<li>Does this make difference?</li>
+</ul>
+</section><section id="recall-local-population" class="slide level2">
+<h2>Recall: local population</h2>
+<p>Local population dynamics with no dispersal is driven by birth <span class="math inline">\(b\)</span> and death <span class="math inline">\(d\)</span> processes</p>
+<p><span class="math display">\[
+\frac{dN}{dt} = (b - d)N
+\]</span></p>
+<p>Once the population goes extinct, <strong>no chance to re-establish a new population</strong></p>
+</section><section id="immigration" class="slide level2">
+<h2>Immigration</h2>
+<p>Immigration can lead to a colonization into a new habitat</p>
+<p><img src="lecture04_metapopulations_files/figure-revealjs/unnamed-chunk-3-1.png" width="480" style="display: block; margin: auto;" /></p>
+</section><section id="metapopulation-theory" class="slide level2">
+<h2>Metapopulation theory</h2>
+<p><strong>Classical metapopulation theory</strong> focuses on dynamics at a landscape level</p>
+<ul>
+<li>Local population dynamics are not explicitly modeled
+<ul>
+<li>either <code>occupied</code> or <code>unoccupied</code></li>
+<li>no information on population size</li>
+</ul></li>
+<li>Metapopulation persistence is the primary interest
+<ul>
+<li>how patch occupancy changes over time</li>
+<li>key: colonization <span class="math inline">\(m\)</span>* and extinction rates <span class="math inline">\(e\)</span>*</li>
+</ul></li>
+</ul>
+<p><small>*Parameter notations may differ among studies</small></p>
+</section><section id="levins-metapopulation-model" class="slide level2">
+<h2>Levins metapopulation model</h2>
+<p>The Levins Metapopulation Model:</p>
+<p><span class="math display">\[
+\frac{dp}{dt} = mp(1-p) - ep
+\]</span></p>
+<ul>
+<li><span class="math inline">\(p\)</span>: proportion of patches occupied</li>
+<li><span class="math inline">\(m\)</span>: colonization rate (per patch)</li>
+<li><span class="math inline">\(e\)</span>: extinction rate (per patch)</li>
+</ul>
+<p><small> Levins (1969) Some demographic and genetic consequences of environmental heterogeneity for biological control. Bulletin of the Entomological Society of America. 15: 237-240 </small></p>
+</section><section id="colonization" class="slide level2">
+<h2>Colonization</h2>
+<p>The Levins Metapopulation Model:</p>
+<p><span class="math display">\[
+\frac{dp}{dt} = mp(1-p) - ep
+\]</span></p>
+<p>The term <span class="math inline">\(mp(1-p)\)</span> determines the rate of increase in occupancy</p>
+<ul>
+<li>immigrants come from occupied patches (<span class="math inline">\(p\)</span>)</li>
+<li>colonization occurs only at unoccupied patches</li>
+<li>multiply <span class="math inline">\(m\)</span> to express random colonization</li>
+</ul>
+</section><section id="extinction" class="slide level2">
+<h2>Extinction</h2>
+<p>The Levins Metapopulation Model:</p>
+<p><span class="math display">\[
+\frac{dp}{dt} = mp(1-p) - ep
+\]</span></p>
+<p>The term <span class="math inline">\(ep\)</span> determines the rate of decrease in occupancy</p>
+<ul>
+<li>extinction occurs only at occupied patches (<span class="math inline">\(p\)</span>)</li>
+<li>multiply <span class="math inline">\(e\)</span> to express random extinction</li>
+</ul>
+</section><section id="r-exercise-colonization" class="slide level2">
+<h2>R exercise: colonization</h2>
+<p>Draw how colonization rate changes over <span class="math inline">\(p\)</span></p>
+<p>Create <span class="math inline">\(p\)</span> and <span class="math inline">\(m\)</span> (set 1.0 for an example)</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>p &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dt">from =</span> <span class="dv">0</span>, <span class="dt">to =</span> <span class="dv">1</span>, <span class="dt">length =</span> <span class="dv">100</span>)</span>
+<span id="cb1-2"><a href="#cb1-2"></a>m &lt;-<span class="st"> </span><span class="dv">1</span></span></code></pre></div>
+</section><section id="r-exercise-colonization-1" class="slide level2">
+<h2>R exercise: colonization</h2>
+<p>Draw how colonization rate changes over <span class="math inline">\(p\)</span></p>
+<p>Plot the relationship b/w <span class="math inline">\(p\)</span> and <span class="math inline">\(mp(1-p)\)</span></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>M &lt;-<span class="st"> </span>m<span class="op">*</span>p<span class="op">*</span>(<span class="dv">1</span><span class="op">-</span>p)</span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="kw">plot</span>(M <span class="op">~</span><span class="st"> </span>p, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>)</span></code></pre></div>
+</section><section id="r-exercise-colonization-2" class="slide level2">
+<h2>R exercise: colonization</h2>
+<p>Draw how colonization rate changes over <span class="math inline">\(p\)</span></p>
+<p>Plot the relationship b/w <span class="math inline">\(p\)</span> and <span class="math inline">\(mp(1-p)\)</span></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>M &lt;-<span class="st"> </span>m<span class="op">*</span>p<span class="op">*</span>(<span class="dv">1</span><span class="op">-</span>p)</span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="kw">plot</span>(M <span class="op">~</span><span class="st"> </span>p, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>)</span></code></pre></div>
+<p><img src="lecture04_metapopulations_files/figure-revealjs/unnamed-chunk-6-1.png" width="480" style="display: block; margin: auto;" /></p>
+</section><section id="r-exercise-extinction" class="slide level2">
+<h2>R exercise: extinction</h2>
+<p>Draw how extinction rate changes over <span class="math inline">\(p\)</span></p>
+<p>Create <span class="math inline">\(e\)</span> (set 0.2 for an example)</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>e &lt;-<span class="st"> </span><span class="fl">0.2</span></span></code></pre></div>
+</section><section id="r-exercise-extinction-1" class="slide level2">
+<h2>R exercise: extinction</h2>
+<p>Draw how extinction rate changes over <span class="math inline">\(p\)</span></p>
+<p>Plot the relationship b/w <span class="math inline">\(p\)</span> and <span class="math inline">\(ep\)</span></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>E &lt;-<span class="st"> </span>e<span class="op">*</span>p</span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="kw">plot</span>(E <span class="op">~</span><span class="st"> </span>p, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>)</span></code></pre></div>
+</section><section id="r-exercise-extinction-2" class="slide level2">
+<h2>R exercise: extinction</h2>
+<p>Draw how extinction rate changes over <span class="math inline">\(p\)</span></p>
+<p>Plot the relationship b/w <span class="math inline">\(p\)</span> and <span class="math inline">\(ep\)</span></p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>E &lt;-<span class="st"> </span>e<span class="op">*</span>p</span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="kw">plot</span>(E <span class="op">~</span><span class="st"> </span>p, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>)</span></code></pre></div>
+<p><img src="lecture04_metapopulations_files/figure-revealjs/unnamed-chunk-9-1.png" width="480" style="display: block; margin: auto;" /></p>
+</section><section id="r-exercise-m-e" class="slide level2">
+<h2>R exercise: m &amp; e</h2>
+<p>Draw how colonization &amp; extinction rates change over <span class="math inline">\(p\)</span></p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">plot</span>(M <span class="op">~</span><span class="st"> </span>p, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>)</span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="kw">lines</span>(E <span class="op">~</span><span class="st"> </span>p, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</span></code></pre></div>
+<p><img src="lecture04_metapopulations_files/figure-revealjs/unnamed-chunk-10-1.png" width="480" style="display: block; margin: auto;" /></p>
+</section><section id="equilibrium-occupancy" class="slide level2">
+<h2>Equilibrium occupancy</h2>
+<p><img src="lecture04_metapopulations_files/figure-revealjs/unnamed-chunk-11-1.png" width="480" style="display: block; margin: auto;" /></p>
+<ul>
+<li>With <span class="math inline">\(p\)</span> below the intersection, occupancy ___</li>
+<li>With <span class="math inline">\(p\)</span> above the intersection, occupancy ___</li>
+</ul>
+</section><section id="equilibrium-occupancy-1" class="slide level2">
+<h2>Equilibrium occupancy</h2>
+<p><span class="math display">\[
+\frac{dp}{dt} = mp(1-p) - ep
+\]</span></p>
+<p><img src="lecture04_metapopulations_files/figure-revealjs/unnamed-chunk-12-1.png" width="480" style="display: block; margin: auto;" /></p>
+</section><section id="equilibrium-occupancy-2" class="slide level2">
+<h2>Equilibrium occupancy</h2>
+<p>How to get equilibrium occupancy?</p>
+</section><section id="equilibrium-occupancy-3" class="slide level2">
+<h2>Equilibrium occupancy</h2>
+<p>Solve the following eq. about <span class="math inline">\(p\)</span></p>
+<p><span class="math display">\[
+\begin{align}
+\frac{dp}{dt} &amp;= cp(1-p) - ep = 0\\
+p^* &amp;= ...\\
+\end{align}
+\]</span></p>
+</section><section id="equilibrium-occupancy-4" class="slide level2">
+<h2>Equilibrium occupancy</h2>
+<p>Solve the following eq. about <span class="math inline">\(p\)</span></p>
+<p><span class="math display">\[
+p^* = 1 - \frac{e}{m}
+\]</span></p>
+</section><section id="condition-for-persistence" class="slide level2">
+<h2>Condition for persistence</h2>
+<p>For a metapopulation to persist, <span class="math inline">\(p^*\)</span> &gt; 0</p>
+<p><span class="math display">\[
+p^* = 1 - \frac{e}{m} &gt; 0
+\]</span></p>
+</section><section id="condition-for-persistence-1" class="slide level2">
+<h2>Condition for persistence</h2>
+<p>For a metapopulation to persist, <span class="math inline">\(p^*\)</span> must exceed zero, meaning</p>
+<p><span class="math display">\[
+m &gt; e
+\]</span></p>
+<p>Colonization rate <span class="math inline">\(m\)</span> must exceed extinction rate <span class="math inline">\(e\)</span></p>
+</section><section id="link-to-logistic-model" class="slide level2">
+<h2>Link to logistic model</h2>
+<p>The Levins Metapopulation Model:</p>
+<p><span class="math display">\[
+\frac{dp}{dt} = mp(1-p) - ep
+\]</span></p>
+<p>can be transformed to:</p>
+<p><span class="math display">\[
+\frac{dp}{dt} = (m-e)p(1-\frac{p}{1-\frac{e}{m}})
+\]</span></p>
+</section><section id="link-to-logistic-model-1" class="slide level2">
+<h2>Link to logistic model</h2>
+<p>Express differently</p>
+<p><span class="math display">\[
+\frac{dp}{dt} = (m-e)p(1-\frac{p}{1-\frac{e}{m}})
+\]</span></p>
+<p>Let (1) <span class="math inline">\(p = N\)</span>, (2) <span class="math inline">\(m-e = r\)</span>, and (3) <span class="math inline">\(1-\frac{e}{m} = K\)</span></p>
+<p><span class="math display">\[
+\frac{dN}{dt} = rN(1-\frac{N}{K})
+\]</span></p>
+<p>Thus, the Levins metapopulation model can be seen as a logistic model at a different spatial scale</p>
+<p><small>NOTE: not identical as <span class="math inline">\(0 \le p \le 1\)</span></small></p>
+</section><section id="assumptions" class="slide level2">
+<h2>Assumptions</h2>
+<p>Classical metapopulation assumes</p>
+<ul>
+<li>No variation in population size</li>
+<li>Immigration from within-metapopulation sources</li>
+<li>Random colonization &amp; extinction</li>
+<li>Dispersal do NOT affect population dynamics</li>
+</ul>
+</section></section>
+<section><section id="mainland-island-metapopulation" class="title-slide slide level1"><h1>Mainland-island metapopulation</h1></section><section id="mainland-island-metapopulation-model" class="slide level2">
+<h2>Mainland-island metapopulation model</h2>
+<p>One of the assumptions in the Levins metapopulation model is equal population size</p>
+<p>The mainland-island metapopulation model is on the other extreme</p>
+</section><section id="levins-vs.-mainland-island" class="slide level2">
+<h2>Levins vs. mainland-island</h2>
+<div id="left">
+<p><img src="lecture04_metapopulations_files/figure-revealjs/unnamed-chunk-13-1.png" width="480" style="display: block; margin: auto;" /></p>
+</div>
+<div id="right">
+<p><img src="lecture04_metapopulations_files/figure-revealjs/unnamed-chunk-14-1.png" width="480" style="display: block; margin: auto;" /></p>
+</div>
+</section><section id="assumptions-1" class="slide level2">
+<h2>Assumptions</h2>
+<ul>
+<li>One LARGE population (the mainland) that never goes extinct</li>
+<li>Immigration from the mainland to islands only</li>
+<li>Random extinctions on islands</li>
+</ul>
+</section><section id="the-formula" class="slide level2">
+<h2>The formula</h2>
+<p>The mainland-island metapopulation model:</p>
+<p><span class="math display">\[
+\frac{dp}{dt} = m(1-p) - ep
+\]</span></p>
+<p>The Levins metapopulation model:</p>
+<p><span class="math display">\[
+\frac{dp}{dt} = mp(1-p) - ep
+\]</span></p>
+</section><section id="r-exercise-colonization-3" class="slide level2">
+<h2>R exercise: colonization</h2>
+<p>Draw how colonization/extinction rate changes over <span class="math inline">\(p\)</span></p>
+<p>Create <span class="math inline">\(p\)</span>, <span class="math inline">\(m\)</span> and <span class="math inline">\(e\)</span></p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>p &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dt">from =</span> <span class="dv">0</span>, <span class="dt">to =</span> <span class="dv">1</span>, <span class="dt">length =</span> <span class="dv">100</span>)</span>
+<span id="cb8-2"><a href="#cb8-2"></a>m &lt;-<span class="st"> </span>e &lt;-<span class="st"> </span><span class="dv">1</span></span></code></pre></div>
+</section><section id="r-exercise-colonization-4" class="slide level2">
+<h2>R exercise: colonization</h2>
+<p>Draw how colonization/extinction rate changes over <span class="math inline">\(p\)</span></p>
+<p>Create <span class="math inline">\(m(1-p)\)</span> and <span class="math inline">\(ep\)</span></p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>M &lt;-<span class="st"> </span>m<span class="op">*</span>(<span class="dv">1</span><span class="op">-</span>p)</span>
+<span id="cb9-2"><a href="#cb9-2"></a>E &lt;-<span class="st"> </span>e<span class="op">*</span>p</span></code></pre></div>
+</section><section id="r-exercise-colonization-5" class="slide level2">
+<h2>R exercise: colonization</h2>
+<p>Plot <span class="math inline">\(m(1-p)\)</span> and <span class="math inline">\(ep\)</span></p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw">plot</span>(M <span class="op">~</span><span class="st"> </span>p, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Colonization or extinction rate&quot;</span>)</span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="kw">lines</span>(E <span class="op">~</span><span class="st"> </span>p, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</span></code></pre></div>
+<p><img src="lecture04_metapopulations_files/figure-revealjs/unnamed-chunk-17-1.png" width="480" style="display: block; margin: auto;" /></p>
+</section><section id="equilibrium" class="slide level2">
+<h2>Equilibrium</h2>
+<p>The mainland-island metapopulation model:</p>
+<p><span class="math display">\[
+\frac{dp}{dt} = m(1-p) - ep
+\]</span></p>
+<p>The equilibrium occupancy <span class="math inline">\(p^*\)</span> is</p>
+<p><span class="math display">\[
+p^* = ...
+\]</span></p>
+</section><section id="equilibrium-1" class="slide level2">
+<h2>Equilibrium</h2>
+<p><span class="math display">\[
+p^* = \frac{m}{m+e}
+\]</span></p>
+<p><img src="lecture04_metapopulations_files/figure-revealjs/unnamed-chunk-18-1.png" width="480" style="display: block; margin: auto;" /></p>
+</section><section id="condition-for-persistence-2" class="slide level2">
+<h2>Condition for persistence</h2>
+<p>For a metapopulation to persist, <span class="math inline">\(p^* &gt; 0\)</span></p>
+<p><span class="math inline">\(\frac{m}{m+e} &gt; 0\)</span>, i.e., <span class="math inline">\(m &gt; 0\)</span></p>
+</section><section id="condition-for-persistence-3" class="slide level2">
+<h2>Condition for persistence</h2>
+<p>When <span class="math inline">\(m &gt; 0\)</span>, there is a persistent supply of immigrants from the mainland</p>
+<ul>
+<li>the metapopulation never goes extinct</li>
+<li>higher extinction rate <span class="math inline">\(e\)</span> cannot lead to the metapopulation extinction</li>
+</ul>
+</section></section>
+<section><section id="field-study" class="title-slide slide level1"><h1>Field study</h1></section><section id="more-complexity" class="slide level2">
+<h2>More complexity</h2>
+<p>The metapopulation models are clearly oversimplified</p>
+<p>In particular…</p>
+<ul>
+<li>Random extinction</li>
+<li>Random colonization</li>
+</ul>
+</section><section id="assumptions-2" class="slide level2">
+<h2>Assumptions</h2>
+<p><strong>Random extinction</strong></p>
+<p>Population size varies in nature and influences local extinction risk</p>
+<p><strong>Random colonization</strong></p>
+<p>Organisms have limited dispersal capability</p>
+</section><section id="proxies" class="slide level2">
+<h2>Proxies</h2>
+<p>Focus on a single habitat patch and think colonization into and extinction of the patch</p>
+<p><img src="lecture04_metapopulations_files/figure-revealjs/unnamed-chunk-19-1.png" width="480" style="display: block; margin: auto;" /></p>
+</section><section id="proxies-1" class="slide level2">
+<h2>Proxies</h2>
+<p><strong>Habitat size</strong></p>
+<p>Extinction probability decreases with increasing habitat size</p>
+<p><img src="lecture04_metapopulations_files/figure-revealjs/unnamed-chunk-20-1.png" width="480" style="display: block; margin: auto;" /></p>
+</section><section id="rationale-habitat-size" class="slide level2">
+<h2>Rationale: habitat size</h2>
+<p>In a large habitat…</p>
+<ul>
+<li>population size is larger</li>
+<li>more refuge</li>
+</ul>
+</section><section id="proxies-2" class="slide level2">
+<h2>Proxies</h2>
+<p><strong>Isolation</strong></p>
+<p>Colonization probability decreases with increasing isolation</p>
+<p><img src="lecture04_metapopulations_files/figure-revealjs/unnamed-chunk-21-1.png" width="480" style="display: block; margin: auto;" /></p>
+</section><section id="rationale-isolation" class="slide level2">
+<h2>Rationale: isolation</h2>
+<p>In a isolated habitat,</p>
+<ul>
+<li>dispersal is more costly &amp; risky</li>
+<li>dispersing individuals are less likely to arrive</li>
+</ul>
+<p>Measures of isolation</p>
+<ul>
+<li>distance to the nearest neighbor</li>
+<li>distance weighted measure</li>
+</ul>
+</section><section id="empirical-approach" class="slide level2">
+<h2>Empirical approach</h2>
+<p>When studying <strong>real</strong> organisms…</p>
+<ul>
+<li>survey presence/absence of the species <span class="math inline">\(y_i\)</span> at each habitat</li>
+<li>relate to habitat size and isolation (and other factors)</li>
+</ul>
+<p><span class="math display">\[
+y_i = f(habitat~size, isolation)
+\]</span></p>
+</section><section id="reality" class="slide level2">
+<h2>Reality</h2>
+<p>More reality might be needed for empirical studies</p>
+<ul>
+<li class="fragment">matrix permeability</li>
+<li class="fragment">wind</li>
+<li class="fragment">current</li>
+<li class="fragment">species interactions</li>
+</ul>
+</section><section id="gap" class="slide level2">
+<h2>Gap</h2>
+<p><strong>Theory</strong>: metapopulation-level occupancy</p>
+<p><strong>Empirical</strong>: patch-level occupancy</p>
+</section><section id="testing-metapopulation-theory" class="slide level2">
+<h2>Testing metapopulation theory</h2>
+<p>Patch-level studies can still provide insights</p>
+<p>However, our primary interest is <strong>the metapopulation persistence</strong>, not persistence of local populations</p>
+</section><section id="approach-to-studying-metapopulations" class="slide level2">
+<h2>Approach to studying metapopulations</h2>
+<p><strong>Metapopulation replicates</strong> are needed to study the drivers of metapopulation persistence</p>
+<p>or</p>
+<p><strong>Scaling up</strong> with simulation approaches with parameters estimated with patch-level studies</p>
+</section></section>
+    </div>
+  </div>
+
+  <script src="site_libs/reveal.js-3.3.0.1/lib/js/head.min.js"></script>
+  <script src="site_libs/reveal.js-3.3.0.1/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        // Display the page number of the current slide
+        slideNumber: true,
+        // Push each slide change to the browser history
+        history: true,
+        // Vertical centering of slides
+        center: false,
+        // Transition style
+        transition: 'default', // none/fade/slide/convex/concave/zoom
+        // Transition style for full page slide backgrounds
+        backgroundTransition: 'default', // none/fade/slide/convex/concave/zoom
+
+        menu: {
+          numbers: true,
+          custom: false,
+          themes: false,
+          transitions: false
+        },
+
+
+
+        chalkboard: {
+          toggleNotesButton: true,
+          theme: 'whiteboard',
+        },
+
+        keyboard: {
+          67: function() { RevealChalkboard.toggleNotesCanvas() },    // toggle notes canvas when 'c' is pressed
+          66: function() { RevealChalkboard.toggleChalkboard() }, // toggle chalkboard when 'b' is pressed
+          46: function() { RevealChalkboard.clear() },    // clear chalkboard when 'DEL' is pressed
+           8: function() { RevealChalkboard.reset() },    // reset chalkboard data on current slide when 'BACKSPACE' is pressed
+          68: function() { RevealChalkboard.download() }, // downlad recorded chalkboard drawing when 'd' is pressed
+        },
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: 'site_libs/reveal.js-3.3.0.1/plugin/chalkboard/chalkboard.js', async: true },
+          { src: 'site_libs/reveal.js-3.3.0.1/plugin/menu/menu.js', async: true },
+        ]
+      });
+    </script>
+  <!-- dynamically load mathjax for compatibility with self-contained -->
+  <script>
+    (function () {
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+      document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
+
+<script>
+  (function() {
+    if (window.jQuery) {
+      Reveal.addEventListener( 'slidechanged', function(event) {  
+        window.jQuery(event.previousSlide).trigger('hidden');
+        window.jQuery(event.currentSlide).trigger('shown');
+      });
+    }
+  })();
+</script>
+
+
+  </body>
+</html>

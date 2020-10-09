@@ -1,0 +1,758 @@
+---
+title: "Population Models"
+date: BIO605 FA20
+output:
+  revealjs::revealjs_presentation:
+    self_contained: false
+    highlight: haddock
+    css: style_slide.css
+    theme: white
+    reveal_plugins: ["menu", "chalkboard"]
+    reveal_options:
+      slideNumber: true
+      chalkboard:
+        theme: whiteboard
+        toggleNotesButton: true
+      menu:
+        numbers: true
+---
+
+```{r setup, include = F}
+
+knitr::opts_chunk$set(echo = F, fig.width = 5, fig.height = 4)
+CEX <- LWD <- 2
+
+```
+
+
+# Population ecology
+
+## What is a population?
+
+A population is **a group of individuals of the same species** that inhabit a given area
+
+  - Populations have structure, including **density**, **spacing** and **age** distribution
+  - Why is it important that the individuals are members of the same species?
+  - Why is it important for a population to have a spatial boundary?
+
+
+## Why is it important?
+
+Population ecology is 
+
+  - important for understanding the **demography** of the species
+  - the **basis** of community ecology and other sub-disciplines of ecology
+  - important for conservation, especially in the **population viability analysis**
+  - useful for the control of **invasive species**
+
+  
+
+## Population ecology
+
+What do population ecologists study?
+
+**Population dynamics** --- how population size/density changes over time in a single habitat
+
+**Distributions** --- how populations are distributed over space
+
+**Landscape-level dynamics** --- how populations are maintained at the landscape level (**metapopulation**)
+
+
+## Examples
+
+<div id="left">
+**Population dynamics**
+
+```{r, echo=FALSE}
+
+set.seed(1)
+n <- 20; x <- 1:n; y <- rpois(n, 30)
+par(mar = c(5,5,3,2) )
+plot(y ~ x,
+     ylab = "Population density", xlab = "Year", cex.lab = CEX,
+     type = "o", cex = CEX, lwd = LWD, col = "steelblue", axes = F)
+box(bty = "l")
+
+```
+
+birth & death\
+(immigration, emigration)
+</div>
+
+<div id="right">
+**Spatial distribution**
+
+```{r, echo = FALSE}
+
+set.seed(3)
+par(mar = c(5,5,3,2) )
+n <- 20; x <- runif(n, 0, 100); y <- runif(n, 0, 100)
+plot(x ~ y, pch = 21, cex = CEX, bg = grey(rbinom(n, 1, p = 0.5)),
+     axes = F, xlab = "X-coordinate", ylab = "Y-coordinate", cex.lab = CEX)
+box(bty = "l")
+
+```
+
+local environments, dispersal
+</div>
+
+
+
+# Exponential model
+
+## What determines population size?
+
+ - Suppose you observe a population of hydra
+ - Counted birth & death events everyday
+ - Estimated birth & death rates
+
+
+## Math
+
+Initial population size $N_0$, birth rate $b$ & death rate $d$ 
+
+$$
+\begin{align}
+N_1 &= N_0 + bN_0 - dN_0\\
+N_2 &= N_1 + bN_1 - dN_1\\
+...
+\end{align}
+$$
+
+## Math
+
+When $N_0 = 10$, $b=0.8$ and $d=0.2$ 
+
+$$
+\begin{align}
+N_1 &= N_0 + bN_0 - dN_0\\
+    &= 10 + 0.8*10 - 0.2*10\\
+    &= 16\\
+\end{align}
+$$
+
+
+## Math
+
+Then $N_1 = 16$, $b=0.8$ and $d=0.2$ 
+
+$$
+\begin{align}
+N_2 &= N_1 + bN_1 - dN_1\\
+    &= 16 + 0.8*16 - 0.2*16\\
+    &= 25.6\\
+\end{align}
+$$
+
+
+## Simple model
+
+Generalize as $N_t$ and modify the equation
+
+<small>
+$$
+\begin{align}
+N_{t+1} &= N_{t} + bN_{t} - dN_{t} &&\text{Generalized}\\
+N_{t+1} - N_{t} &= bN_{t} - dN_{t} &&\text{Subtract $N_{t}$ from both sides}\\
+N_{t+1} - N_{t} &= (b-d)N_{t} &&\text{Organize the equation}\\
+\Delta N_{t} &= rN_{t} &&\text{$\Delta N_t = N_{t+1} - N_{t}$, $r = b-d$}\\
+\end{align}
+$$
+</small>
+
+- $\Delta N_{t}$ represents **the net increase** per unit time
+- $r = b-d$ determines the population growth **rate**
+
+## Simple model
+
+<div id="left">
+```{r}
+N <- matrix(10, nrow = 20, ncol = 3)
+N[1,] <- 10; r <- 1:3*0.1
+Nt <- 20; t <- 1:Nt
+for(i in 1:(Nt-1) ){ N[i+1,] <- N[i,] + r*N[i,] }
+
+par(mar = c(5,5,4,3))
+matplot(t, N, type = "o", pch = 21, lty = 1,
+        axes = F,
+        cex = CEX, lwd = LWD, cex.lab = CEX, cex.axis = CEX,
+        ylab = "Population size N", xlab = "t",
+        col = rainbow(3) )
+box(bty = "l")
+```
+</div>
+
+<div id="right">
+**Model**
+
+$N_{t+1} = N_{t} + rN_{t}$
+\
+\
+
+**Growth rate** $r$
+
+- $r = `r r[1]`$ <span style="color: red;">red</span> 
+- $r = `r r[2]`$ <span style="color: green;">green</span> 
+- $r = `r r[3]`$ <span style="color: blue;">blue</span> 
+</div>
+
+
+## Simple model
+
+Geometric population model assumes
+
+- population growth of discrete intervals $\Delta t = 1$
+- unit can be one year, day, hour...
+
+
+## Exponential model
+
+Convert the model to a continuous version
+
+- Birth & death processes can occur continuously
+- Take the limit of $\Delta N$
+  - $\displaystyle \lim_{\Delta t \to 0} \Delta N$
+  - As $\Delta t$ approaches zero, the rate of change become **instantaneous**
+  - **Exponential model** $\frac{dN}{dt} = rN$
+- Solving $\frac{dN}{dt} = rN$ yields $N_t = e^{rt}N_0$
+
+
+## Exponential model
+
+<div id="left">
+```{r}
+N0 <- 10; r <- 1:3*0.1
+N <- sapply(1:3, function(i) N0*exp(r[i]*seq(0, 20, length = 100)) ) 
+
+par(mar = c(5,5,4,3))
+matplot(N, type = "l", pch = 21, lty = 1,
+        axes = F,
+        cex = CEX, lwd = LWD, cex.lab = CEX, cex.axis = CEX,
+        ylab = "Population size N", xlab = "t",
+        col = rainbow(3) )
+box(bty = "l")
+```
+</div>
+
+<div id="right">
+**Model**
+
+$$
+\begin{aligned}
+\frac{dN}{dt} &= rN\\
+N_t &= e^{rt}N_0
+\end{aligned}
+$$
+
+**Population growth rate**
+
+- $r = `r r[1]`$ <span style="color: red;">red</span> 
+- $r = `r r[2]`$ <span style="color: green;">green</span> 
+- $r = `r r[3]`$ <span style="color: blue;">blue</span> 
+</div>
+
+## Exponential model
+
+Recall: $r = b-d$
+
+- What happens if $r = b-d = 0$?\
+(i.e., death equals birth)
+- What happens if $r = b-d < 0$?\
+(i.e., death exceeds birth)
+
+
+
+## R exercise: create time data
+
+Create "time" data `t` (x-axis)
+
+- `seq()` is a function to create a vector
+- give `from`, `to` and `length`
+
+```{r, echo = TRUE}
+
+t <- seq(from = 0, to = 50, length = 100)
+
+```
+
+
+## R exercise: check elements
+
+Check elements
+
+```{r, echo = TRUE}
+# elements 1 to 5
+t[1:5]
+
+# elements 96 to 100
+t[96:100]
+
+```
+
+
+## R exercise: initial condition
+
+Define the initial population size `N0`
+
+```{r, echo = TRUE}
+
+N0 <- 10
+print(N0)
+
+```
+
+
+## R exercise: growth rate
+
+Define the population growth rate `r`
+
+- Set `0` as a reference case
+
+```{r, echo = TRUE}
+
+r0 <- 0
+print(r0)
+
+```
+
+
+## R exercise: equation
+
+Write the equation
+
+- `exp(x)` is $e^x$
+
+```{r, echo = TRUE}
+
+N <- exp(r0*t)*N0
+
+```
+
+
+## R exercise: visualize
+
+Visualize with `plot()`
+
+```{r, echo = TRUE, fig.width = 3, fig.height = 3, fig.align = "center" }
+
+plot(N ~ t, type = "l", ylim = c(0, 12) )
+
+```
+
+
+## R exercise: growth rate
+
+Try another parameter
+
+- Set `r1` as `-0.1`
+
+```{r, echo = TRUE, fig.width = 3, fig.height = 3, fig.align = "center" }
+
+r1 <- -0.1
+N1 <- exp(r1*t)*N0
+plot(N1 ~ t, type = "l", ylim = c(0, 12), col = "red")
+
+```
+
+
+## R exercise: compare
+
+Compare with `N`
+
+```{r, echo = TRUE, fig.width = 3, fig.height = 3, fig.align = "center" }
+
+plot(N1 ~ t, type = "l", ylim = c(0, 12), col = "red")
+lines(N ~ t)
+
+```
+
+
+## Theory
+
+Recall: what's the role of theory?
+
+<div id="left">
+
+```{r}
+par(mar= c(0,0,0,0), oma = c(0,0,0,0))
+plot(0, type = "n", xlim = c(0,1), ylim = c(0,1), ann = F, axes = F)
+text(0.5, 0.8, "Mechanism", cex = CEX)
+text(0.5, 0.2, "Pattern\n(observation)", cex = CEX)
+arrows(x0 = 0.7, y0 = 0.3, y1 = 0.7, col = "gray", lwd = LWD); text(0.3, 0.5, "Theoretical\nmodel", cex = CEX)
+arrows(x0 = 0.3, y0 = 0.7, y1 = 0.3, col = "gray", lwd = LWD); text(0.7, 0.5, "Statistical\nmodel", cex = CEX)
+
+```
+
+</div>
+
+<div id="right">
+
+**Theory**
+
+- Generate predictions with given mechanisms
+- How do population dynamics look like if $r = XX$?
+- $r$ is a **parameter**
+
+</div>
+
+## Observation
+
+Recall: what's the role of observation?
+
+<div id="left">
+
+```{r}
+par(mar= c(0,0,0,0), oma = c(0,0,0,0))
+plot(0, type = "n", xlim = c(0,1), ylim = c(0,1), ann = F, axes = F)
+text(0.5, 0.8, "Mechanism", cex = CEX)
+text(0.5, 0.2, "Pattern\n(observation)", cex = CEX)
+arrows(x0 = 0.7, y0 = 0.3, y1 = 0.7, col = "gray", lwd = LWD); text(0.3, 0.5, "Theoretical\nmodel", cex = CEX)
+arrows(x0 = 0.3, y0 = 0.7, y1 = 0.3, col = "gray", lwd = LWD); text(0.7, 0.5, "Statistical\nmodel", cex = CEX)
+
+```
+
+</div>
+
+<div id="right">
+**Observation**
+
+- Infer mechanisms (parameters)
+- $N_0 = 10$ and $N_{50} = 300$
+- **Assume** exponential model
+  - $N_t = e^{rt}N_0$
+  - $N_{50} = e^{50r}10$?
+  - $r = ??$
+\
+\
+\
+</div>
+
+<small>
+*Note: in practice, parameter inference is much more complex to account for sampling uncertainty
+</small>
+
+# Logistic model
+
+## Exponential model
+
+In the exponential model of population growth
+
+- no resource limitation assumed
+- a population grows infinitely
+- in nature, however, resources are limited
+
+<small> *Exponential model is appropriate for describing dynamics of a newly established population </small>
+
+
+## Exponential to logistic
+
+Instantaneous population growth $\frac{dN}{dt}$ is
+
+$$
+\begin{align}
+\frac{dN}{dt} &= rN &&\text{Exponential model}\\
+\frac{dN}{dt} &= rN(1-\frac{N}{K}) &&\text{Logistic model}\\
+\end{align}
+$$
+
+## Logistic model: parameter
+
+$$
+\begin{align}
+\frac{dN}{dt} &= rN(1-\frac{N}{K}) &&\text{Logistic model}\\
+\end{align}
+$$
+
+- $r$ is the **intrinsic rate** of population growth
+- $K$ is the **carrying capacity**
+
+
+## Logistic model: what if
+
+$$
+\begin{align}
+\frac{dN}{dt} &= rN(1-\frac{N}{K}) &&\text{Logistic model}\\
+\end{align}
+$$
+
+**Questions**
+
+- If $N < K$, $\frac{dN}{dt}$
+- If $N = N$, $\frac{dN}{dt}$
+- If $N > N$, $\frac{dN}{dt}$
+
+
+## Logistic model: visualize
+
+$$
+\begin{align}
+\frac{dN}{dt} &= rN(1-\frac{N}{K})\\
+\end{align}
+$$
+
+```{r, fig.align="center"}
+ylab <- expression(dN/dt)
+fun <- function(r,x,K){r*x*(1-x/K)}
+
+x <- 0:120; K <- 100; r <- 1
+par(mar=c(5,5,3,2))
+plot(fun(r,x,K) ~ x, type = "l", axes = F,
+     ylab = ylab, xlab = "N", cex.lab = CEX)
+abline(h = 0, col=grey(0.5), lty = 2)
+box(bty = "l")
+points(K, 0, pch = 21, cex = CEX)
+axis(2, at = 0)
+
+```
+
+
+## Logistic model: competition
+
+$$
+\begin{align}
+\frac{dN}{dt} &= rN(1-\frac{N}{K}) &&\text{Logistic model}\\
+\end{align}
+$$
+
+The term $1-\frac{N}{K}$
+
+- is a decreasing function of $N$
+- expresses **density dependence**
+- involves density dependent birth & death
+
+## Logistic model: solve
+
+Solve the equation
+
+$$
+\begin{align}
+\frac{dN}{dt} &= rN(1-\frac{N}{K})\\
+N_t &= \frac{K}{1+(\frac{K-N_0}{N_0})e^{-rt}}
+\end{align}
+$$
+
+## R exercise: define parameters
+
+**Model**
+
+$$
+\begin{align}
+N_t &= \frac{K}{1+(\frac{K-N_0}{N_0})e^{-rt}}
+\end{align}
+$$
+
+Create time: `t={0...50}`
+
+Define parameters: `r=1`, `K=200`, `N0=10`
+
+```{r, echo = TRUE}
+t <- seq(0, 50, length = 100)
+r <- 1
+K <- 200
+N0 <- 10
+```
+
+
+## R exercise: write the eq.
+
+**Model**
+
+$$
+\begin{align}
+N_t &= \frac{K}{1+(\frac{K-N_0}{N_0})e^{-rt}}
+\end{align}
+$$
+
+Write in two lines to avoid errors
+
+```{r, echo = TRUE}
+
+C <- (K - N0)/N0
+N <- K/(1 + C*exp(-r*t) )
+
+```
+
+## R exercise: visualize
+
+```{r, echo = TRUE, fig.align = "center" }
+plot(N ~ t, type = "l")
+```
+
+
+## R exercise: visualize
+
+**Model**
+
+$$
+\begin{align}
+N_t &= \frac{K}{1+(\frac{K-N_0}{N_0})e^{-rt}}
+\end{align}
+$$
+
+Make predictinos under the following scenarios
+
+- What if `r=0.1`, `K=200`, `N0=10` (store as `N1`)
+- What if `r=1`, `K=100`, `N0=200` (store as `N2`)
+- Plot model predictions on a single figure
+
+
+## Logistic model: +alpha
+
+Modify the equation to facilitate your understanding
+
+$$
+\begin{align}
+\frac{dN}{dt} &= rN(1-\frac{N}{K})\\
+\frac{dN}{dt} &= N(r-\frac{rN}{K})\\
+\frac{dN}{dt} &= (r-\beta N)N &&\text{Use $\beta = \frac{r}{K}$}\\
+\end{align}
+$$
+
+
+
+
+# Discrete model
+
+## Continuous observation...?
+
+- Exponential & logistic models are **continuous**
+- Can you observe population size continuously? No way
+- **Discrete models**
+- How continuous and discrete models are related?
+
+## Multiplicative expression
+
+- Suppose you made observations at year 0, 1, 2,...
+- Simplest expession would be $N_1 = \lambda N_0$
+- Population growth $\lambda = \frac{N_1}{N_0}$
+
+## Multiplicative expression
+
+Example
+
+$$
+\begin{align}
+N_1 &= \lambda N_0\\
+N_2 &= \lambda N_1\\
+N_3 &= \lambda N_2
+\end{align}
+$$
+
+
+## Multiplicative expression
+
+Express differently
+
+$$
+\begin{align}
+N_3 &= \lambda N_2\\
+    &= \lambda * \lambda N_1\\
+    &= \lambda * \lambda * \lambda N_0\\
+    &= \lambda^3 N_0\\
+\end{align}
+$$
+
+
+## Geometric model
+
+Generalize - **Geometric** model
+
+$$
+\begin{align}
+N_{t+1} &= \lambda N_t &&\text{relate $N_{t+1}$ to $N_t$}\\
+N_t &= \lambda^t N_0 &&\text{relate $N_{t}$ to $N_0$}\\
+\end{align}
+$$
+
+
+## Geometric model: compare
+
+Compare
+
+$$
+\begin{align}
+N_t &= \lambda^t N_0 &&\text{Geometric}\\
+N_t &=e^{rt} N_0 &&\text{Exponential}\\
+\end{align}
+$$
+
+Let $e^r$ be $\lambda$...the two models become identical!
+
+**Geometric**\
+a population grows when $\lambda > 1$ (i.e. $r > 0$)
+
+**Exponential**\
+a population grows when $r > 0$ (i.e. $\lambda > 1$)
+
+## Beverton-Holt model
+
+**Beverton-Holt model**\
+Include density dependence ($\beta = \frac{\lambda-1}{K}$)
+
+$$
+\begin{align}
+N_{t+1} &= \frac{\lambda N_t}{1 + \beta N_t} &&\text{relate $N_{t+1}$ to $N_{t}$}\\
+\frac{N_{t+1}}{N_t} &= \lambda_t = \frac{\lambda}{1 + \beta N_t}
+\end{align}
+$$
+
+- When $N_t = 0$, $\lambda_t$...
+- When $N_t = K$, $\lambda_t$...
+- When $N_t > K$, $\lambda_t$...
+
+## Beverton-Holt model: solve
+
+**Beverton-Holt model**\
+Solve the equation
+
+$$
+\begin{align}
+N_{t+1} &= \frac{\lambda N_t}{1 + \beta N_t} &&\text{relate $N_{t+1}$ to $N_{t}$}\\
+N_{t} &= \frac{K}{1+(\frac{K-N_0}{N_0})\lambda^{-t}} &&\text{relate $N_{t}$ to $N_{0}$}\\
+\end{align}
+$$
+
+
+## Beverton-Holt model: compare
+
+Compare
+
+$$
+\begin{align}
+N_{t} &= \frac{K}{1+(\frac{K-N_0}{N_0})\lambda^{-t}} &&\text{Beverton-Holt}\\
+N_t &= \frac{K}{1+(\frac{K-N_0}{N_0})e^{-rt}} &&\text{Logistic}\\
+\end{align}
+$$
+
+Let $e^r$ be $\lambda$...the two models become identical!
+
+
+# Summary
+
+## Model types
+
+**Continuous** models are used in pure theoretical research
+
+**Discrete** models can be used in both theoretical and statistical analysis
+
+<div id="left">
+**No resource limitation**
+
+- Exponential (continuous)
+- Geometric (discrete)
+
+</div>
+
+<div id="right">
+**Resource limitation**
+
+- Logistic (continuous)
+- Beverton-Holt (discrete)
+
+</div>
+
+## Other models
+
+There are (many) other models
+
+but most of them are a **modification** of these basic models

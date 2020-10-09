@@ -1,0 +1,681 @@
+---
+title: "Metapopulations"
+date: BIO605 FA20
+output:
+  revealjs::revealjs_presentation:
+    self_contained: false
+    highlight: haddock
+    css: style_slide.css
+    theme: white
+    reveal_plugins: ["menu", "chalkboard"]
+    reveal_options:
+      slideNumber: true
+      chalkboard:
+        theme: whiteboard
+        toggleNotesButton: true
+      menu:
+        numbers: true
+---
+
+```{r setup, include = F}
+
+knitr::opts_chunk$set(echo = F, fig.width = 5, fig.height = 4, fig.align = "center")
+CEX <- LWD <- 2
+
+```
+
+# Population ecology
+
+## Population ecology
+
+What do population ecologists study?
+
+**Population dynamics** --- how population size/density changes over time in a single habitat
+
+**Distributions** --- how populations are distributed over space
+
+**Landscape-level dynamics** --- how populations are maintained at the landscape level (**metapopulation**)
+
+## Examples
+
+<div id="left">
+**Population dynamics**
+
+```{r, echo=FALSE}
+
+set.seed(1)
+n <- 20; x <- 1:n; y <- rpois(n, 30)
+par(mar = c(5,5,3,2) )
+plot(y ~ x,
+     ylab = "Population density", xlab = "Year", cex.lab = CEX,
+     type = "o", cex = CEX, lwd = LWD, col = "steelblue", axes = F)
+box(bty = "l")
+
+```
+
+birth & death\
+(immigration, emigration)
+</div>
+
+<div id="right">
+**Spatial distribution**
+
+```{r, echo = FALSE}
+
+set.seed(3)
+par(mar = c(5,5,3,2) )
+n <- 20; x <- runif(n, 0, 100); y <- runif(n, 0, 100)
+plot(x ~ y, pch = 21, cex = CEX, bg = grey(rbinom(n, 1, p = 0.5)),
+     axes = F, xlab = "X-coordinate", ylab = "Y-coordinate", cex.lab = CEX)
+box(bty = "l")
+
+```
+
+local environments, dispersal
+</div>
+
+# Classical metapopulation
+
+## What is a metapopulation?
+
+<span style="color:steelblue">**Population of populations**</span>
+
+- Populations are connected by dispersal
+- Does this make difference?
+
+## Recall: local population
+
+Local population dynamics with no dispersal is driven by birth $b$ and death $d$ processes
+
+$$
+\frac{dN}{dt} = (b - d)N
+$$
+
+Once the population goes extinct, **no chance to re-establish a new population**
+
+## Immigration
+
+Immigration can lead to a colonization into a new habitat
+
+```{r, fig.width = 5}
+
+plot(0, type = "n", xlim = c(0,1), ylim = c(0,1),
+     axes = F, ann = F)
+points(x = c(0.2, 0.8), y = c(0.5, 0.5), cex = 10,
+       pch = 21, bg = c(grey(1), grey(0,0.5)), col = grey(0,0.5))
+arrows(x0 = 0.8, y0 = 0.5, x1 = 0.2, col = grey(0,0.5) )
+mtext("Colonization", cex = CEX)
+
+```
+
+## Metapopulation theory
+
+**Classical metapopulation theory** focuses on dynamics at a landscape level
+
+- Local population dynamics are not explicitly modeled
+  - either `occupied` or `unoccupied`
+  - no information on population size
+
+- Metapopulation persistence is the primary interest
+  - how patch occupancy changes over time
+  - key: colonization $m$* and extinction rates $e$*
+  
+<small>*Parameter notations may differ among studies</small>
+
+## Levins metapopulation model
+
+The Levins Metapopulation Model:
+
+$$
+\frac{dp}{dt} = mp(1-p) - ep
+$$
+
+- $p$: proportion of patches occupied
+- $m$: colonization rate (per patch)
+- $e$: extinction rate (per patch)
+
+<small>
+Levins (1969) Some demographic and genetic consequences of environmental heterogeneity for biological control. Bulletin of the Entomological Society of America. 15: 237-240
+</small>
+
+## Colonization
+
+The Levins Metapopulation Model:
+
+$$
+\frac{dp}{dt} = mp(1-p) - ep
+$$
+
+The term $mp(1-p)$ determines the rate of increase in occupancy
+
+  - immigrants come from occupied patches ($p$)
+  - colonization occurs only at unoccupied patches
+  - multiply $m$ to express random colonization
+
+
+## Extinction
+
+The Levins Metapopulation Model:
+
+$$
+\frac{dp}{dt} = mp(1-p) - ep
+$$
+
+The term $ep$ determines the rate of decrease in occupancy
+
+  - extinction occurs only at occupied patches ($p$)
+  - multiply $e$ to express random extinction 
+
+
+## R exercise: colonization
+
+Draw how colonization rate changes over $p$
+
+Create $p$ and $m$ (set 1.0 for an example)
+
+```{r, echo = TRUE}
+
+p <- seq(from = 0, to = 1, length = 100)
+m <- 1
+
+```
+
+## R exercise: colonization
+
+Draw how colonization rate changes over $p$
+
+Plot the relationship b/w $p$ and $mp(1-p)$
+
+```{r, fig.height = 3, fig.width = 5, echo = TRUE, eval = F}
+
+M <- m*p*(1-p)
+plot(M ~ p, type = "l")
+
+```
+
+## R exercise: colonization
+
+Draw how colonization rate changes over $p$
+
+Plot the relationship b/w $p$ and $mp(1-p)$
+
+```{r, fig.height = 3, fig.width = 5, echo = TRUE}
+
+M <- m*p*(1-p)
+plot(M ~ p, type = "l")
+
+```
+
+## R exercise: extinction
+
+Draw how extinction rate changes over $p$
+
+Create $e$ (set 0.2 for an example)
+
+```{r, echo = TRUE}
+
+e <- 0.2
+
+```
+
+## R exercise: extinction
+
+Draw how extinction rate changes over $p$
+
+Plot the relationship b/w $p$ and $ep$
+
+```{r, fig.height = 3, echo = TRUE, eval = F}
+
+E <- e*p
+plot(E ~ p, type = "l")
+
+```
+
+## R exercise: extinction
+
+Draw how extinction rate changes over $p$
+
+Plot the relationship b/w $p$ and $ep$
+
+```{r, fig.height = 3, echo = TRUE, eval = T}
+
+E <- e*p
+plot(E ~ p, type = "l")
+
+```
+
+## R exercise: m & e
+
+Draw how colonization & extinction rates change over $p$
+
+```{r, fig.height = 3, echo = TRUE}
+
+plot(M ~ p, type = "l")
+lines(E ~ p, col = "red")
+
+```
+
+
+## Equilibrium occupancy
+
+```{r}
+
+par(mar = c(5,5,4,3))
+plot(M ~ p, type = "l", axes = F,
+     ylab = "Colonization or extinction rate", xlab = "p")
+lines(E ~ p, col = "red")
+box(bty = "l")
+axis(1); axis(2, las = 2)
+
+```
+
+- With $p$ below the intersection, occupancy ___
+- With $p$ above the intersection, occupancy ___
+
+
+## Equilibrium occupancy
+
+$$
+\frac{dp}{dt} = mp(1-p) - ep
+$$
+
+```{r}
+
+par(mar = c(5,5,4,3))
+plot(I(M-E) ~ p, type = "l", axes = F,
+     ylab = "dp/dt", xlab = "p")
+points(I(1-e/m), 0, cex = CEX)
+abline(h = 0, col = grey(0, 0.2) )
+box(bty = "l")
+axis(1); axis(2, las = 2)
+
+```
+
+
+## Equilibrium occupancy
+
+How to get equilibrium occupancy?
+
+
+## Equilibrium occupancy
+
+Solve the following eq. about $p$
+
+$$
+\begin{align}
+\frac{dp}{dt} &= cp(1-p) - ep = 0\\
+p^* &= ...\\
+\end{align}
+$$
+
+
+## Equilibrium occupancy
+
+Solve the following eq. about $p$
+
+$$
+p^* = 1 - \frac{e}{m}
+$$
+
+
+## Condition for persistence
+
+For a metapopulation to persist, $p^*$ > 0
+
+$$
+p^* = 1 - \frac{e}{m} > 0
+$$
+
+
+## Condition for persistence
+
+For a metapopulation to persist, $p^*$ must exceed zero, meaning
+
+$$
+m > e
+$$
+
+Colonization rate $m$ must exceed extinction rate $e$
+
+
+## Link to logistic model
+
+The Levins Metapopulation Model:
+
+$$
+\frac{dp}{dt} = mp(1-p) - ep
+$$
+
+can be transformed to:
+
+$$
+\frac{dp}{dt} = (m-e)p(1-\frac{p}{1-\frac{e}{m}})
+$$
+
+
+## Link to logistic model
+
+Express differently
+
+$$
+\frac{dp}{dt} = (m-e)p(1-\frac{p}{1-\frac{e}{m}})
+$$
+
+Let (1) $p = N$, (2) $m-e = r$, and (3) $1-\frac{e}{m} = K$
+
+$$
+\frac{dN}{dt} = rN(1-\frac{N}{K})
+$$
+
+Thus, the Levins metapopulation model can be seen as a logistic model at a different spatial scale
+
+<small>NOTE: not identical as $0 \le p \le 1$</small>
+
+
+## Assumptions
+
+Classical metapopulation assumes
+
+- No variation in population size
+- Immigration from within-metapopulation sources
+- Random colonization & extinction
+- Dispersal do NOT affect population dynamics
+
+
+
+# Mainland-island metapopulation
+
+## Mainland-island metapopulation model
+
+One of the assumptions in the Levins metapopulation model is equal population size
+
+The mainland-island metapopulation model is on the other extreme
+
+## Levins vs. mainland-island
+
+<div id="left">
+```{r}
+set.seed(1)
+
+x <- runif(10, -1, 1)
+y <- runif(10, -1, 1)
+
+par(mar = c(0,0,3,0) )
+plot(y ~ x, cex = 3,
+     xlim = c(-1.2,1.2), ylim = c(-1.2,1.2),
+     ann = F, axes = F,
+     pch = 21, bg = grey(rbinom(10, 1, 0.5), 0.5) )
+mtext("Levins model", cex = 2)
+
+```
+</div>
+
+<div id="right">
+```{r}
+set.seed(1)
+
+x <- runif(10, -1, 1)
+y <- runif(10, -1, 1)
+
+par(mar = c(0,0,3,0) )
+plot(y ~ x, cex = 3,
+     xlim = c(-3,1.2), ylim = c(-1.2,1.2),
+     ann = F, axes = F,
+     pch = 21, bg = grey(rbinom(10, 1, 0.5), 0.5) )
+points(-2.2, 0, cex = 18, pch = 21, bg = grey(0, 0.5))
+mtext("Mainland-island model", cex = 2)
+
+```
+</div>
+
+## Assumptions
+
+- One LARGE population (the mainland) that never goes extinct
+- Immigration from the mainland to islands only
+- Random extinctions on islands
+
+## The formula
+
+The mainland-island metapopulation model:
+
+$$
+\frac{dp}{dt} = m(1-p) - ep
+$$
+
+The Levins metapopulation model:
+
+$$
+\frac{dp}{dt} = mp(1-p) - ep
+$$
+
+## R exercise: colonization
+
+Draw how colonization/extinction rate changes over $p$
+
+Create $p$, $m$ and $e$
+
+```{r, echo = T}
+p <- seq(from = 0, to = 1, length = 100)
+m <- e <- 1
+```
+
+## R exercise: colonization
+
+Draw how colonization/extinction rate changes over $p$
+
+Create $m(1-p)$ and $ep$
+
+```{r, echo = T}
+M <- m*(1-p)
+E <- e*p
+```
+
+## R exercise: colonization
+
+Plot $m(1-p)$ and $ep$
+
+```{r, echo = T}
+plot(M ~ p, type = "l", ylab = "Colonization or extinction rate")
+lines(E ~ p, col = "red")
+```
+
+## Equilibrium
+
+The mainland-island metapopulation model:
+
+$$
+\frac{dp}{dt} = m(1-p) - ep
+$$
+
+The equilibrium occupancy $p^*$ is
+
+$$
+p^* = ...
+$$
+
+## Equilibrium
+
+$$
+p^* = \frac{m}{m+e}
+$$
+
+```{r}
+m <- e <- 1
+p <- seq(0, 1, length = 100)
+M <- m*(1-p)
+E <- e*p
+
+plot(M ~ p, type = "l", axes = F, ylab = "Colonization or Extinction")
+lines(E ~ p, col = "red")
+box(bty = "l")
+axis(1); axis(2, las = 2)
+
+```
+
+## Condition for persistence
+
+For a metapopulation to persist, $p^* > 0$
+
+$\frac{m}{m+e} > 0$, i.e., $m > 0$
+
+
+## Condition for persistence
+
+When $m > 0$, there is a persistent supply of immigrants from the mainland 
+
+- the metapopulation never goes extinct
+- higher extinction rate $e$ cannot lead to the metapopulation extinction
+
+
+# Field study
+
+## More complexity
+
+The metapopulation models are clearly oversimplified
+
+In particular...
+
+- Random extinction
+- Random colonization
+
+
+## Assumptions
+
+**Random extinction**
+
+Population size varies in nature and influences local extinction risk
+
+**Random colonization**
+
+Organisms have limited dispersal capability
+
+
+## Proxies
+
+Focus on a single habitat patch and think colonization into and extinction of the patch
+
+```{r}
+set.seed(2)
+x <- runif(10)
+y <- runif(10)
+par(mar = rep(0,4) )
+plot(y ~ x, cex = runif(10, 0.1, 12), ann = F, axes = F,
+     xlim = c(-0.2,1.2), ylim = c(-0.2,1.2) )
+```
+
+
+## Proxies
+
+**Habitat size**
+
+Extinction probability decreases with increasing habitat size
+
+```{r}
+set.seed(2)
+n <- 10
+x <- runif(n)
+y <- runif(n)
+cex <- runif(n, 0.1, 12)
+bg <- 1 - scale(cex, center = min(cex), scale = max(cex) - min(cex))
+
+par(mar = rep(0,4) )
+plot(y ~ x, cex = cex, ann = F, axes = F,
+     xlim = c(-0.2,1.2), ylim = c(-0.2,1.2),
+     pch = 21, bg = grey(bg) )
+```
+
+
+## Rationale: habitat size
+
+In a large habitat...
+
+- population size is larger
+- more refuge
+
+
+## Proxies
+
+**Isolation**
+
+Colonization probability decreases with increasing isolation
+
+```{r}
+set.seed(2)
+n <- 10
+x <- runif(n)
+y <- runif(n)
+alpha <- 10
+
+D <- as.matrix(dist(cbind(x,y), diag = T, upper = T))
+C <- colSums(exp(-alpha*D))
+
+cex <- runif(n, 0.1, 12)
+bg <- 1 - scale(C, center = min(C), max(C) - min(C) )
+
+par(mar = rep(0,4) )
+plot(y ~ x, cex = cex, ann = F, axes = F,
+     xlim = c(-0.2,1.2), ylim = c(-0.2,1.2),
+     pch = 21, bg = grey(bg) )
+```
+
+
+## Rationale: isolation
+
+In a isolated habitat,
+
+- dispersal is more costly & risky
+- dispersing individuals are less likely to arrive
+
+Measures of isolation
+
+- distance to the nearest neighbor
+- distance weighted measure
+
+
+## Empirical approach
+
+When studying **real** organisms...
+
+- survey presence/absence of the species $y_i$ at each habitat
+- relate to habitat size and isolation (and other factors)
+
+$$
+y_i = f(habitat~size, isolation)
+$$
+
+
+## Reality
+
+More reality might be needed for empirical studies
+
+> - matrix permeability
+> - wind
+> - current
+> - species interactions
+
+
+
+## Gap
+
+**Theory**: metapopulation-level occupancy
+
+**Empirical**: patch-level occupancy
+
+## Testing metapopulation theory
+
+Patch-level studies can still provide insights
+
+However, our primary interest is **the metapopulation persistence**, not persistence of local populations
+
+## Approach to studying metapopulations
+
+**Metapopulation replicates** are needed to study the drivers of metapopulation persistence
+
+or
+
+**Scaling up** with simulation approaches with parameters estimated with patch-level studies
+
+
+
+
+
