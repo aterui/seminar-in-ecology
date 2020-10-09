@@ -6,7 +6,7 @@ navbar:
     - text: "About"
       href: index.html
     - text: "Back to AquatiQuE"
-      href: https://github.com/aterui/aquaecolab/
+      href: https://aterui.github.io/aquaecolab/
   
   right:
     - icon: fa-code fa-lg
