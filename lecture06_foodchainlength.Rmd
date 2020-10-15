@@ -139,7 +139,7 @@ g
 
 **Energy web**
 
-- Quntitative interactions
+- Quantitative interactions
 - Extremely time consuming
   
 ```{r}
@@ -253,16 +253,20 @@ Calculate trophic positions of *L. noguchii* and *B.stenoderus*
 <small>*$\Delta_{N} = 3.4$ and $TP_{base} = 2$ for this example</small>
 
 ```{r, echo = T}
-Nbase <- datN$meanN[which(datN$species == "grasshopper")]
+Ngh <- datN$meanN[which(datN$species == "grasshopper")]
 Nln <- datN$meanN[which(datN$species == "L_noguchii")]
 Nbs <- datN$meanN[which(datN$species == "B_stenoderus")]
+
+fcl <- function(Nbase, Ntop, deltaN, TPbase) {
+  y <- (Ntop - Nbase)/deltaN + TPbase
+  return(y)
+}
+
+TPln <- fcl(Nbase = Ngh, Ntop = Nln, deltaN = 3.4, TPbase = 2)
+TPbs <- fcl(Nbase = Ngh, Ntop = Nbs, deltaN = 3.4, TPbase = 2)
+
 ```
 
-
-```{r}
-TPln <- (Nln - Nbase)/3.4 + 2
-TPbs <- (Nbs - Nbase)/3.4 + 2
-```
 
 ## R exercise: trophic position
 

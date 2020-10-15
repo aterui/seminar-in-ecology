@@ -11,19 +11,18 @@
 
 
 <style type="text/css">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -43,7 +42,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {   }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; } /* Alert */
 code span.an { color: #008000; } /* Annotation */
@@ -506,6 +505,7 @@ style.innerHTML = style_script;
 document.getElementsByTagName('head')[0].appendChild(style);
 </script>
 
+    <script src="site_libs/header-attrs-2.3/header-attrs.js"></script>
     <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
     <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 </head>
@@ -518,7 +518,12 @@ document.getElementsByTagName('head')[0].appendChild(style);
     <h3 class="date">BIO605 FA20</h3>
 </section>
 
-<section><section id="define-food-chain-length" class="title-slide slide level1"><h1>Define food chain length</h1></section><section id="trophic-position" class="slide level2">
+<section>
+<section id="define-food-chain-length" class="title-slide slide level1">
+<h1>Define food chain length</h1>
+
+</section>
+<section id="trophic-position" class="slide level2">
 <h2>Trophic position</h2>
 <p><strong>Trophic position</strong> (TP) is the vertical position in a food web</p>
 <ul>
@@ -526,7 +531,8 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <li>Primary consumers have a value of two (e.g., hevivores)</li>
 </ul>
 <p><img src="lecture06_foodchainlength_files/figure-revealjs/unnamed-chunk-1-1.png" width="480" style="display: block; margin: auto;" /></p>
-</section><section id="trophic-position-1" class="slide level2">
+</section>
+<section id="trophic-position-1" class="slide level2">
 <h2>Trophic position</h2>
 <p><strong>Trophic position</strong> (TP) is the vertical position in a food web</p>
 <ul>
@@ -534,7 +540,8 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <li>How would you define them?</li>
 </ul>
 <p><img src="lecture06_foodchainlength_files/figure-revealjs/unnamed-chunk-2-1.png" width="480" style="display: block; margin: auto;" /></p>
-</section><section id="fractional-trophic-position" class="slide level2">
+</section>
+<section id="fractional-trophic-position" class="slide level2">
 <h2>Fractional trophic position</h2>
 <p><span class="math display">\[
 TP_i = 1 + \sum_{i}^{S}{F_{j}TP_{j}}
@@ -548,21 +555,25 @@ TP_i = 1 + \sum_{i}^{S}{F_{j}TP_{j}}
 <li><span class="math inline">\(TP_{j}\)</span> Trophic position of species j</li>
 </ul>
 <p><small>Pauly and Palomales 2005, Bulletin of Marine Science</small></p>
-</section><section id="fractional-trophic-position-1" class="slide level2">
+</section>
+<section id="fractional-trophic-position-1" class="slide level2">
 <h2>Fractional trophic position</h2>
 <p><span class="math display">\[
 TP_i = 1 + \sum_{i}^{S}{F_{j}TP_{j}}
 \]</span></p>
 <p><img src="lecture06_foodchainlength_files/figure-revealjs/unnamed-chunk-3-1.png" width="480" style="display: block; margin: auto;" /></p>
-</section><section id="food-chain-length" class="slide level2">
+</section>
+<section id="food-chain-length" class="slide level2">
 <h2>Food chain length</h2>
 <p>Food chian length is the TP of the apex predator</p>
 <p><img src="lecture06_foodchainlength_files/figure-revealjs/unnamed-chunk-4-1.png" width="480" style="display: block; margin: auto;" /></p>
-</section><section id="why-food-chain-length-is-important" class="slide level2">
+</section>
+<section id="why-food-chain-length-is-important" class="slide level2">
 <h2>Why food chain length is important</h2>
 <p>Food chain length is a summary measure of a food web</p>
 <p>Why is it important?</p>
-</section><section id="why-food-chain-length-is-important-1" class="slide level2">
+</section>
+<section id="why-food-chain-length-is-important-1" class="slide level2">
 <h2>Why food chain length is important</h2>
 <p>Food chain length influences</p>
 <ul>
@@ -574,10 +585,16 @@ TP_i = 1 + \sum_{i}^{S}{F_{j}TP_{j}}
 </ul>
 <p><small> <span class="math inline">\(^1\)</span>Wang et al. 2018 Ecology Letters <span class="math inline">\(^2\)</span>Pace et al. 1998 TREE <span class="math inline">\(^3\)</span>Kidd et al. 1998 CFJAS </small></p>
 </section></section>
-<section><section id="measuring-food-chain-length" class="title-slide slide level1"><h1>Measuring food chain length</h1></section><section id="methods" class="slide level2">
+<section>
+<section id="measuring-food-chain-length" class="title-slide slide level1">
+<h1>Measuring food chain length</h1>
+
+</section>
+<section id="methods" class="slide level2">
 <h2>Methods</h2>
 <p>There are many methods, but stable isotopes (nitrogen) is the most common approach</p>
-</section><section id="method-1" class="slide level2">
+</section>
+<section id="method-1" class="slide level2">
 <h2>Method 1</h2>
 <p><strong>Connectance web</strong></p>
 <ul>
@@ -585,15 +602,17 @@ TP_i = 1 + \sum_{i}^{S}{F_{j}TP_{j}}
 <li>Ignores energy flow</li>
 </ul>
 <p><img src="lecture06_foodchainlength_files/figure-revealjs/unnamed-chunk-5-1.png" width="480" style="display: block; margin: auto;" /></p>
-</section><section id="method-2" class="slide level2">
+</section>
+<section id="method-2" class="slide level2">
 <h2>Method 2</h2>
 <p><strong>Energy web</strong></p>
 <ul>
-<li>Quntitative interactions</li>
+<li>Quantitative interactions</li>
 <li>Extremely time consuming</li>
 </ul>
 <p><img src="lecture06_foodchainlength_files/figure-revealjs/unnamed-chunk-6-1.png" width="480" style="display: block; margin: auto;" /></p>
-</section><section id="method-3" class="slide level2">
+</section>
+<section id="method-3" class="slide level2">
 <h2>Method 3</h2>
 <p><strong>Stable isotopes</strong></p>
 <ul>
@@ -601,7 +620,8 @@ TP_i = 1 + \sum_{i}^{S}{F_{j}TP_{j}}
 <li>(Relatively) easy to measure</li>
 <li>Food web structure itself is unknown</li>
 </ul>
-</section><section id="food-chain-length-with-stable-isotopes" class="slide level2">
+</section>
+<section id="food-chain-length-with-stable-isotopes" class="slide level2">
 <h2>Food chain length with stable isotopes</h2>
 <div data-if="right">
 <p>Collect stable isotope data (nitrogen) for the baseline and top predator</p>
@@ -610,7 +630,8 @@ TP_i = 1 + \sum_{i}^{S}{F_{j}TP_{j}}
 <div id="left>
 <img src="lecture06_foodchainlength_files/figure-revealjs/unnamed-chunk-7-1.png" width="480" style="display: block; margin: auto;" />
 </div>
-</section><section id="equation" class="slide level2">
+</section>
+<section id="equation" class="slide level2">
 <h2>Equation</h2>
 <p>Food chain length (top predator’s TP) is calculated as:</p>
 <p><span class="math display">\[
@@ -618,15 +639,18 @@ FCL = \frac{\delta ^{15}N_{predator} - \delta ^{15}N_{base}}{\Delta_N} + TP_{bas
 \]</span><br />
 <br />
 <span class="math inline">\(\Delta_N\)</span> is TEF for nitrogen, and <span class="math inline">\(TP_{base}\)</span> is the trophic position of the base species (1.0 or 2.0)</p>
-</section><section id="the-advantage" class="slide level2">
+</section>
+<section id="the-advantage" class="slide level2">
 <h2>The advantage</h2>
 <p>Recall: stable isotopes are the <strong>mixed signature</strong> of prey resources</p>
 <p>It can account for complicated food web structure without knowing the specifics</p>
-</section><section id="tottabetsu-river" class="slide level2">
+</section>
+<section id="tottabetsu-river" class="slide level2">
 <h2>Tottabetsu river</h2>
 <p>Tottabetsu River, Japan</p>
 <p><img src="image_slide/img07.JPG" width="70%"></img></p>
-</section><section id="ground-beetles" class="slide level2">
+</section>
+<section id="ground-beetles" class="slide level2">
 <h2>Ground beetles</h2>
 <p>Ground beetle - generalist predator</p>
 <div id="left">
@@ -635,11 +659,12 @@ FCL = \frac{\delta ^{15}N_{predator} - \delta ^{15}N_{base}}{\Delta_N} + TP_{bas
 <div id="right">
 <p><img src="image_slide/img08.JPG"></img> <em>Lithochlaenius noguchii</em></p>
 </div>
-</section><section id="r-exercise-data" class="slide level2">
+</section>
+<section id="r-exercise-data" class="slide level2">
 <h2>R exercise: data</h2>
 <p>Download <code>sample_data.csv</code> and read it into R</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>dat &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/sample_data.csv&quot;</span>)</span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">head</span>(dat)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/sample_data.csv&quot;</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dat)</span></code></pre></div>
 <pre><code>##         site     date     species   d13C  d15N
 ## 1 tottabetsu 6/9/2014 grasshopper -28.03 -0.04
 ## 2 tottabetsu 6/9/2014 grasshopper -27.86  2.53
@@ -647,56 +672,75 @@ FCL = \frac{\delta ^{15}N_{predator} - \delta ^{15}N_{base}}{\Delta_N} + TP_{bas
 ## 4 tottabetsu 6/9/2014 grasshopper -28.24  0.81
 ## 5 tottabetsu 8/9/2014 grasshopper -26.94  0.23
 ## 6 tottabetsu 8/9/2014 grasshopper -27.92  1.65</code></pre>
-</section><section id="r-exercise-data-formatting" class="slide level2">
+</section>
+<section id="r-exercise-data-formatting" class="slide level2">
 <h2>R exercise: data formatting</h2>
 <p>Check <code>species</code> column</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">unique</span>(dat<span class="op">$</span>species)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(dat<span class="sc">$</span>species)</span></code></pre></div>
 <pre><code>## [1] &quot;grasshopper&quot;  &quot;L_noguchii&quot;   &quot;B_stenoderus&quot;</code></pre>
 <p><code>grasshopper</code> is the base species</p>
-</section><section id="r-exercise-mean-n" class="slide level2">
+</section>
+<section id="r-exercise-mean-n" class="slide level2">
 <h2>R exercise: mean N</h2>
 <p>Calculate mean <span class="math inline">\(\delta ^{15}N\)</span> for each taxon</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">library</span>(tidyverse)</span>
-<span id="cb5-2"><a href="#cb5-2"></a></span>
-<span id="cb5-3"><a href="#cb5-3"></a>datN =<span class="st"> </span>dat <span class="op">%&gt;%</span></span>
-<span id="cb5-4"><a href="#cb5-4"></a><span class="st">  </span><span class="kw">group_by</span>(species) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># grouping by &#39;species&#39;</span></span>
-<span id="cb5-5"><a href="#cb5-5"></a><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">meanN =</span> <span class="kw">mean</span>(d15N)) <span class="co"># calculate means for each group</span></span>
-<span id="cb5-6"><a href="#cb5-6"></a></span>
-<span id="cb5-7"><a href="#cb5-7"></a>datN</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>datN <span class="ot">=</span> dat <span class="sc">%&gt;%</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(species) <span class="sc">%&gt;%</span> <span class="co"># grouping by &#39;species&#39;</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">meanN =</span> <span class="fu">mean</span>(d15N)) <span class="co"># calculate means for each group</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>datN</span></code></pre></div>
 <pre><code>## # A tibble: 3 x 2
 ##   species      meanN
 ##   &lt;chr&gt;        &lt;dbl&gt;
 ## 1 B_stenoderus 5.88 
 ## 2 grasshopper  0.933
 ## 3 L_noguchii   5.06</code></pre>
-</section><section id="r-exercise-trophic-position" class="slide level2">
+</section>
+<section id="r-exercise-trophic-position" class="slide level2">
 <h2>R exercise: trophic position</h2>
 <p><span class="math display">\[
 TP_{predator} = \frac{\delta ^{15}N_{predator} - \delta ^{15}N_{base}}{\Delta_N} + TP_{base}
 \]</span></p>
 <p>Calculate trophic positions of <em>L. noguchii</em> and <em>B.stenoderus</em></p>
 <p><small>*<span class="math inline">\(\Delta_{N} = 3.4\)</span> and <span class="math inline">\(TP_{base} = 2\)</span> for this example</small></p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>Nbase &lt;-<span class="st"> </span>datN<span class="op">$</span>meanN[<span class="kw">which</span>(datN<span class="op">$</span>species <span class="op">==</span><span class="st"> &quot;grasshopper&quot;</span>)]</span>
-<span id="cb7-2"><a href="#cb7-2"></a>Nln &lt;-<span class="st"> </span>datN<span class="op">$</span>meanN[<span class="kw">which</span>(datN<span class="op">$</span>species <span class="op">==</span><span class="st"> &quot;L_noguchii&quot;</span>)]</span>
-<span id="cb7-3"><a href="#cb7-3"></a>Nbs &lt;-<span class="st"> </span>datN<span class="op">$</span>meanN[<span class="kw">which</span>(datN<span class="op">$</span>species <span class="op">==</span><span class="st"> &quot;B_stenoderus&quot;</span>)]</span></code></pre></div>
-</section><section id="r-exercise-trophic-position-1" class="slide level2">
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>Ngh <span class="ot">&lt;-</span> datN<span class="sc">$</span>meanN[<span class="fu">which</span>(datN<span class="sc">$</span>species <span class="sc">==</span> <span class="st">&quot;grasshopper&quot;</span>)]</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>Nln <span class="ot">&lt;-</span> datN<span class="sc">$</span>meanN[<span class="fu">which</span>(datN<span class="sc">$</span>species <span class="sc">==</span> <span class="st">&quot;L_noguchii&quot;</span>)]</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>Nbs <span class="ot">&lt;-</span> datN<span class="sc">$</span>meanN[<span class="fu">which</span>(datN<span class="sc">$</span>species <span class="sc">==</span> <span class="st">&quot;B_stenoderus&quot;</span>)]</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>fcl <span class="ot">&lt;-</span> <span class="cf">function</span>(Nbase, Ntop, deltaN, TPbase) {</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  y <span class="ot">&lt;-</span> (Ntop <span class="sc">-</span> Nbase)<span class="sc">/</span>deltaN <span class="sc">+</span> TPbase</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(y)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>TPln <span class="ot">&lt;-</span> <span class="fu">fcl</span>(<span class="at">Nbase =</span> Ngh, <span class="at">Ntop =</span> Nln, <span class="at">deltaN =</span> <span class="fl">3.4</span>, <span class="at">TPbase =</span> <span class="dv">2</span>)</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>TPbs <span class="ot">&lt;-</span> <span class="fu">fcl</span>(<span class="at">Nbase =</span> Ngh, <span class="at">Ntop =</span> Nbs, <span class="at">deltaN =</span> <span class="fl">3.4</span>, <span class="at">TPbase =</span> <span class="dv">2</span>)</span></code></pre></div>
+</section>
+<section id="r-exercise-trophic-position-1" class="slide level2">
 <h2>R exercise: trophic position</h2>
 <p>Check values</p>
 <p><em>L. noguchii</em>: TP = 3.21<br />
 <em>B. stenoderus</em>: TP = 3.46</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>TPln</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>TPln</span></code></pre></div>
 <pre><code>## [1] 3.213063</code></pre>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>TPbs</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>TPbs</span></code></pre></div>
 <pre><code>## [1] 3.456478</code></pre>
-</section><section id="long-lasting-debate" class="slide level2">
+</section>
+<section id="long-lasting-debate" class="slide level2">
 <h2>Long lasting debate</h2>
 <p>Food chain length varies in nature</p>
 <p>What determines food chain length?</p>
 </section></section>
-<section><section id="h1-basal-resource" class="title-slide slide level1"><h1>H1: basal resource</h1></section><section id="basal-resource-availability" class="slide level2">
+<section>
+<section id="h1-basal-resource" class="title-slide slide level1">
+<h1>H1: basal resource</h1>
+
+</section>
+<section id="basal-resource-availability" class="slide level2">
 <h2>Basal resource availability</h2>
 <p>The productivity hypothesis predicts that food chain length should increase with increasing resource availability - why?</p>
-</section><section id="rationale" class="slide level2">
+</section>
+<section id="rationale" class="slide level2">
 <h2>Rationale</h2>
 <p>Energy would be lost through predation</p>
 <p>Post (2002) summarized energetic efficiency in predator-prey interactions</p>
@@ -705,16 +749,18 @@ TP_{predator} = \frac{\delta ^{15}N_{predator} - \delta ^{15}N_{base}}{\Delta_N}
 <li>Range: 5 - 50%</li>
 </ul>
 <p><small>Post 2002, TREE 6: 269-277</small></p>
-</section><section id="diminishing-energy" class="slide level2">
+</section>
+<section id="diminishing-energy" class="slide level2">
 <h2>Diminishing energy</h2>
 <p>Energy available to the top predator will be limited by basal resource availability or energetic efficiency</p>
 <div id="left">
-<p><img src="lecture06_foodchainlength_files/figure-revealjs/unnamed-chunk-14-1.png" width="480" style="display: block; margin: auto;" /></p>
+<p><img src="lecture06_foodchainlength_files/figure-revealjs/unnamed-chunk-13-1.png" width="480" style="display: block; margin: auto;" /></p>
 </div>
 <div id="right">
-<p><img src="lecture06_foodchainlength_files/figure-revealjs/unnamed-chunk-15-1.png" width="480" style="display: block; margin: auto;" /></p>
+<p><img src="lecture06_foodchainlength_files/figure-revealjs/unnamed-chunk-14-1.png" width="480" style="display: block; margin: auto;" /></p>
 </div>
-</section><section id="empirical-evidence" class="slide level2">
+</section>
+<section id="empirical-evidence" class="slide level2">
 <h2>Empirical evidence</h2>
 <p>Highly controlled microbial system</p>
 <div id="left">
@@ -729,7 +775,8 @@ TP_{predator} = \frac{\delta ^{15}N_{predator} - \delta ^{15}N_{base}}{\Delta_N}
 <p><img src="image_slide/img10.JPG" width="60%"></img></p>
 </div>
 <p><small>Kaunzinger and Morin 1998, Nature</small></p>
-</section><section id="counter-evidence" class="slide level2">
+</section>
+<section id="counter-evidence" class="slide level2">
 <h2>Counter evidence</h2>
 <p>Natural lakes</p>
 <div id="left">
@@ -743,20 +790,23 @@ TP_{predator} = \frac{\delta ^{15}N_{predator} - \delta ^{15}N_{base}}{\Delta_N}
 <p><img src="image_slide/img11.JPG" width="100%"></img></p>
 </div>
 <p><small>Post et al. 2000, Nature</small></p>
-</section><section id="theory-impaired" class="slide level2">
+</section>
+<section id="theory-impaired" class="slide level2">
 <h2>Theory impaired?</h2>
 <p>Contradicting results in experimental and natural systems</p>
 <p>Why does the difference emerge?</p>
-</section><section id="food-web-structure" class="slide level2">
+</section>
+<section id="food-web-structure" class="slide level2">
 <h2>Food web structure</h2>
 <p>Intraguild predation</p>
 <div id="left">
 <p>Predation on the species that shares a prey item(s)</p>
 </div>
 <div id="right">
-<p><img src="lecture06_foodchainlength_files/figure-revealjs/unnamed-chunk-16-1.png" width="480" style="display: block; margin: auto;" /></p>
+<p><img src="lecture06_foodchainlength_files/figure-revealjs/unnamed-chunk-15-1.png" width="480" style="display: block; margin: auto;" /></p>
 </div>
-</section><section id="intraguild-predation" class="slide level2">
+</section>
+<section id="intraguild-predation" class="slide level2">
 <h2>Intraguild predation</h2>
 <p>Intraguild predation can drive intraguild prey extinction</p>
 <div id="left">
@@ -771,20 +821,28 @@ TP_{predator} = \frac{\delta ^{15}N_{predator} - \delta ^{15}N_{base}}{\Delta_N}
 <p><img src="image_slide/img12.JPG" width="90%"></img></p>
 </div>
 <p><small>Post &amp; Takimoto. 2007, Oikos</small></p>
-</section><section id="theoretical-evidence" class="slide level2">
+</section>
+<section id="theoretical-evidence" class="slide level2">
 <h2>Theoretical evidence</h2>
 <p><img src="image_slide/img13.JPG" width="70%"></img></p>
 <p><small> Ward et al. 2017, Nature Communications</small></p>
 </section></section>
-<section><section id="h2-disturbance" class="title-slide slide level1"><h1>H2: disturbance</h1></section><section id="the-dynamic-stability-hypothesis" class="slide level2">
+<section>
+<section id="h2-disturbance" class="title-slide slide level1">
+<h1>H2: disturbance</h1>
+
+</section>
+<section id="the-dynamic-stability-hypothesis" class="slide level2">
 <h2>The dynamic stability hypothesis</h2>
 <p>The dynamic stability hypothesis predicts that food chain length will decrease with increasing disturbance frequency/intensity - why?</p>
 <p><small>Pimm and Lawton 1977, Nature</small></p>
-</section><section id="rationale-1" class="slide level2">
+</section>
+<section id="rationale-1" class="slide level2">
 <h2>Rationale</h2>
 <p>Long food chains take time to recover - frequent/intense disturbance will inhibit recovery</p>
 <p><small>Pimm and Lawton 1977, Nature</small></p>
-</section><section id="empirical-evidence-1" class="slide level2">
+</section>
+<section id="empirical-evidence-1" class="slide level2">
 <h2>Empirical evidence</h2>
 <p>Often tested in rivers</p>
 <div id="left">
@@ -798,7 +856,8 @@ TP_{predator} = \frac{\delta ^{15}N_{predator} - \delta ^{15}N_{base}}{\Delta_N}
 <p><img src="image_slide/img14.JPG" width="100%"></img></p>
 </div>
 <p><small>Sabo et al. 2010, Science</small></p>
-</section><section id="counter-evidence-1" class="slide level2">
+</section>
+<section id="counter-evidence-1" class="slide level2">
 <h2>Counter evidence</h2>
 <p>Often tested in rivers</p>
 <div id="left">
@@ -812,11 +871,13 @@ TP_{predator} = \frac{\delta ^{15}N_{predator} - \delta ^{15}N_{base}}{\Delta_N}
 <p><img src="image_slide/img15.JPG" width="100%"></img></p>
 </div>
 <p><small>Warfe et al. 2013, Plos One</small></p>
-</section><section id="theory-impaired-1" class="slide level2">
+</section>
+<section id="theory-impaired-1" class="slide level2">
 <h2>Theory impaired?</h2>
 <p>Contradicting results in different regions</p>
 <p>Why does the difference emerge?</p>
-</section><section id="intraguild-predation-1" class="slide level2">
+</section>
+<section id="intraguild-predation-1" class="slide level2">
 <h2>Intraguild predation</h2>
 <p>Again, theory suggests intraguild predation may mediate the effect of disturbance</p>
 <p>Disturbance</p>
@@ -827,10 +888,16 @@ TP_{predator} = \frac{\delta ^{15}N_{predator} - \delta ^{15}N_{base}}{\Delta_N}
 </ul>
 <p><small>Takimoto et al. 2012, Ecological Research</small></p>
 </section></section>
-<section><section id="h3-ecosystem-size" class="title-slide slide level1"><h1>H3: ecosystem size</h1></section><section id="the-ecosystem-size-hypothesis" class="slide level2">
+<section>
+<section id="h3-ecosystem-size" class="title-slide slide level1">
+<h1>H3: ecosystem size</h1>
+
+</section>
+<section id="the-ecosystem-size-hypothesis" class="slide level2">
 <h2>The ecosystem size hypothesis</h2>
 <p>The ecosystem size hypothesis predicts long food chains in large ecosystems (area or volume) - why?</p>
-</section><section id="rationale-2" class="slide level2">
+</section>
+<section id="rationale-2" class="slide level2">
 <h2>Rationale</h2>
 <p>Multiple possibilities</p>
 <ul>
@@ -840,7 +907,8 @@ TP_{predator} = \frac{\delta ^{15}N_{predator} - \delta ^{15}N_{base}}{\Delta_N}
 <li>and more…</li>
 </ul>
 <p>i.e., mechanisms are unclear</p>
-</section><section id="metapopulation-based-theory" class="slide level2">
+</section>
+<section id="metapopulation-based-theory" class="slide level2">
 <h2>Metapopulation-based theory</h2>
 <p>Consumers live on the patches of prey species - this builds up nested metapopulations</p>
 <p><small> <span class="math display">\[
@@ -852,11 +920,13 @@ TP_{predator} = \frac{\delta ^{15}N_{predator} - \delta ^{15}N_{base}}{\Delta_N}
 \]</span> </small></p>
 <p><span class="math inline">\(h (0 \le h \le 1)\)</span> is the fraction of habitat patches livable to the basal species</p>
 <p><small>Modified from Holt 2002, Ecological Research</small></p>
-</section><section id="metapopulation-based-theory-1" class="slide level2">
+</section>
+<section id="metapopulation-based-theory-1" class="slide level2">
 <h2>Metapopulation-based theory</h2>
 <p>Metapopulation-based theory suggets the effect of ecosystem size is less sensitive to local food web structure (strength of intraguild predation)</p>
 <p><small>Takimoto et al. 2012, Ecological Research</small></p>
-</section><section id="empirical-evidence-2" class="slide level2">
+</section>
+<section id="empirical-evidence-2" class="slide level2">
 <h2>Empirical evidence</h2>
 <p>Ample empirical evidence - lakes, ponds, and islands</p>
 <p><img src="image_slide/img16.JPG" width="70%"></img></p>
@@ -885,7 +955,15 @@ TP_{predator} = \frac{\delta ^{15}N_{predator} - \delta ^{15}N_{base}}{\Delta_N}
         backgroundTransition: 'default', // none/fade/slide/convex/concave/zoom
 
         menu: {
+   
           numbers: true,
+    
+    
+    
+    
+    
+    
+ 
           custom: false,
           themes: false,
           transitions: false
