@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <title>Competition</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="site_libs/reveal.js-3.3.0.1/css/reveal.css"/>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; } /* Alert */
+code span.an { color: #008000; } /* Annotation */
+code span.at { } /* Attribute */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #0000ff; } /* ControlFlow */
+code span.ch { color: #008080; } /* Char */
+code span.cn { } /* Constant */
+code span.co { color: #008000; } /* Comment */
+code span.cv { color: #008000; } /* CommentVar */
+code span.do { color: #008000; } /* Documentation */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.im { } /* Import */
+code span.in { color: #008000; } /* Information */
+code span.kw { color: #0000ff; } /* Keyword */
+code span.op { } /* Operator */
+code span.ot { color: #ff4000; } /* Other */
+code span.pp { color: #ff4000; } /* Preprocessor */
+code span.sc { color: #008080; } /* SpecialChar */
+code span.ss { color: #008080; } /* SpecialString */
+code span.st { color: #008080; } /* String */
+code span.va { } /* Variable */
+code span.vs { color: #008080; } /* VerbatimString */
+code span.wa { color: #008000; font-weight: bold; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="site_libs/reveal.js-3.3.0.1/css/theme/white.css" id="theme">
+
+
+  <!-- some tweaks to reveal css -->
+  <style type="text/css">
+    .reveal h1 { font-size: 2.0em; }
+    .reveal h2 { font-size: 1.5em;  }
+    .reveal h3 { font-size: 1.25em;	}
+    .reveal h4 { font-size: 1em;	}
+
+    .reveal .slides>section,
+    .reveal .slides>section>section {
+      padding: 0px 0px;
+    }
+
+
+
+    .reveal table {
+      border-width: 1px;
+      border-spacing: 2px;
+      border-style: dotted;
+      border-color: gray;
+      border-collapse: collapse;
+      font-size: 0.7em;
+    }
+
+    .reveal table th {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      font-weight: bold;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+    .reveal table td {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+    .reveal .slide-menu-button {
+      left: 105px !important;
+    }
+
+  </style>
+
+    <style type="text/css">code{white-space: pre;}</style>
+
+    <link rel="stylesheet" href="style_slide.css"/>
+
+<!-- Printing and PDF exports -->
+<script id="paper-css" type="application/dynamic-css">
+
+/* Default Print Stylesheet Template
+   by Rob Glazebrook of CSSnewbie.com
+   Last Updated: June 4, 2008
+
+   Feel free (nay, compelled) to edit, append, and
+   manipulate this file as you see fit. */
+
+
+@media print {
+
+	/* SECTION 1: Set default width, margin, float, and
+	   background. This prevents elements from extending
+	   beyond the edge of the printed page, and prevents
+	   unnecessary background images from printing */
+	html {
+		background: #fff;
+		width: auto;
+		height: auto;
+		overflow: visible;
+	}
+	body {
+		background: #fff;
+		font-size: 20pt;
+		width: auto;
+		height: auto;
+		border: 0;
+		margin: 0 5%;
+		padding: 0;
+		overflow: visible;
+		float: none !important;
+	}
+
+	/* SECTION 2: Remove any elements not needed in print.
+	   This would include navigation, ads, sidebars, etc. */
+	.nestedarrow,
+	.controls,
+	.fork-reveal,
+	.share-reveal,
+	.state-background,
+	.reveal .progress,
+	.reveal .backgrounds {
+		display: none !important;
+	}
+
+	/* SECTION 3: Set body font face, size, and color.
+	   Consider using a serif font for readability. */
+	body, p, td, li, div {
+		font-size: 20pt!important;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		color: #000;
+	}
+
+	/* SECTION 4: Set heading font face, sizes, and color.
+	   Differentiate your headings from your body text.
+	   Perhaps use a large sans-serif for distinction. */
+	h1,h2,h3,h4,h5,h6 {
+		color: #000!important;
+		height: auto;
+		line-height: normal;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		text-shadow: 0 0 0 #000 !important;
+		text-align: left;
+		letter-spacing: normal;
+	}
+	/* Need to reduce the size of the fonts for printing */
+	h1 { font-size: 28pt !important;  }
+	h2 { font-size: 24pt !important; }
+	h3 { font-size: 22pt !important; }
+	h4 { font-size: 22pt !important; font-variant: small-caps; }
+	h5 { font-size: 21pt !important; }
+	h6 { font-size: 20pt !important; font-style: italic; }
+
+	/* SECTION 5: Make hyperlinks more usable.
+	   Ensure links are underlined, and consider appending
+	   the URL to the end of the link for usability. */
+	a:link,
+	a:visited {
+		color: #000 !important;
+		font-weight: bold;
+		text-decoration: underline;
+	}
+	/*
+	.reveal a:link:after,
+	.reveal a:visited:after {
+		content: " (" attr(href) ") ";
+		color: #222 !important;
+		font-size: 90%;
+	}
+	*/
+
+
+	/* SECTION 6: more reveal.js specific additions by @skypanther */
+	ul, ol, div, p {
+		visibility: visible;
+		position: static;
+		width: auto;
+		height: auto;
+		display: block;
+		overflow: visible;
+		margin: 0;
+		text-align: left !important;
+	}
+	.reveal pre,
+	.reveal table {
+		margin-left: 0;
+		margin-right: 0;
+	}
+	.reveal pre code {
+		padding: 20px;
+		border: 1px solid #ddd;
+	}
+	.reveal blockquote {
+		margin: 20px 0;
+	}
+	.reveal .slides {
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 0 !important;
+		zoom: 1 !important;
+
+		overflow: visible !important;
+		display: block !important;
+
+		text-align: left !important;
+		-webkit-perspective: none;
+		   -moz-perspective: none;
+		    -ms-perspective: none;
+		        perspective: none;
+
+		-webkit-perspective-origin: 50% 50%;
+		   -moz-perspective-origin: 50% 50%;
+		    -ms-perspective-origin: 50% 50%;
+		        perspective-origin: 50% 50%;
+	}
+	.reveal .slides section {
+		visibility: visible !important;
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+		display: block !important;
+		overflow: visible !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 60px 20px !important;
+		z-index: auto !important;
+
+		opacity: 1 !important;
+
+		page-break-after: always !important;
+
+		-webkit-transform-style: flat !important;
+		   -moz-transform-style: flat !important;
+		    -ms-transform-style: flat !important;
+		        transform-style: flat !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+
+		-webkit-transition: none !important;
+		   -moz-transition: none !important;
+		    -ms-transition: none !important;
+		        transition: none !important;
+	}
+	.reveal .slides section.stack {
+		padding: 0 !important;
+	}
+	.reveal section:last-of-type {
+		page-break-after: avoid !important;
+	}
+	.reveal section .fragment {
+		opacity: 1 !important;
+		visibility: visible !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+	}
+	.reveal section img {
+		display: block;
+		margin: 15px 0px;
+		background: rgba(255,255,255,1);
+		border: 1px solid #666;
+		box-shadow: none;
+	}
+
+	.reveal section small {
+		font-size: 0.8em;
+	}
+
+}  
+</script>
+
+
+<script id="pdf-css" type="application/dynamic-css">
+    
+/**
+ * This stylesheet is used to print reveal.js
+ * presentations to PDF.
+ *
+ * https://github.com/hakimel/reveal.js#pdf-export
+ */
+
+* {
+	-webkit-print-color-adjust: exact;
+}
+
+body {
+	margin: 0 auto !important;
+	border: 0;
+	padding: 0;
+	float: none !important;
+	overflow: visible;
+}
+
+html {
+	width: 100%;
+	height: 100%;
+	overflow: visible;
+}
+
+/* Remove any elements not needed in print. */
+.nestedarrow,
+.reveal .controls,
+.reveal .progress,
+.reveal .playback,
+.reveal.overview,
+.fork-reveal,
+.share-reveal,
+.state-background {
+	display: none !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	text-shadow: 0 0 0 #000 !important;
+}
+
+.reveal pre code {
+	overflow: hidden !important;
+	font-family: Courier, 'Courier New', monospace !important;
+}
+
+ul, ol, div, p {
+	visibility: visible;
+	position: static;
+	width: auto;
+	height: auto;
+	display: block;
+	overflow: visible;
+	margin: auto;
+}
+.reveal {
+	width: auto !important;
+	height: auto !important;
+	overflow: hidden !important;
+}
+.reveal .slides {
+	position: static;
+	width: 100%;
+	height: auto;
+
+	left: auto;
+	top: auto;
+	margin: 0 !important;
+	padding: 0 !important;
+
+	overflow: visible;
+	display: block;
+
+	-webkit-perspective: none;
+	   -moz-perspective: none;
+	    -ms-perspective: none;
+	        perspective: none;
+
+	-webkit-perspective-origin: 50% 50%; /* there isn't a none/auto value but 50-50 is the default */
+	   -moz-perspective-origin: 50% 50%;
+	    -ms-perspective-origin: 50% 50%;
+	        perspective-origin: 50% 50%;
+}
+
+.reveal .slides section {
+	page-break-after: always !important;
+
+	visibility: visible !important;
+	position: relative !important;
+	display: block !important;
+	position: relative !important;
+
+	margin: 0 !important;
+	padding: 0 !important;
+	box-sizing: border-box !important;
+	min-height: 1px;
+
+	opacity: 1 !important;
+
+	-webkit-transform-style: flat !important;
+	   -moz-transform-style: flat !important;
+	    -ms-transform-style: flat !important;
+	        transform-style: flat !important;
+
+	-webkit-transform: none !important;
+	   -moz-transform: none !important;
+	    -ms-transform: none !important;
+	        transform: none !important;
+}
+
+.reveal section.stack {
+	margin: 0 !important;
+	padding: 0 !important;
+	page-break-after: avoid !important;
+	height: auto !important;
+	min-height: auto !important;
+}
+
+.reveal img {
+	box-shadow: none;
+}
+
+.reveal .roll {
+	overflow: visible;
+	line-height: 1em;
+}
+
+/* Slide backgrounds are placed inside of their slide when exporting to PDF */
+.reveal section .slide-background {
+	display: block !important;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: -1;
+}
+
+/* All elements should be above the slide-background */
+.reveal section>* {
+	position: relative;
+	z-index: 1;
+}
+
+/* Display slide speaker notes when 'showNotes' is enabled */
+.reveal .speaker-notes-pdf {
+	display: block;
+	width: 100%;
+	max-height: none;
+	left: auto;
+	top: auto;
+	z-index: 100;
+}
+
+/* Display slide numbers when 'slideNumber' is enabled */
+.reveal .slide-number-pdf {
+	display: block;
+	position: absolute;
+	font-size: 14px;
+}
+
+</script>
+
+
+<script>
+var style = document.createElement( 'style' );
+style.type = 'text/css';
+var style_script_id = window.location.search.match( /print-pdf/gi ) ? 'pdf-css' : 'paper-css';
+var style_script = document.getElementById(style_script_id).text;
+style.innerHTML = style_script;
+document.getElementsByTagName('head')[0].appendChild(style);
+</script>
+
+    <script src="site_libs/header-attrs-2.6/header-attrs.js"></script>
+    <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+    <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section>
+    <h1 class="title">Competition</h1>
+    <h3 class="date">BIO605 FA20</h3>
+</section>
+
+<section>
+<section id="community-ecology" class="title-slide slide level1">
+<h1>Community Ecology</h1>
+
+</section>
+<section id="what-is-a-community" class="slide level2">
+<h2>What is a community?</h2>
+<p>A group of species that interact in a given space</p>
+<ul>
+<li>Communities have structure, including <strong>species richness</strong>, <strong>relative abundance</strong> etc.</li>
+<li>Different types of interactions</li>
+<li>Why is it important to study interactions in a community?</li>
+</ul>
+</section>
+<section id="interctions-matter" class="slide level2">
+<h2>Interctions matter</h2>
+<p>Species interactions can be a determinant of:</p>
+<ul>
+<li>persistence of constituent species</li>
+<li>stability of a community</li>
+<li>ecosystem functions</li>
+</ul>
+</section>
+<section id="types-of-interactions" class="slide level2">
+<h2>Types of interactions</h2>
+<p>List species interactions</p>
+<ul>
+<li class="fragment"><span style="color:steelblue;">Competition</span></li>
+<li class="fragment">Predation</li>
+<li class="fragment">Mutualism</li>
+<li class="fragment">Parasitism</li>
+<li class="fragment">Commensalism</li>
+<li class="fragment">and more…</li>
+</ul>
+</section>
+<section id="competition" class="slide level2">
+<h2>Competition</h2>
+<p>Competition is considered to be a dominant (perhaps THE dominant) type of species interactions in a community*.</p>
+<p><small>*I doubt it</small></p>
+<p><strong>Contest competition</strong></p>
+<p>One or few individuals dominate resources</p>
+<p><strong>Scramble competition</strong></p>
+<p>Depletes resources and all competitors are affected</p>
+</section></section>
+<section>
+<section id="competition-models" class="title-slide slide level1">
+<h1>Competition models</h1>
+
+</section>
+<section id="recall-logistic-model" class="slide level2">
+<h2>Recall: logistic model</h2>
+<p>One species model (Logistic model):</p>
+<p><span class="math display">\[
+\begin{align}
+\frac{dN}{dt} &amp;= rN(1-\frac{N}{K}) &amp;&amp;\text{Logistic model}\\
+\end{align}
+\]</span></p>
+</section>
+<section id="include-competition" class="slide level2">
+<h2>Include competition</h2>
+<p>Add <span class="math inline">\(N_2\)</span> to the equation:</p>
+<p><span class="math display">\[
+\begin{align}
+\frac{dN_1}{dt} &amp;= r_1N_1(1-\frac{N_1+N_2}{K_1})\\
+\end{align}
+\]</span></p>
+<p>How does <span class="math inline">\(N_2\)</span> impact <span class="math inline">\(\frac{dN_1}{dt}\)</span>?</p>
+</section>
+<section id="r-exercise-set-parameters" class="slide level2">
+<h2>R exercise: set parameters</h2>
+<p>Visualize how <span class="math inline">\(N_2\)</span> impacts <span class="math inline">\(\frac{dN_1}{dt}\)</span></p>
+<p>Set <span class="math inline">\(r\)</span>, <span class="math inline">\(K_1\)</span>, <span class="math inline">\(N_1\)</span>, and <span class="math inline">\(N_2\)</span></p>
+<p><small><span class="math inline">\(N_2\)</span> is set to be <span class="math inline">\(0\)</span> for reference</small></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>r1 <span class="ot">&lt;-</span> <span class="fl">1.5</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>K1 <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>N1 <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">150</span>, <span class="at">length =</span> <span class="dv">100</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>N2 <span class="ot">&lt;-</span> <span class="dv">0</span> <span class="co"># set 0 as a reference</span></span></code></pre></div>
+</section>
+<section id="r-exercise-equation" class="slide level2">
+<h2>R exercise: equation</h2>
+<p>Write equation</p>
+<p><span class="math display">\[
+\frac{dN_1}{dt} = r_1N_1(1-\frac{N_1+N_2}{K_1})\\
+\]</span></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>dN1_0 <span class="ot">&lt;-</span> r1<span class="sc">*</span>N1<span class="sc">*</span>(<span class="dv">1</span> <span class="sc">-</span> (N1 <span class="sc">+</span> N2)<span class="sc">/</span>K1)</span></code></pre></div>
+</section>
+<section id="r-exercise-visualize" class="slide level2">
+<h2>R exercise: visualize</h2>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(dN1_0 <span class="sc">~</span> N1, <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;dN1/dt&quot;</span>) <span class="co"># N2 = 0</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">0</span>, <span class="at">col =</span> <span class="fu">grey</span>(<span class="dv">0</span>, <span class="fl">0.2</span>))</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(<span class="dv">100</span>, <span class="dv">0</span>, <span class="at">cex =</span> CEX)</span></code></pre></div>
+<p><img src="lecture03_competition_files/figure-revealjs/unnamed-chunk-3-1.png" width="480" style="display: block; margin: auto;" /></p>
+</section>
+<section id="r-exercise-visualize-1" class="slide level2">
+<h2>R exercise: visualize</h2>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>dN1_10 <span class="ot">&lt;-</span> r1<span class="sc">*</span>N1<span class="sc">*</span>(<span class="dv">1</span> <span class="sc">-</span> (N1 <span class="sc">+</span> <span class="dv">10</span>)<span class="sc">/</span>K1) <span class="co"># N2 = 10</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(dN1_0 <span class="sc">~</span> N1, <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;dN1/dt&quot;</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">0</span>, <span class="at">col =</span> <span class="fu">grey</span>(<span class="dv">0</span>, <span class="fl">0.2</span>))</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(dN1_10 <span class="sc">~</span> N1, <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>)</span></code></pre></div>
+</section>
+<section id="r-exercise-visualize-2" class="slide level2">
+<h2>R exercise: visualize</h2>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>dN1_10 <span class="ot">&lt;-</span> r1<span class="sc">*</span>N1<span class="sc">*</span>(<span class="dv">1</span> <span class="sc">-</span> (N1 <span class="sc">+</span> <span class="dv">10</span>)<span class="sc">/</span>K1) <span class="co"># N2 = 10</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(dN1_0 <span class="sc">~</span> N1, <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;dN1/dt&quot;</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">0</span>, <span class="at">col =</span> <span class="fu">grey</span>(<span class="dv">0</span>, <span class="fl">0.2</span>))</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(dN1_10 <span class="sc">~</span> N1, <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>)</span></code></pre></div>
+<p><img src="lecture03_competition_files/figure-revealjs/unnamed-chunk-5-1.png" width="480" style="display: block; margin: auto;" /></p>
+</section>
+<section id="r-exercise-visualize-3" class="slide level2">
+<h2>R exercise: visualize</h2>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>dN1_50 <span class="ot">&lt;-</span> r1<span class="sc">*</span>N1<span class="sc">*</span>(<span class="dv">1</span> <span class="sc">-</span> (N1 <span class="sc">+</span> <span class="dv">50</span>)<span class="sc">/</span>K1) <span class="co"># N2 = 50</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(dN1_0 <span class="sc">~</span> N1, <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;dN1/dt&quot;</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">0</span>, <span class="at">col =</span> <span class="fu">grey</span>(<span class="dv">0</span>, <span class="fl">0.2</span>))</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(dN1_10 <span class="sc">~</span> N1, <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(dN1_50 <span class="sc">~</span> N1, <span class="at">col =</span> <span class="st">&quot;red&quot;</span>)</span></code></pre></div>
+</section>
+<section id="r-exercise-visualize-4" class="slide level2">
+<h2>R exercise: visualize</h2>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>dN1_50 <span class="ot">&lt;-</span> r1<span class="sc">*</span>N1<span class="sc">*</span>(<span class="dv">1</span> <span class="sc">-</span> (N1 <span class="sc">+</span> <span class="dv">50</span>)<span class="sc">/</span>K1) <span class="co"># N2 = 50</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(dN1_0 <span class="sc">~</span> N1, <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;dN1/dt&quot;</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">0</span>, <span class="at">col =</span> <span class="fu">grey</span>(<span class="dv">0</span>, <span class="fl">0.2</span>))</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(dN1_10 <span class="sc">~</span> N1, <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(dN1_50 <span class="sc">~</span> N1, <span class="at">col =</span> <span class="st">&quot;red&quot;</span>)</span></code></pre></div>
+<p><img src="lecture03_competition_files/figure-revealjs/unnamed-chunk-7-1.png" width="480" style="display: block; margin: auto;" /></p>
+</section>
+<section id="impact-of-competition" class="slide level2">
+<h2>Impact of competition</h2>
+<p>Logistic model + species 2 (<span class="math inline">\(N_2\)</span>)</p>
+<p><span class="math display">\[
+\frac{dN_1}{dt} = r_1N_1(1-\frac{N_1+N_2}{K_1})\\
+\]</span></p>
+<ul>
+<li>As <span class="math inline">\(N_2\)</span> increases, the population growth of <span class="math inline">\(N_1\)</span> becomes negative more quickly</li>
+<li>Population size of species 1 reaches its equilibrium below <span class="math inline">\(K_1\)</span>, the carrying capacity in the absence of species 2</li>
+</ul>
+</section>
+<section id="assumptions" class="slide level2">
+<h2>Assumptions</h2>
+<p>Logistic model + species 2 (<span class="math inline">\(N_2\)</span>)</p>
+<p><span class="math display">\[
+\frac{dN_1}{dt} = r_1N_1(1-\frac{N_1+N_2}{K_1})\\
+\]</span></p>
+<p>The above model assumes per-capita impacts are equal b/w species 1 and 2</p>
+</section>
+<section id="competition-coefficient" class="slide level2">
+<h2>Competition coefficient</h2>
+<p>Logistic model + species 2 (<span class="math inline">\(N_2\)</span>)</p>
+<p><span class="math display">\[
+\frac{dN_1}{dt} = r_1N_1(1-\frac{N_1+ \alpha N_2}{K_1})\\
+\]</span></p>
+<p>Multiply <span class="math inline">\(\alpha\)</span> to model different impacts of species 2</p>
+<p><span class="math inline">\(\alpha\)</span> is referred to as the <strong>competition coefficient</strong></p>
+<ul>
+<li><span class="math inline">\(\alpha &lt; 0\)</span> … effect of species 2 is less than species 1</li>
+<li><span class="math inline">\(\alpha &gt; 0\)</span> … effect of species 2 is greater than species 1</li>
+</ul>
+</section>
+<section id="assumptions-1" class="slide level2">
+<h2>Assumptions</h2>
+<p>Logistic model + species 2 (<span class="math inline">\(N_2\)</span>)</p>
+<p><span class="math display">\[
+\frac{dN_1}{dt} = r_1N_1(1-\frac{N_1+ \alpha N_2}{K_1})\\
+\]</span></p>
+<p>The above model assumes</p>
+<ul>
+<li><span class="math inline">\(N_2\)</span> is constant</li>
+<li><span class="math inline">\(N_1\)</span> has no impacts on <span class="math inline">\(N_2\)</span></li>
+</ul>
+</section>
+<section id="lotka-volterra-model" class="slide level2">
+<h2>Lotka-Volterra model</h2>
+<p>Lotka-Volterra model</p>
+<p><span class="math display">\[
+\frac{dN_1}{dt} = r_1N_1(1-\frac{N_1+ \alpha_{12} N_2}{K_1})\\
+\frac{dN_2}{dt} = r_2N_2(1-\frac{N_2+ \alpha_{21} N_1}{K_2})\\
+\]</span></p>
+<p>The above equation models dynamic interactions of the two competing species</p>
+</section>
+<section id="lotka-volterra-model-1" class="slide level2">
+<h2>Lotka-Volterra model</h2>
+<p>Lotka-Volterra model (different form)</p>
+<p><span class="math display">\[
+\frac{dN_1}{dt} = N_1(r_1-\beta_1 N_1 - \gamma_{12}N_2)\\
+\frac{dN_2}{dt} = N_2(r_2-\beta_2 N_2 - \gamma_{21}N_1)\\
+\]</span></p>
+<ul>
+<li><span class="math inline">\(\beta_i\)</span> <strong>Intraspecific</strong> competition coefficient</li>
+<li><span class="math inline">\(\gamma_{ji}\)</span> <strong>Interspecific</strong> competition coefficient</li>
+</ul>
+</section>
+<section id="relate-parameters" class="slide level2">
+<h2>Relate parameters</h2>
+<p><span class="math display">\[
+\begin{align}
+\frac{dN_1}{dt} &amp;= r_1N_1(1-\frac{N_1+ \alpha_{12} N_2}{K_1})\\
+                &amp;= N_1(r_1 - \frac{r_1}{K_1}N_1 - \frac{r_1 \alpha_{12}}{K_1} N_2)\\
+                &amp;= N_1(r_1 - \beta_1 N_1 - \beta_1 \alpha_{12} N_2)\\
+                &amp;=  N_1(r_1 - \beta_1 N_1 - \gamma_{12} N_2)\\
+\end{align}
+\]</span></p>
+<p>where <span class="math inline">\(\beta_1 = \frac{r_1}{K_1}\)</span> and <span class="math inline">\(\alpha_{12} = \frac{\gamma_{12}}{\beta_1}\)</span></p>
+<p><span class="math inline">\(\alpha_{12}\)</span> is the <strong>ratio of inta- and interspecific competition coefficitents</strong></p>
+</section></section>
+<section>
+<section id="predict-consequences-of-competition" class="title-slide slide level1">
+<h1>Predict consequences of competition</h1>
+
+</section>
+<section id="model-prediction" class="slide level2">
+<h2>Model prediction</h2>
+<div id="left">
+<p><img src="lecture03_competition_files/figure-revealjs/unnamed-chunk-8-1.png" width="480" style="display: block; margin: auto;" /></p>
+</div>
+<div id="right">
+<p><strong>Theory</strong></p>
+<ul>
+<li>Generate predictions with given mechanisms</li>
+</ul>
+</div>
+</section>
+<section id="model-prediction-1" class="slide level2">
+<h2>Model prediction</h2>
+<p>Much of interests in community ecology is the coexistence of competiting species</p>
+<p>What does the Lotka-Volterra model predict?</p>
+</section>
+<section id="discrete-version" class="slide level2">
+<h2>Discrete version</h2>
+<p>Make the discrete version of the Lotka-Volterra model</p>
+<p>In analogy of trasformation from the logistic to Beverton-Holt model</p>
+<p><span class="math display">\[
+N_{1,t+1} = (\frac{\lambda_1}{1 + \beta_1 N_{1,t} + \gamma_{12}N_{2,t}}) N_{1,t}\\
+N_{2,t+1} = (\frac{\lambda_2}{1 + \beta_2 N_{2,t} + \gamma_{21}N_{1,t}}) N_{2,t}
+\]</span></p>
+</section>
+<section id="r-exercise-set-parameters-1" class="slide level2">
+<h2>R exercise: set parameters</h2>
+<p>Set <span class="math inline">\(\lambda\)</span>, <span class="math inline">\(\beta_i\)</span>, and <span class="math inline">\(\gamma_{ji}\)</span></p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set equal values of lambda for species 1 and 2</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>lambda <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>b1 <span class="ot">&lt;-</span> <span class="fl">0.1</span>   <span class="co"># Intra-specific competition</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>g21 <span class="ot">&lt;-</span> <span class="fl">0.05</span> <span class="co"># Impact of sp1 on sp2</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>b2 <span class="ot">&lt;-</span> <span class="fl">0.3</span>   <span class="co"># Intra-specific competition</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>g12 <span class="ot">&lt;-</span> <span class="fl">0.15</span> <span class="co"># Impact of sp2 on sp1</span></span></code></pre></div>
+</section>
+<section id="r-exercise-initial-abundance" class="slide level2">
+<h2>R exercise: initial abundance</h2>
+<p>Set initial abundance <code>N1[1]</code> and <code>N2[1]</code></p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>N1 <span class="ot">&lt;-</span> N2 <span class="ot">&lt;-</span> <span class="cn">NULL</span> <span class="co"># create &quot;NULL&quot; objects</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>N1[<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="dv">10</span>  <span class="co"># initial abundance 10</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>N2[<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="dv">5</span> <span class="co"># initial abundance 5</span></span></code></pre></div>
+</section>
+<section id="r-exercise-equation-1" class="slide level2">
+<h2>R exercise: equation</h2>
+<p>Write the equations</p>
+<p><span class="math display">\[
+N_{1,t+1} = (\frac{\lambda_1}{1 + \beta_1 N_{1,t} + \gamma_{12}N_{2,t}}) N_{1,t}\\
+N_{2,t+1} = (\frac{\lambda_2}{1 + \beta_2 N_{2,t} + \gamma_{21}N_{1,t}}) N_{2,t}
+\]</span></p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(t <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">99</span>){ <span class="co"># simulate 100 time steps</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  N1[t<span class="sc">+</span><span class="dv">1</span>] <span class="ot">&lt;-</span> (lambda<span class="sc">*</span>N1[t])<span class="sc">/</span>(<span class="dv">1</span> <span class="sc">+</span> b1<span class="sc">*</span>N1[t] <span class="sc">+</span> g12<span class="sc">*</span>N2[t])</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  N2[t<span class="sc">+</span><span class="dv">1</span>] <span class="ot">&lt;-</span> (lambda<span class="sc">*</span>N2[t])<span class="sc">/</span>(<span class="dv">1</span> <span class="sc">+</span> b2<span class="sc">*</span>N2[t] <span class="sc">+</span> g21<span class="sc">*</span>N1[t])</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+</section>
+<section id="r-exercise-print" class="slide level2">
+<h2>R exercise: print</h2>
+<p>Check the first 5 time steps</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(N1[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>])</span></code></pre></div>
+<pre><code>## [1] 10.00000 10.90909 11.52000 11.95514 12.27701</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(N2[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>])</span></code></pre></div>
+<pre><code>## [1] 5.000000 5.000000 4.925373 4.838899 4.760467</code></pre>
+</section>
+<section id="r-exercise-visualize-5" class="slide level2">
+<h2>R exercise: visualize</h2>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(N1)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(N1 <span class="sc">~</span> t, <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;N1 or N2&quot;</span>,</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fu">max</span>(N1, N2) ) )</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(N2 <span class="sc">~</span> t, <span class="at">col =</span> <span class="st">&quot;red&quot;</span>)</span></code></pre></div>
+</section>
+<section id="r-exercise-visualize-6" class="slide level2">
+<h2>R exercise: visualize</h2>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(N1)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(N1 <span class="sc">~</span> t, <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;N1 or N2&quot;</span>,</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fu">max</span>(N1, N2) ) )</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(N2 <span class="sc">~</span> t, <span class="at">col =</span> <span class="st">&quot;red&quot;</span>)</span></code></pre></div>
+<p><img src="lecture03_competition_files/figure-revealjs/unnamed-chunk-14-1.png" width="480" style="display: block; margin: auto;" /></p>
+</section>
+<section id="model-prediction-2" class="slide level2">
+<h2>Model prediction</h2>
+<p><span class="math display">\[
+N_{1,t+1} = (\frac{\lambda_1}{1 + \beta_1 N_{1,t} + \gamma_{12}N_{2,t}}) N_{1,t}\\
+N_{2,t+1} = (\frac{\lambda_2}{1 + \beta_2 N_{2,t} + \gamma_{21}N_{1,t}}) N_{2,t}
+\]</span></p>
+<p>In the previous exercise, we set:</p>
+<ul>
+<li class="fragment"><span class="math inline">\(\lambda_1 = \lambda_2\)</span> = 3</li>
+<li class="fragment"><span class="math inline">\(\beta_1\)</span> = 0.1 and <span class="math inline">\(\gamma_{21}\)</span> = 0.05</li>
+<li class="fragment"><span class="math inline">\(\beta_2\)</span> = 0.3 and <span class="math inline">\(\gamma_{12}\)</span> = 0.15</li>
+</ul>
+<p>What does this mean?</p>
+</section>
+<section id="competition-scenario-1" class="slide level2">
+<h2>Competition: scenario 1</h2>
+<p>Try the following conditions</p>
+<p><strong>Scenario 1</strong></p>
+<p>Intraspecific competition <span class="math inline">\(\beta_{i}\)</span> is <strong>stronger</strong> than interspecific competition <span class="math inline">\(\gamma_{ji}\)</span> for both species (<span class="math inline">\(\beta_i &gt; \gamma_{ji}\)</span>)</p>
+</section>
+<section id="r-exercise-scenario-1" class="slide level2">
+<h2>R exercise: scenario 1</h2>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set equal values of lambda for species 1 and 2</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>lambda <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>b1 <span class="ot">&lt;-</span> <span class="fl">0.1</span>   <span class="co"># Intra-specific competition</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>g21 <span class="ot">&lt;-</span> <span class="fl">0.05</span> <span class="co"># Impact of sp1 on sp2</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>b2 <span class="ot">&lt;-</span> <span class="fl">0.3</span>   <span class="co"># Intra-specific competition</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>g12 <span class="ot">&lt;-</span> <span class="fl">0.15</span> <span class="co"># Impact of sp2 on sp1</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="co"># initial abundance</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>N1 <span class="ot">&lt;-</span> N2 <span class="ot">&lt;-</span> <span class="cn">NULL</span> <span class="co"># create &quot;NULL&quot; objects</span></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>N1[<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="dv">5</span>  <span class="co"># set initial abundance 5</span></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>N2[<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="dv">10</span> <span class="co"># set initial abundance 10</span></span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a><span class="co"># simulate</span></span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(t <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">99</span>){ <span class="co"># simulate 100 time steps</span></span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>  N1[t<span class="sc">+</span><span class="dv">1</span>] <span class="ot">&lt;-</span> (lambda<span class="sc">*</span>N1[t])<span class="sc">/</span>(<span class="dv">1</span> <span class="sc">+</span> b1<span class="sc">*</span>N1[t] <span class="sc">+</span> g12<span class="sc">*</span>N2[t])</span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>  N2[t<span class="sc">+</span><span class="dv">1</span>] <span class="ot">&lt;-</span> (lambda<span class="sc">*</span>N2[t])<span class="sc">/</span>(<span class="dv">1</span> <span class="sc">+</span> b2<span class="sc">*</span>N2[t] <span class="sc">+</span> g21<span class="sc">*</span>N1[t])</span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+</section>
+<section id="r-exercise-scenario-1-1" class="slide level2">
+<h2>R exercise: scenario 1</h2>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(N1)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(N1 <span class="sc">~</span> t, <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;N1 or N2&quot;</span>,</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fu">max</span>(N1,N2) ) )</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(N2 <span class="sc">~</span> t, <span class="at">col =</span> <span class="st">&quot;red&quot;</span>)</span></code></pre></div>
+<p><img src="lecture03_competition_files/figure-revealjs/unnamed-chunk-16-1.png" width="480" style="display: block; margin: auto;" /></p>
+</section>
+<section id="prediction-scenario-1" class="slide level2">
+<h2>Prediction: scenario 1</h2>
+<p>When <span class="math inline">\(\beta_i &gt; \gamma_{ji}\)</span>,</p>
+<p>the <strong>two species coexist</strong> (initial abundance does not matter)</p>
+</section>
+<section id="competition-scenario-2" class="slide level2">
+<h2>Competition: scenario 2</h2>
+<p>Try the following conditions</p>
+<p><strong>Scenario 2</strong></p>
+<p>Intraspecific competition <span class="math inline">\(\beta_{i}\)</span> is <strong>stronger</strong> than interspecific competition <span class="math inline">\(\gamma_{ji}\)</span> for species 1 (<span class="math inline">\(\beta_1 &gt; \gamma_{21}\)</span>)</p>
+<p>&amp;</p>
+<p>Intraspecific competition <span class="math inline">\(\beta_{i}\)</span> is <strong>weaker</strong> than interspecific competition <span class="math inline">\(\gamma_{ji}\)</span> for species 2 (<span class="math inline">\(\beta_2 &lt; \gamma_{12}\)</span>)</p>
+</section>
+<section id="r-exercise-scenario-2" class="slide level2">
+<h2>R exercise: scenario 2</h2>
+<p>Set initial abundance as you like</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set equal values of lambda for species 1 and 2</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>lambda <span class="ot">&lt;-</span> <span class="dv">3</span> </span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co"># in sp.1 equation</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>b1 <span class="ot">&lt;-</span> <span class="fl">1.5</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>g21 <span class="ot">&lt;-</span> <span class="fl">1.0</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="co"># in sp.2 equation</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>b2 <span class="ot">&lt;-</span> <span class="fl">0.1</span></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>g12 <span class="ot">&lt;-</span> <span class="fl">0.8</span></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a><span class="co"># initial abundance</span></span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>N1 <span class="ot">&lt;-</span> N2 <span class="ot">&lt;-</span> <span class="cn">NULL</span> <span class="co"># create &quot;NULL&quot; objects</span></span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>N1[<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>N2[<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="dv">8</span></span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a><span class="co"># simulate</span></span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(t <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">99</span>){ <span class="co"># simulate 100 time steps</span></span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>  N1[t<span class="sc">+</span><span class="dv">1</span>] <span class="ot">&lt;-</span> (lambda<span class="sc">*</span>N1[t])<span class="sc">/</span>(<span class="dv">1</span> <span class="sc">+</span> b1<span class="sc">*</span>N1[t] <span class="sc">+</span> g12<span class="sc">*</span>N2[t])</span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>  N2[t<span class="sc">+</span><span class="dv">1</span>] <span class="ot">&lt;-</span> (lambda<span class="sc">*</span>N2[t])<span class="sc">/</span>(<span class="dv">1</span> <span class="sc">+</span> b2<span class="sc">*</span>N2[t] <span class="sc">+</span> g21<span class="sc">*</span>N1[t])</span>
+<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+</section>
+<section id="r-exercise-scenario-2-1" class="slide level2">
+<h2>R exercise: scenario 2</h2>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(N1)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(N1 <span class="sc">~</span> t, <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;N1 or N2&quot;</span>,</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fu">max</span>(N1, N2) ) )</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(N2 <span class="sc">~</span> t, <span class="at">col =</span> <span class="st">&quot;red&quot;</span>)</span></code></pre></div>
+<p><img src="lecture03_competition_files/figure-revealjs/unnamed-chunk-18-1.png" width="480" style="display: block; margin: auto;" /></p>
+</section>
+<section id="prediction-scenario-2" class="slide level2">
+<h2>Prediction: scenario 2</h2>
+<p>When <span class="math inline">\(\beta_i &gt; \gamma_{ji} \cap \beta_j &lt; \gamma_{ij}\)</span> (or <span class="math inline">\(\beta_i &lt; \gamma_{ji} \cap \beta_j &gt; \gamma_{ij}\)</span>),</p>
+<p>the <strong>two species cannot coexist</strong></p>
+<ul>
+<li>Winner has greater impacts on the competitor than themselves (<span class="math inline">\(\beta_i &lt; \gamma_{ji}\)</span> or <span class="math inline">\(\beta_j &lt; \gamma_{ij}\)</span>)</li>
+<li>Loser has greater impacts on themselves than the competitor (<span class="math inline">\(\beta_i &gt; \gamma_{ji}\)</span> or <span class="math inline">\(\beta_j &gt; \gamma_{ij}\)</span>)</li>
+</ul>
+</section>
+<section id="competition-scenario-3" class="slide level2">
+<h2>Competition: scenario 3</h2>
+<p>Try the following conditions</p>
+<p><strong>Scenario 3</strong></p>
+<p>Intraspecific competition <span class="math inline">\(\beta_{i}\)</span> is <strong>weaker</strong> than interspecific competition <span class="math inline">\(\gamma_{ji}\)</span> for species 1 (<span class="math inline">\(\beta_1 &lt; \gamma_{21}\)</span>)</p>
+<p>&amp;</p>
+<p>Intraspecific competition <span class="math inline">\(\beta_{i}\)</span> is <strong>weaker</strong> than interspecific competition <span class="math inline">\(\gamma_{ji}\)</span> for species 2 (<span class="math inline">\(\beta_2 &lt; \gamma_{12}\)</span>)</p>
+</section>
+<section id="r-exercise-scenario-3" class="slide level2">
+<h2>R exercise: scenario 3</h2>
+<p>Set initial abundance as you like</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set equal values of lambda for species 1 and 2</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>lambda <span class="ot">&lt;-</span> <span class="dv">3</span> </span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="co"># in sp.1 equation</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>b1 <span class="ot">&lt;-</span> <span class="fl">0.1</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>g21 <span class="ot">&lt;-</span> <span class="fl">0.2</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="co"># in sp.2 equation</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>b2 <span class="ot">&lt;-</span> <span class="fl">0.2</span></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>g12 <span class="ot">&lt;-</span> <span class="fl">0.4</span></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a><span class="co"># initial abundance</span></span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>N1 <span class="ot">&lt;-</span> N2 <span class="ot">&lt;-</span> <span class="cn">NULL</span> <span class="co"># create &quot;NULL&quot; objects</span></span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>N1[<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>N2[<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="fl">1.5</span></span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a><span class="co"># simulate</span></span>
+<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(t <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">99</span>){ <span class="co"># simulate 100 time steps</span></span>
+<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a>  N1[t<span class="sc">+</span><span class="dv">1</span>] <span class="ot">&lt;-</span> (lambda<span class="sc">*</span>N1[t])<span class="sc">/</span>(<span class="dv">1</span> <span class="sc">+</span> b1<span class="sc">*</span>N1[t] <span class="sc">+</span> g12<span class="sc">*</span>N2[t])</span>
+<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a>  N2[t<span class="sc">+</span><span class="dv">1</span>] <span class="ot">&lt;-</span> (lambda<span class="sc">*</span>N2[t])<span class="sc">/</span>(<span class="dv">1</span> <span class="sc">+</span> b2<span class="sc">*</span>N2[t] <span class="sc">+</span> g21<span class="sc">*</span>N1[t])</span>
+<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+</section>
+<section id="r-exercise-scenario-3-1" class="slide level2">
+<h2>R exercise: scenario 3</h2>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(N1)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(N1 <span class="sc">~</span> t, <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;N1 or N2&quot;</span>,</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fu">max</span>(N1, N2) ) )</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(N2 <span class="sc">~</span> t, <span class="at">col =</span> <span class="st">&quot;red&quot;</span>)</span></code></pre></div>
+<p><img src="lecture03_competition_files/figure-revealjs/unnamed-chunk-20-1.png" width="480" style="display: block; margin: auto;" /></p>
+</section>
+<section id="prediction-scenario-3" class="slide level2">
+<h2>Prediction: scenario 3</h2>
+<p>When <span class="math inline">\(\beta_i &lt; \gamma_{ji}\)</span>,<br />
+the <strong>two species cannot coexist</strong> (winner is the species with higher initial abundance)</p>
+</section>
+<section id="summary" class="slide level2">
+<h2>Summary</h2>
+<p>Lotka-Volterra model predicts three consequences</p>
+<p><strong>Stable coexistence</strong><br />
+<span class="math inline">\(\beta_i &gt; \gamma_{ji}\)</span></p>
+<p><strong>Competitive dominance (exclusion)</strong><br />
+<span class="math inline">\(\beta_i &gt; \gamma_{ji} \cap \beta_j &lt; \gamma_{ij}\)</span> (or <span class="math inline">\(\beta_i &lt; \gamma_{ji} \cap \beta_j &gt; \gamma_{ij}\)</span>)</p>
+<p><strong>Destabilizing competition</strong><br />
+<span class="math inline">\(\beta_i &lt; \gamma_{ji}\)</span></p>
+</section></section>
+    </div>
+  </div>
+
+  <script src="site_libs/reveal.js-3.3.0.1/lib/js/head.min.js"></script>
+  <script src="site_libs/reveal.js-3.3.0.1/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        // Display the page number of the current slide
+        slideNumber: true,
+        // Push each slide change to the browser history
+        history: true,
+        // Vertical centering of slides
+        center: false,
+        // Transition style
+        transition: 'default', // none/fade/slide/convex/concave/zoom
+        // Transition style for full page slide backgrounds
+        backgroundTransition: 'default', // none/fade/slide/convex/concave/zoom
+
+        menu: {
+   
+          numbers: true,
+    
+    
+    
+    
+    
+    
+ 
+          custom: false,
+          themes: false,
+          transitions: false
+        },
+
+
+
+        chalkboard: {
+          toggleNotesButton: true,
+          theme: 'whiteboard',
+        },
+
+        keyboard: {
+          67: function() { RevealChalkboard.toggleNotesCanvas() },    // toggle notes canvas when 'c' is pressed
+          66: function() { RevealChalkboard.toggleChalkboard() }, // toggle chalkboard when 'b' is pressed
+          46: function() { RevealChalkboard.clear() },    // clear chalkboard when 'DEL' is pressed
+           8: function() { RevealChalkboard.reset() },    // reset chalkboard data on current slide when 'BACKSPACE' is pressed
+          68: function() { RevealChalkboard.download() }, // downlad recorded chalkboard drawing when 'd' is pressed
+        },
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: 'site_libs/reveal.js-3.3.0.1/plugin/chalkboard/chalkboard.js', async: true },
+          { src: 'site_libs/reveal.js-3.3.0.1/plugin/menu/menu.js', async: true },
+        ]
+      });
+    </script>
+  <!-- dynamically load mathjax for compatibility with self-contained -->
+  <script>
+    (function () {
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+      document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
+
+<script>
+  (function() {
+    if (window.jQuery) {
+      Reveal.addEventListener( 'slidechanged', function(event) {  
+        window.jQuery(event.previousSlide).trigger('hidden');
+        window.jQuery(event.currentSlide).trigger('shown');
+      });
+    }
+  })();
+</script>
+
+
+  </body>
+</html>

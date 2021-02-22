@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <title>Trophic interactions</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="site_libs/reveal.js-3.3.0.1/css/reveal.css"/>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; } /* Alert */
+code span.an { color: #008000; } /* Annotation */
+code span.at { } /* Attribute */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #0000ff; } /* ControlFlow */
+code span.ch { color: #008080; } /* Char */
+code span.cn { } /* Constant */
+code span.co { color: #008000; } /* Comment */
+code span.cv { color: #008000; } /* CommentVar */
+code span.do { color: #008000; } /* Documentation */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.im { } /* Import */
+code span.in { color: #008000; } /* Information */
+code span.kw { color: #0000ff; } /* Keyword */
+code span.op { } /* Operator */
+code span.ot { color: #ff4000; } /* Other */
+code span.pp { color: #ff4000; } /* Preprocessor */
+code span.sc { color: #008080; } /* SpecialChar */
+code span.ss { color: #008080; } /* SpecialString */
+code span.st { color: #008080; } /* String */
+code span.va { } /* Variable */
+code span.vs { color: #008080; } /* VerbatimString */
+code span.wa { color: #008000; font-weight: bold; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="site_libs/reveal.js-3.3.0.1/css/theme/white.css" id="theme">
+
+
+  <!-- some tweaks to reveal css -->
+  <style type="text/css">
+    .reveal h1 { font-size: 2.0em; }
+    .reveal h2 { font-size: 1.5em;  }
+    .reveal h3 { font-size: 1.25em;	}
+    .reveal h4 { font-size: 1em;	}
+
+    .reveal .slides>section,
+    .reveal .slides>section>section {
+      padding: 0px 0px;
+    }
+
+
+
+    .reveal table {
+      border-width: 1px;
+      border-spacing: 2px;
+      border-style: dotted;
+      border-color: gray;
+      border-collapse: collapse;
+      font-size: 0.7em;
+    }
+
+    .reveal table th {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      font-weight: bold;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+    .reveal table td {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+    .reveal .slide-menu-button {
+      left: 105px !important;
+    }
+
+  </style>
+
+    <style type="text/css">code{white-space: pre;}</style>
+
+    <link rel="stylesheet" href="style_slide.css"/>
+
+<!-- Printing and PDF exports -->
+<script id="paper-css" type="application/dynamic-css">
+
+/* Default Print Stylesheet Template
+   by Rob Glazebrook of CSSnewbie.com
+   Last Updated: June 4, 2008
+
+   Feel free (nay, compelled) to edit, append, and
+   manipulate this file as you see fit. */
+
+
+@media print {
+
+	/* SECTION 1: Set default width, margin, float, and
+	   background. This prevents elements from extending
+	   beyond the edge of the printed page, and prevents
+	   unnecessary background images from printing */
+	html {
+		background: #fff;
+		width: auto;
+		height: auto;
+		overflow: visible;
+	}
+	body {
+		background: #fff;
+		font-size: 20pt;
+		width: auto;
+		height: auto;
+		border: 0;
+		margin: 0 5%;
+		padding: 0;
+		overflow: visible;
+		float: none !important;
+	}
+
+	/* SECTION 2: Remove any elements not needed in print.
+	   This would include navigation, ads, sidebars, etc. */
+	.nestedarrow,
+	.controls,
+	.fork-reveal,
+	.share-reveal,
+	.state-background,
+	.reveal .progress,
+	.reveal .backgrounds {
+		display: none !important;
+	}
+
+	/* SECTION 3: Set body font face, size, and color.
+	   Consider using a serif font for readability. */
+	body, p, td, li, div {
+		font-size: 20pt!important;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		color: #000;
+	}
+
+	/* SECTION 4: Set heading font face, sizes, and color.
+	   Differentiate your headings from your body text.
+	   Perhaps use a large sans-serif for distinction. */
+	h1,h2,h3,h4,h5,h6 {
+		color: #000!important;
+		height: auto;
+		line-height: normal;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		text-shadow: 0 0 0 #000 !important;
+		text-align: left;
+		letter-spacing: normal;
+	}
+	/* Need to reduce the size of the fonts for printing */
+	h1 { font-size: 28pt !important;  }
+	h2 { font-size: 24pt !important; }
+	h3 { font-size: 22pt !important; }
+	h4 { font-size: 22pt !important; font-variant: small-caps; }
+	h5 { font-size: 21pt !important; }
+	h6 { font-size: 20pt !important; font-style: italic; }
+
+	/* SECTION 5: Make hyperlinks more usable.
+	   Ensure links are underlined, and consider appending
+	   the URL to the end of the link for usability. */
+	a:link,
+	a:visited {
+		color: #000 !important;
+		font-weight: bold;
+		text-decoration: underline;
+	}
+	/*
+	.reveal a:link:after,
+	.reveal a:visited:after {
+		content: " (" attr(href) ") ";
+		color: #222 !important;
+		font-size: 90%;
+	}
+	*/
+
+
+	/* SECTION 6: more reveal.js specific additions by @skypanther */
+	ul, ol, div, p {
+		visibility: visible;
+		position: static;
+		width: auto;
+		height: auto;
+		display: block;
+		overflow: visible;
+		margin: 0;
+		text-align: left !important;
+	}
+	.reveal pre,
+	.reveal table {
+		margin-left: 0;
+		margin-right: 0;
+	}
+	.reveal pre code {
+		padding: 20px;
+		border: 1px solid #ddd;
+	}
+	.reveal blockquote {
+		margin: 20px 0;
+	}
+	.reveal .slides {
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 0 !important;
+		zoom: 1 !important;
+
+		overflow: visible !important;
+		display: block !important;
+
+		text-align: left !important;
+		-webkit-perspective: none;
+		   -moz-perspective: none;
+		    -ms-perspective: none;
+		        perspective: none;
+
+		-webkit-perspective-origin: 50% 50%;
+		   -moz-perspective-origin: 50% 50%;
+		    -ms-perspective-origin: 50% 50%;
+		        perspective-origin: 50% 50%;
+	}
+	.reveal .slides section {
+		visibility: visible !important;
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+		display: block !important;
+		overflow: visible !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 60px 20px !important;
+		z-index: auto !important;
+
+		opacity: 1 !important;
+
+		page-break-after: always !important;
+
+		-webkit-transform-style: flat !important;
+		   -moz-transform-style: flat !important;
+		    -ms-transform-style: flat !important;
+		        transform-style: flat !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+
+		-webkit-transition: none !important;
+		   -moz-transition: none !important;
+		    -ms-transition: none !important;
+		        transition: none !important;
+	}
+	.reveal .slides section.stack {
+		padding: 0 !important;
+	}
+	.reveal section:last-of-type {
+		page-break-after: avoid !important;
+	}
+	.reveal section .fragment {
+		opacity: 1 !important;
+		visibility: visible !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+	}
+	.reveal section img {
+		display: block;
+		margin: 15px 0px;
+		background: rgba(255,255,255,1);
+		border: 1px solid #666;
+		box-shadow: none;
+	}
+
+	.reveal section small {
+		font-size: 0.8em;
+	}
+
+}  
+</script>
+
+
+<script id="pdf-css" type="application/dynamic-css">
+    
+/**
+ * This stylesheet is used to print reveal.js
+ * presentations to PDF.
+ *
+ * https://github.com/hakimel/reveal.js#pdf-export
+ */
+
+* {
+	-webkit-print-color-adjust: exact;
+}
+
+body {
+	margin: 0 auto !important;
+	border: 0;
+	padding: 0;
+	float: none !important;
+	overflow: visible;
+}
+
+html {
+	width: 100%;
+	height: 100%;
+	overflow: visible;
+}
+
+/* Remove any elements not needed in print. */
+.nestedarrow,
+.reveal .controls,
+.reveal .progress,
+.reveal .playback,
+.reveal.overview,
+.fork-reveal,
+.share-reveal,
+.state-background {
+	display: none !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	text-shadow: 0 0 0 #000 !important;
+}
+
+.reveal pre code {
+	overflow: hidden !important;
+	font-family: Courier, 'Courier New', monospace !important;
+}
+
+ul, ol, div, p {
+	visibility: visible;
+	position: static;
+	width: auto;
+	height: auto;
+	display: block;
+	overflow: visible;
+	margin: auto;
+}
+.reveal {
+	width: auto !important;
+	height: auto !important;
+	overflow: hidden !important;
+}
+.reveal .slides {
+	position: static;
+	width: 100%;
+	height: auto;
+
+	left: auto;
+	top: auto;
+	margin: 0 !important;
+	padding: 0 !important;
+
+	overflow: visible;
+	display: block;
+
+	-webkit-perspective: none;
+	   -moz-perspective: none;
+	    -ms-perspective: none;
+	        perspective: none;
+
+	-webkit-perspective-origin: 50% 50%; /* there isn't a none/auto value but 50-50 is the default */
+	   -moz-perspective-origin: 50% 50%;
+	    -ms-perspective-origin: 50% 50%;
+	        perspective-origin: 50% 50%;
+}
+
+.reveal .slides section {
+	page-break-after: always !important;
+
+	visibility: visible !important;
+	position: relative !important;
+	display: block !important;
+	position: relative !important;
+
+	margin: 0 !important;
+	padding: 0 !important;
+	box-sizing: border-box !important;
+	min-height: 1px;
+
+	opacity: 1 !important;
+
+	-webkit-transform-style: flat !important;
+	   -moz-transform-style: flat !important;
+	    -ms-transform-style: flat !important;
+	        transform-style: flat !important;
+
+	-webkit-transform: none !important;
+	   -moz-transform: none !important;
+	    -ms-transform: none !important;
+	        transform: none !important;
+}
+
+.reveal section.stack {
+	margin: 0 !important;
+	padding: 0 !important;
+	page-break-after: avoid !important;
+	height: auto !important;
+	min-height: auto !important;
+}
+
+.reveal img {
+	box-shadow: none;
+}
+
+.reveal .roll {
+	overflow: visible;
+	line-height: 1em;
+}
+
+/* Slide backgrounds are placed inside of their slide when exporting to PDF */
+.reveal section .slide-background {
+	display: block !important;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: -1;
+}
+
+/* All elements should be above the slide-background */
+.reveal section>* {
+	position: relative;
+	z-index: 1;
+}
+
+/* Display slide speaker notes when 'showNotes' is enabled */
+.reveal .speaker-notes-pdf {
+	display: block;
+	width: 100%;
+	max-height: none;
+	left: auto;
+	top: auto;
+	z-index: 100;
+}
+
+/* Display slide numbers when 'slideNumber' is enabled */
+.reveal .slide-number-pdf {
+	display: block;
+	position: absolute;
+	font-size: 14px;
+}
+
+</script>
+
+
+<script>
+var style = document.createElement( 'style' );
+style.type = 'text/css';
+var style_script_id = window.location.search.match( /print-pdf/gi ) ? 'pdf-css' : 'paper-css';
+var style_script = document.getElementById(style_script_id).text;
+style.innerHTML = style_script;
+document.getElementsByTagName('head')[0].appendChild(style);
+</script>
+
+    <script src="site_libs/header-attrs-2.6/header-attrs.js"></script>
+    <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+    <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section>
+    <h1 class="title">Trophic interactions</h1>
+    <h3 class="date">BIO605 FA20</h3>
+</section>
+
+<section>
+<section id="predator-prey-interaction" class="title-slide slide level1">
+<h1>Predator-prey interaction</h1>
+
+</section>
+<section id="predator-prey-interactions-are-prevalent" class="slide level2">
+<h2>Predator-prey interactions are prevalent</h2>
+<p><img src="image_slide/img02.jpg" width="60%"></img></p>
+</section>
+<section id="the-building-block" class="slide level2">
+<h2>The building block</h2>
+<p>Predator-prey interactions are the building blocks of a food web and affect community stability</p>
+<ul>
+<li>Links are species specific (e.g., specialist or generalist)</li>
+<li>Differ in strength (strong and weak interactions)</li>
+</ul>
+</section>
+<section id="predator" class="slide level2">
+<h2>Predator</h2>
+<ul>
+<li>Carnivore</li>
+<li>Herbivore</li>
+<li>Omnivore</li>
+</ul>
+<p>They take a variety of predation tactics (active, ambush hunting, etc.)</p>
+</section>
+<section id="prey" class="slide level2">
+<h2>Prey</h2>
+<ul>
+<li>Behavioral avoidance</li>
+<li>Predator satiation (e.g., synchronized emergence)</li>
+<li>Mechanical</li>
+<li>Chemical</li>
+<li>Mimicry</li>
+</ul>
+<p>Prey adopt a variety of anti-predator tactics</p>
+</section>
+<section id="prey-adaptation" class="slide level2">
+<h2>Prey adaptation</h2>
+<p>The front door</p>
+<p><a href="https://youtu.be/l5Py02wqloM" class="uri">https://youtu.be/l5Py02wqloM</a></p>
+<p>The back door</p>
+<p><a href="https://youtu.be/qbefo_vUzog" class="uri">https://youtu.be/qbefo_vUzog</a></p>
+</section></section>
+<section>
+<section id="predator-prey-model" class="title-slide slide level1">
+<h1>Predator-prey model</h1>
+
+</section>
+<section id="the-model" class="slide level2">
+<h2>The model</h2>
+<p>Lotka-Volterra <strong>predator-prey</strong> model</p>
+<p>Let <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> be prey and predator density</p>
+<p><span class="math display">\[
+\frac{dx}{dt} = rx - cxy\\
+\frac{dy}{dt} = b(cxy) - dy
+\]</span></p>
+</section>
+<section id="prey-dynamics" class="slide level2">
+<h2>Prey dynamics</h2>
+<p>Lotka-Volterra <strong>predator-prey</strong> model</p>
+<p><span class="math display">\[
+\frac{dx}{dt} = rx - cxy\\
+\]</span></p>
+<p>The term <span class="math inline">\(rx\)</span> represents the population growth of the prey</p>
+<ul>
+<li><span class="math inline">\(r\)</span> is the intrinsic population growth rate</li>
+</ul>
+</section>
+<section id="prey-dynamics-1" class="slide level2">
+<h2>Prey dynamics</h2>
+<p>Lotka-Volterra <strong>predator-prey</strong> model</p>
+<p><span class="math display">\[
+\frac{dx}{dt} = rx - cxy\\
+\]</span></p>
+<p>The term <span class="math inline">\(cxy\)</span> represents the predator-prey interaction</p>
+<ul>
+<li><span class="math inline">\(xy\)</span> is proportional to the frequency of prey and predator meet</li>
+<li><span class="math inline">\(c\)</span> is the rate of predation if they happen to meet</li>
+</ul>
+</section>
+<section id="predator-dynamics" class="slide level2">
+<h2>Predator dynamics</h2>
+<p>Lotka-Volterra <strong>predator-prey</strong> model</p>
+<p><span class="math display">\[
+\frac{dy}{dt} = b(cxy) - dy
+\]</span></p>
+<p>The term <span class="math inline">\(b(cxy)\)</span> represents the population growth of the predator</p>
+<ul>
+<li>predator population growth depends on prey density <span class="math inline">\(x\)</span></li>
+<li><span class="math inline">\(b\)</span> is the birth rate or <em>efficiency</em> that predators convert prey to reproduction</li>
+</ul>
+</section>
+<section id="predator-dynamics-1" class="slide level2">
+<h2>Predator dynamics</h2>
+<p>Lotka-Volterra <strong>predator-prey</strong> model</p>
+<p><span class="math display">\[
+\frac{dy}{dt} = b(cxy) - dy
+\]</span></p>
+<p>The term <span class="math inline">\(dy\)</span> represents the death rate of the predator</p>
+<ul>
+<li><span class="math inline">\(d\)</span> is the death rate</li>
+</ul>
+</section>
+<section id="prediction" class="slide level2">
+<h2>Prediction</h2>
+<p>Population cycle</p>
+<div id="left">
+<p><img src="lecture05_trophic_files/figure-revealjs/unnamed-chunk-1-1.png" width="480" style="display: block; margin: auto;" /></p>
+</div>
+<div id="right">
+<p><img src="lecture05_trophic_files/figure-revealjs/unnamed-chunk-2-1.png" width="480" style="display: block; margin: auto;" /></p>
+</div>
+</section>
+<section id="food-web-complexity" class="slide level2">
+<h2>Food web complexity</h2>
+<p>Food webs are more complex in nature</p>
+<ul>
+<li>Predators eat multiple prey species</li>
+<li>Interaction strength differs</li>
+<li>and more…</li>
+</ul>
+</section>
+<section id="food-web-complexity-and-stability" class="slide level2">
+<h2>Food web complexity and stability</h2>
+<p>Does food web complexity incease community stability?</p>
+<p>Pimm’s work (1980) looked at if a species deletion causes futher species loss in the system</p>
+<p><small>Pimm 1980, Oikos</small></p>
+</section>
+<section id="sample-food-webs" class="slide level2">
+<h2>Sample food webs</h2>
+<p>Which of the following is more sensitive to the basal species deletion?</p>
+<div id="left">
+<p><img src="lecture05_trophic_files/figure-revealjs/unnamed-chunk-3-1.png" width="480" style="display: block; margin: auto;" /></p>
+</div>
+<div id="right">
+<p><img src="lecture05_trophic_files/figure-revealjs/unnamed-chunk-4-1.png" width="480" style="display: block; margin: auto;" /></p>
+</div>
+</section>
+<section id="sample-food-webs-1" class="slide level2">
+<h2>Sample food webs</h2>
+<p>Which of the following is more sensitive to the top predator deletion?</p>
+<div id="left">
+<p><img src="lecture05_trophic_files/figure-revealjs/unnamed-chunk-5-1.png" width="480" style="display: block; margin: auto;" /></p>
+</div>
+<div id="right">
+<p><img src="lecture05_trophic_files/figure-revealjs/unnamed-chunk-6-1.png" width="480" style="display: block; margin: auto;" /></p>
+</div>
+</section>
+<section id="complexity-destabilizes-the-system" class="slide level2">
+<h2>Complexity destabilizes the system</h2>
+<p>General conclusion is greater complexity (connectance or number of species) destabilizes the system</p>
+</section>
+<section id="complexity-destabilizes-the-system-1" class="slide level2">
+<h2>Complexity destabilizes the system</h2>
+<p>Opposing effects of complexity</p>
+<ol type="1">
+<li>Complexity increases the stability against the basal species removal<br />
+</li>
+<li>Complexity decreases the stability against the predator removal</li>
+</ol>
+<p>1 &lt; 2 - as a result, complexity decreases the overall stability</p>
+</section>
+<section id="food-web-complexity-1" class="slide level2">
+<h2>Food web complexity</h2>
+<p>There are many studies exploring the stability-complexity relationship</p>
+<ul>
+<li>May’s paradox (May 1974, Stability and Complexity in Model Ecosystems)
+<ul>
+<li>Develop a random food web (interactions are randomly drawn)</li>
+<li>Analyze the relationship between community stability* and complexity</li>
+<li>Food web complexity destabilizes the food web</li>
+</ul></li>
+</ul>
+<p><small>*the maximum eigenvalue of the community interaction matrix</small></p>
+</section>
+<section id="food-web-complexity-2" class="slide level2">
+<h2>Food web complexity</h2>
+<p>The following properties can reverse the stability-complexity relationship</p>
+<ul>
+<li class="fragment">Dominance of weak interactions (McCann et al. 1998 Nature)</li>
+<li class="fragment">Adaptive foraging (Kondoh 2003, Science)</li>
+<li class="fragment">Mutualistic interactions (Mougi and Kondoh 2012, Science)</li>
+</ul>
+</section></section>
+<section>
+<section id="field-studies-diet-estimate" class="title-slide slide level1">
+<h1>Field studies: diet estimate</h1>
+
+</section>
+<section id="how-do-we-study-predator-prey-interactions" class="slide level2">
+<h2>How do we study predator prey interactions?</h2>
+<p><strong>Direct survey</strong><br />
+Dissect the stomach and see what’s in there</p>
+<ul>
+<li class="fragment">High resolution</li>
+<li class="fragment">Reflect short-term diet</li>
+<li class="fragment">Time consuming</li>
+</ul>
+</section>
+<section id="how-do-we-study-predator-prey-interactions-1" class="slide level2">
+<h2>How do we study predator prey interactions?</h2>
+<div id="left">
+<p>Dissect…identify all the species…measure their volume…and…</p>
+</div>
+<div id="right">
+<p><img src="image_slide/img04.jpg" width="80%"></img> <small>Bellmore 2013, Ecological Applications</small></p>
+</div>
+</section>
+<section id="stable-isotopes" class="slide level2">
+<h2>Stable isotopes</h2>
+<p>Alternative approach is the use of <strong>stable isotopes</strong></p>
+<p>The same atomic # (proton), but different neutron #</p>
+<p><strong>Carbon</strong> <span class="math inline">\(^{12}C\)</span>, <span class="math inline">\(^{13}C\)</span> and <strong>nitrogen</strong> <span class="math inline">\(^{14}N\)</span>, <span class="math inline">\(^{15}N\)</span></p>
+<ul>
+<li><span class="math inline">\(^{12}C\)</span> 98.89%, <span class="math inline">\(^{13}C\)</span> 1.11%</li>
+<li><span class="math inline">\(^{14}N\)</span> 99.63%, <span class="math inline">\(^{15}N\)</span> 0.37%</li>
+</ul>
+</section>
+<section id="delta-expression" class="slide level2">
+<h2>Delta expression</h2>
+<p>Stable istopes are expressed in <span class="math inline">\(\delta\)</span> values</p>
+<p>carbon example:</p>
+<p><span class="math display">\[
+\delta ^{13}C (\unicode{x2030}) = 1000(\frac{R_{sample}}{R_{standard}} - 1)
+\]</span></p>
+<p>where <span class="math inline">\(R = \frac{^{13}C}{^{12}C}\)</span></p>
+</section>
+<section id="fractionation" class="slide level2">
+<h2>Fractionation</h2>
+<p>Predator cannot convert all the prey into their body tissues - predators lose some through metabolic processes</p>
+<ul>
+<li>respiration</li>
+<li>urine, feces</li>
+</ul>
+<p>Excrete lighter isotopes first, then heavier</p>
+<p>The ratio in predators differs from that in prey</p>
+</section>
+<section id="fractionation-1" class="slide level2">
+<h2>Fractionation</h2>
+<p>The change in <span class="math inline">\(\delta\)</span> values through predator-prey interactions is referred to as <strong>trophic enrichment factor</strong>* (TEF)</p>
+<p>Carbon: <span class="math inline">\(0.4 \pm 1.3 \unicode{x2030}\)</span></p>
+<p>Nitrogen: <span class="math inline">\(3.4 \pm 1.0 \unicode{x2030}\)</span></p>
+<p>Carbon may reflect the basal resources, while nitrogen may reflect the vertical position in a food web</p>
+<p><small>Post 2002, Ecology 83: 703-718</small></p>
+<p><small>*there are other names…</small></p>
+</section>
+<section id="fractionation-2" class="slide level2">
+<h2>Fractionation</h2>
+<p><img src="lecture05_trophic_files/figure-revealjs/unnamed-chunk-7-1.png" width="480" style="display: block; margin: auto;" /></p>
+</section>
+<section id="two-sources" class="slide level2">
+<h2>Two sources</h2>
+<p>Again, predators eat multiple prey items…</p>
+<p>How stable isotopes help ditinguish their contributions to the diet?</p>
+</section>
+<section id="two-sources-1" class="slide level2">
+<h2>Two sources</h2>
+<p>Think caborn isotopes only</p>
+<p><span class="math display">\[
+\begin{align}
+\delta ^{13}C (\unicode{x2030}) &amp;= 3.0 = Y &amp;&amp;\text{Predator}\\
+\delta ^{13}C (\unicode{x2030}) &amp;= 1.0 = X_1 &amp;&amp;\text{Prey 1}\\
+\delta ^{13}C (\unicode{x2030}) &amp;= 3.0 = X_2 &amp;&amp;\text{Prey 2}\\
+\end{align}
+\]</span></p>
+</section>
+<section id="two-sources-2" class="slide level2">
+<h2>Two sources</h2>
+<p>Make up <span class="math inline">\(Y\)</span> with <span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span></p>
+<p><span class="math display">\[
+\begin{align}
+Y &amp;= \alpha (X_1 + 0.4) + (1-\alpha) (X_2 + 0.4)\\
+&amp;\text{where}\\
+Y &amp;= 3.0, X_1 = 1.0, and ~ X_2 = 3.0
+\end{align}
+\]</span></p>
+<p>Calculate <span class="math inline">\(\alpha\)</span></p>
+<p><span class="math inline">\(\alpha = ...\)</span></p>
+</section>
+<section id="mixing-model" class="slide level2">
+<h2>Mixing model</h2>
+<p><span class="math inline">\(Y\)</span> is the weighted mean of <span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span><br />
+(<span class="math inline">\(\alpha\)</span> is the proportional contribution of <span class="math inline">\(X_1\)</span>)</p>
+<p>This is the basis of <strong>mixing model</strong></p>
+<p><img src="lecture05_trophic_files/figure-revealjs/unnamed-chunk-8-1.png" width="768" style="display: block; margin: auto;" /></p>
+</section>
+<section id="mixing-model-1" class="slide level2">
+<h2>Mixing model</h2>
+<p>General formula</p>
+<p><span class="math display">\[
+\begin{align}
+\delta_{j,predator} &amp;= \sum^n_{i=1} \alpha_{i}(\delta_{j,i} + \Delta_j)\\
+1 &amp;= \sum^n_{i=1} \alpha_{i}
+\end{align}
+\]</span></p>
+<ul>
+<li><span class="math inline">\(i\)</span> is the prey indicator (1, 2, …, n)</li>
+<li><span class="math inline">\(j\)</span> is the element indicator (carbon, nitrogen,…)</li>
+</ul>
+</section>
+<section id="mixing-model-2" class="slide level2">
+<h2>Mixing model</h2>
+<p>Different types of mixing models</p>
+<ul>
+<li>IsoSource<span class="math inline">\(^1\)</span> (the basic model)</li>
+<li><strong>MixSIR</strong><span class="math inline">\(^2\)</span> (prior, uncertainties in TEF)</li>
+<li><strong>SIAR</strong><span class="math inline">\(^3\)</span> (prior, uncertainties in TEF)</li>
+<li><strong>IsoWeb</strong><span class="math inline">\(^4\)</span> (whole food web analysis)</li>
+</ul>
+<p><small> <span class="math inline">\(^1\)</span>Phillips and Gregg 2003, Oecologia<br />
+<span class="math inline">\(^2\)</span>Moore and Semmens 2008, Ecology Letters<br />
+<span class="math inline">\(^3\)</span>Parnell et al. 2010, Plos one<br />
+<span class="math inline">\(^4\)</span>Kadoya et al. 2012, Plos one<br />
+<strong>bold</strong>: Bayesian implmentation </small></p>
+</section>
+<section id="caution" class="slide level2">
+<h2>Caution</h2>
+<ul>
+<li class="fragment">Low resolution (think if <span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span> values are very close)</li>
+<li class="fragment">Reflect long-term diet (turnover time vaies by taxa)</li>
+</ul>
+</section>
+<section id="comparison" class="slide level2">
+<h2>Comparison</h2>
+<div id="left">
+<p><strong>Stomach content</strong></p>
+<ul>
+<li>High resolution</li>
+<li>Short-term</li>
+<li>Time consuming</li>
+</ul>
+</div>
+<div id="right">
+<p><strong>Stable isotope</strong></p>
+<ul>
+<li>Low resolution</li>
+<li>Long-term</li>
+<li>Less time consuming</li>
+<li>Tricky modeling</li>
+</ul>
+</div>
+</section></section>
+<section>
+<section id="field-studies-niche-width" class="title-slide slide level1">
+<h1>Field studies: niche width</h1>
+
+</section>
+<section id="alternative" class="slide level2">
+<h2>Alternative</h2>
+<p>One drawback of stable isotopes is the low resolution</p>
+<p>However, stable isotope ratios provide the integrated measures of a food web</p>
+<ul>
+<li><span style="color: steelblue;">Niche width</span></li>
+<li>Food chain length</li>
+</ul>
+</section>
+<section id="niche-width" class="slide level2">
+<h2>Niche width</h2>
+<p><strong>Niche</strong> can be defined in a variety of ways</p>
+<ul>
+<li>habitat</li>
+<li>physiology</li>
+<li><span style="color: steelblue;">food</span></li>
+<li>…</li>
+</ul>
+<p>Stable isotopes can be used as a composite measure of variation in resource use <strong>among individuals</strong></p>
+</section>
+<section id="variation-in-stable-isotope-signatures" class="slide level2">
+<h2>Variation in stable isotope signatures</h2>
+<p>Recall: carbon may reflect the basal resources, while nitrogen may reflect the vertical position in a food web</p>
+<div id="left">
+<p><img src="lecture05_trophic_files/figure-revealjs/unnamed-chunk-9-1.png" width="480" style="display: block; margin: auto;" /></p>
+</div>
+<div id="right">
+<p><img src="lecture05_trophic_files/figure-revealjs/unnamed-chunk-10-1.png" width="480" style="display: block; margin: auto;" /></p>
+</div>
+<p><small>*Points represent isotope signatures of individuals</small></p>
+</section>
+<section id="variation-in-stable-isotope-signatures-1" class="slide level2">
+<h2>Variation in stable isotope signatures</h2>
+<p>Recall: carbon may reflect the basal resources, while nitrogen may reflect the vertical position in a food web</p>
+<p><img src="image_slide/img05.jpg" width="50%"></img></p>
+<p><small>Layman et al. 2007 Ecology Letters</small></p>
+</section>
+<section id="variation-in-stable-isotope-signatures-2" class="slide level2">
+<h2>Variation in stable isotope signatures</h2>
+<p>Recall: carbon may reflect the basal resources, while nitrogen may reflect the vertical position in a food web</p>
+<p><img src="image_slide/img06.jpg" width="40%"></img></p>
+<p><small>Layman et al. 2007 Ecology Letters</small></p>
+</section>
+<section id="tottabetsu-river" class="slide level2">
+<h2>Tottabetsu river</h2>
+<p>Tottabetsu River, Japan</p>
+<p><img src="image_slide/img07.JPG" width="70%"></img></p>
+</section>
+<section id="ground-beetles" class="slide level2">
+<h2>Ground beetles</h2>
+<p>Ground beetle - generalist predator</p>
+<div id="left">
+<p><img src="image_slide/img02.jpg"></img> <em>Brachinus stenoderus</em></p>
+</div>
+<div id="right">
+<p><img src="image_slide/img08.JPG"></img> <em>Lithochlaenius noguchii</em></p>
+</div>
+</section>
+<section id="r-exercise-install-siar" class="slide level2">
+<h2>R exercise: install SIAR</h2>
+<p>Install <code>siar</code> &amp; <code>tidyverse</code> packages</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;siar&quot;</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;tidyverse&quot;</span>)</span></code></pre></div>
+<p>Call packages in the current R session<br />
+This will add additional functions to R</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(siar)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
+<p><small>functions in packages must be called through <code>library()</code> everytime you open a new R session; otherwise you’ll get error messages</small></p>
+</section>
+<section id="r-exercise-read-data" class="slide level2">
+<h2>R exercise: read data</h2>
+<p>Download <code>sample_data.csv</code> and read it into R</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/sample_data.csv&quot;</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dat)</span></code></pre></div>
+<pre><code>##         site     date     species   d13C  d15N
+## 1 tottabetsu 6/9/2014 grasshopper -28.03 -0.04
+## 2 tottabetsu 6/9/2014 grasshopper -27.86  2.53
+## 3 tottabetsu 6/9/2014 grasshopper -28.18  0.99
+## 4 tottabetsu 6/9/2014 grasshopper -28.24  0.81
+## 5 tottabetsu 8/9/2014 grasshopper -26.94  0.23
+## 6 tottabetsu 8/9/2014 grasshopper -27.92  1.65</code></pre>
+</section>
+<section id="r-exercise-data-formatting" class="slide level2">
+<h2>R exercise: data formatting</h2>
+<p>Check <code>species</code> column</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(dat<span class="sc">$</span>species)</span></code></pre></div>
+<pre><code>## [1] &quot;grasshopper&quot;  &quot;L_noguchii&quot;   &quot;B_stenoderus&quot;</code></pre>
+</section>
+<section id="r-exercise-data-formatting-1" class="slide level2">
+<h2>R exercise: data formatting</h2>
+<p>Filter rows</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># L. nogutii</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>dat_ln <span class="ot">&lt;-</span> <span class="fu">filter</span>(dat, species <span class="sc">==</span> <span class="st">&quot;L_noguchii&quot;</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(dat_ln<span class="sc">$</span>species)</span></code></pre></div>
+<pre><code>## [1] &quot;L_noguchii&quot;</code></pre>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># B. stenoderus</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>dat_bs <span class="ot">&lt;-</span> <span class="fu">filter</span>(dat, species <span class="sc">==</span> <span class="st">&quot;B_stenoderus&quot;</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(dat_bs<span class="sc">$</span>species)</span></code></pre></div>
+<pre><code>## [1] &quot;B_stenoderus&quot;</code></pre>
+</section>
+<section id="r-exercise-convex-hull" class="slide level2">
+<h2>R exercise: convex hull</h2>
+<p>Calculate convex hull with <code>convexhull</code></p>
+<p><code>x</code> carbon data<br />
+<code>y</code> nitrogen data</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>estln <span class="ot">&lt;-</span> <span class="fu">convexhull</span>(<span class="at">x =</span> dat_ln<span class="sc">$</span>d13C, <span class="at">y =</span> dat_ln<span class="sc">$</span>d15N)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>estbs <span class="ot">&lt;-</span> <span class="fu">convexhull</span>(<span class="at">x =</span> dat_bs<span class="sc">$</span>d13C, <span class="at">y =</span> dat_bs<span class="sc">$</span>d15N)</span></code></pre></div>
+</section>
+<section id="r-exercise-covex-hull" class="slide level2">
+<h2>R exercise: covex hull</h2>
+<p>Inspect <em>L. noguchii</em></p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>estln</span></code></pre></div>
+<pre><code>## $TA
+##          [,1]
+## [1,] 12.95555
+## 
+## $xcoords
+## [1] -22.10 -25.40 -26.92 -27.46 -25.50 -24.85 -22.23 -22.10
+## 
+## $ycoords
+## [1] 4.32 3.05 4.39 5.13 7.03 6.85 5.57 4.32
+## 
+## $ind
+## [1] 18 29 39 37  5 38  1 18</code></pre>
+</section>
+<section id="r-exercise-covex-hull-1" class="slide level2">
+<h2>R exercise: covex hull</h2>
+<p>Inspect <em>B. stenoderus</em></p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>estbs</span></code></pre></div>
+<pre><code>## $TA
+##        [,1]
+## [1,] 12.545
+## 
+## $xcoords
+## [1] -23.97 -22.94 -27.38 -27.80 -27.33 -26.76 -23.97
+## 
+## $ycoords
+## [1] 6.24 4.25 4.52 5.57 8.63 8.47 6.24
+## 
+## $ind
+## [1] 18  4 30 33 25 21 18</code></pre>
+</section>
+<section id="r-exercise-visualize" class="slide level2">
+<h2>R exercise: visualize</h2>
+<p>Visualize the convex hulls</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set plot region</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="dv">0</span>, <span class="at">type =</span> <span class="st">&quot;n&quot;</span>,</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlim =</span> <span class="fu">range</span>(dat_ln<span class="sc">$</span>d13C, dat_bs<span class="sc">$</span>d13C),</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylim =</span> <span class="fu">range</span>(dat_ln<span class="sc">$</span>d15N, dat_bs<span class="sc">$</span>d15N),</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">&quot;delta N&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;delta C&quot;</span>)</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="co"># for L.noguchii</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(d15N <span class="sc">~</span> d13C, <span class="at">data =</span> dat_ln, <span class="at">pch =</span> <span class="dv">19</span>) <span class="co"># add points</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="fu">polygon</span>(estln<span class="sc">$</span>xcoords, estln<span class="sc">$</span>ycoords) <span class="co"># draw polygon</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="co"># for B.stenoderus</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(d15N <span class="sc">~</span> d13C, <span class="at">data =</span> dat_bs, <span class="at">pch =</span> <span class="dv">21</span>,</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="cn">NA</span>, <span class="at">bg =</span> <span class="fu">grey</span>(<span class="dv">0</span>, <span class="fl">0.2</span>)) <span class="co"># add points</span></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a><span class="fu">polygon</span>(estbs<span class="sc">$</span>xcoords, estbs<span class="sc">$</span>ycoords,</span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>        <span class="at">col =</span> <span class="fu">grey</span>(<span class="dv">0</span>, <span class="fl">0.2</span>), <span class="at">border =</span> <span class="fu">grey</span>(<span class="dv">0</span>, <span class="fl">0.5</span>)) <span class="co"># draw polygon</span></span></code></pre></div>
+</section>
+<section id="r-exercise-visualize-1" class="slide level2">
+<h2>R exercise: visualize</h2>
+<p><img src="lecture05_trophic_files/figure-revealjs/unnamed-chunk-20-1.png" width="480" style="display: block; margin: auto;" /></p>
+</section></section>
+    </div>
+  </div>
+
+  <script src="site_libs/reveal.js-3.3.0.1/lib/js/head.min.js"></script>
+  <script src="site_libs/reveal.js-3.3.0.1/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        // Display the page number of the current slide
+        slideNumber: true,
+        // Push each slide change to the browser history
+        history: true,
+        // Vertical centering of slides
+        center: false,
+        // Transition style
+        transition: 'default', // none/fade/slide/convex/concave/zoom
+        // Transition style for full page slide backgrounds
+        backgroundTransition: 'default', // none/fade/slide/convex/concave/zoom
+
+        menu: {
+   
+          numbers: true,
+    
+    
+    
+    
+    
+    
+ 
+          custom: false,
+          themes: false,
+          transitions: false
+        },
+
+
+
+        chalkboard: {
+          toggleNotesButton: true,
+          theme: 'whiteboard',
+        },
+
+        keyboard: {
+          67: function() { RevealChalkboard.toggleNotesCanvas() },    // toggle notes canvas when 'c' is pressed
+          66: function() { RevealChalkboard.toggleChalkboard() }, // toggle chalkboard when 'b' is pressed
+          46: function() { RevealChalkboard.clear() },    // clear chalkboard when 'DEL' is pressed
+           8: function() { RevealChalkboard.reset() },    // reset chalkboard data on current slide when 'BACKSPACE' is pressed
+          68: function() { RevealChalkboard.download() }, // downlad recorded chalkboard drawing when 'd' is pressed
+        },
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: 'site_libs/reveal.js-3.3.0.1/plugin/chalkboard/chalkboard.js', async: true },
+          { src: 'site_libs/reveal.js-3.3.0.1/plugin/menu/menu.js', async: true },
+        ]
+      });
+    </script>
+  <!-- dynamically load mathjax for compatibility with self-contained -->
+  <script>
+    (function () {
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+      document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
+
+<script>
+  (function() {
+    if (window.jQuery) {
+      Reveal.addEventListener( 'slidechanged', function(event) {  
+        window.jQuery(event.previousSlide).trigger('hidden');
+        window.jQuery(event.currentSlide).trigger('shown');
+      });
+    }
+  })();
+</script>
+
+
+  </body>
+</html>
