@@ -1,6 +1,6 @@
 ---
 title: "Trophic interactions"
-date: BIO605 FA20
+date: BIO605
 output:
   revealjs::revealjs_presentation:
     self_contained: false

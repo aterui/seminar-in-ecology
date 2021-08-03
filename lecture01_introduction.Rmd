@@ -1,6 +1,6 @@
 ---
 title: "Seminar in Ecology"
-date: BIO605 FA20
+date: BIO605
 output:
   revealjs::revealjs_presentation:
     self_contained: false
@@ -29,8 +29,8 @@ CEX <- LWD <- 2
 ## BIO605 SEMINAR IN ECOLOGY
 
 - **Instructor**: Akira Terui
-- **When**: Thurs 12:30 – 14:45 (face-to-face or online)
-- **Where**: Graham 303 or online
+- **When**: Thurs 12:30 – 14:45
+- **Where**: Sullivan 349
 - **Virtual office hour**: By appointment
 - **Required equipment**: Laptop installed with R
 
@@ -194,34 +194,32 @@ Mismatch b/w theory & observation is **common**
 
 **Part 1: Basic R exercise (Week 1 & 2)**
 
-- The first two weeks will be devoted to learning R (**f2f**)
+- The first two weeks will be devoted to learning R
 
 **Part 2: Lecture & Paper discussion (Week 3 to 12)**
 
-- One lecture for each topic with R exercise (**f2f**)
-- Student-led paper discussion (**Zoom**)
+- One lecture for each topic with R exercise
+- Student-led paper discussion
 
 **Part 3: Synthesis (Week 13 & 14)**
 
-- Synthesize an ecological topic of your choice
-- Present & submit a term paper
+- Final report - synthesis questions
 
 
 
 ## Grading
 
 **Attendance**
-
-- **R script** submission (lectures) - 20%
-- Discussion participation (paper discussions) - 20%
+- Attendance - 10%
+- **R script** submission (lectures) - 30%
 
 **Paper Introduction**
 
-- Presentation evaluation - 20%
+- Presentation evaluation - 15%
+- Discussion participation (paper discussions) - 15%
 
 **Synthesis Paper/Presentation**
 
-- Synthesis presentation - 20%
-- Term paper - 20%
+- Synthesis report/presentation - 30%
 
 Detailed guidelines will be provided!
