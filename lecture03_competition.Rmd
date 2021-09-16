@@ -215,8 +215,8 @@ Multiply $\alpha$ to model different impacts of species 2
 
 $\alpha$ is referred to as the **competition coefficient**
 
-- $\alpha < 0$ ... effect of species 2 is less than species 1
-- $\alpha > 0$ ... effect of species 2 is greater than species 1
+- $\alpha < 1$ ... effect of species 2 is less than species 1
+- $\alpha > 1$ ... effect of species 2 is greater than species 1
 
 
 ## Assumptions
