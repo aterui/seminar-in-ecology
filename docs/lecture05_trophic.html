@@ -624,13 +624,53 @@ document.getElementsByTagName('head')[0].appendChild(style);
 </section>
 <section id="prediction" class="slide level2">
 <h2>Prediction</h2>
-<p>Population cycle</p>
-<div id="left">
-<p><img src="lecture05_trophic_files/figure-revealjs/unnamed-chunk-1-1.png" width="480" style="display: block; margin: auto;" /></p>
-</div>
-<div id="right">
-<p><img src="lecture05_trophic_files/figure-revealjs/unnamed-chunk-2-1.png" width="480" style="display: block; margin: auto;" /></p>
-</div>
+<p>Unfortunately, the discrete equivalent does not exist (some closely-related models exist, such as the Nicholson-Bailey model) - we will use R package <code>deSolve</code> to solve the equations</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(deSolve)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># parameters</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>param <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">r =</span> <span class="dv">1</span>,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">b =</span> <span class="fl">0.1</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">c =</span> <span class="fl">0.1</span>,</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>           <span class="at">d =</span> <span class="fl">0.1</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># initial values for state variables</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>state <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">x =</span> <span class="dv">5</span>,</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>           <span class="at">y =</span> <span class="dv">5</span>)</span></code></pre></div>
+</section>
+<section id="prediction-1" class="slide level2">
+<h2>Prediction</h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># function</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>lotka_voltera <span class="ot">&lt;-</span> <span class="cf">function</span>(t, state, param) {</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">with</span>(<span class="fu">as.list</span>(<span class="fu">c</span>(state, param)), {</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># prey</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    dx <span class="ot">&lt;-</span> r <span class="sc">*</span> x <span class="sc">-</span> c <span class="sc">*</span> x <span class="sc">*</span> y</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># predator</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    dy <span class="ot">&lt;-</span> b <span class="sc">*</span> (c <span class="sc">*</span> x <span class="sc">*</span> y) <span class="sc">-</span> d <span class="sc">*</span> y</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">list</span>(<span class="fu">c</span>(dx, dy))</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+</section>
+<section id="prediction-2" class="slide level2">
+<h2>Prediction</h2>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>times <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">100</span>, <span class="at">by =</span> <span class="fl">0.01</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>pred <span class="ot">&lt;-</span> <span class="fu">ode</span>(<span class="at">y =</span> state,</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">times =</span> times,</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">func =</span> lotka_voltera,</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">parms =</span> param)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>df_pred <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(pred)</span></code></pre></div>
+</section>
+<section id="prediction-3" class="slide level2">
+<h2>Prediction</h2>
+<p>Make figures</p>
+<ol type="1">
+<li><p>figure 1 - time on x-axis and prey and predator density on y-axis</p></li>
+<li><p>figure 2 - prey density on x-axis and predator density on y-axis</p></li>
+</ol>
 </section>
 <section id="food-web-complexity" class="slide level2">
 <h2>Food web complexity</h2>
@@ -651,20 +691,20 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <h2>Sample food webs</h2>
 <p>Which of the following is more sensitive to the basal species deletion?</p>
 <div id="left">
-<p><img src="lecture05_trophic_files/figure-revealjs/unnamed-chunk-3-1.png" width="480" style="display: block; margin: auto;" /></p>
+<p><img src="lecture05_trophic_files/figure-revealjs/unnamed-chunk-4-1.png" width="480" style="display: block; margin: auto;" /></p>
 </div>
 <div id="right">
-<p><img src="lecture05_trophic_files/figure-revealjs/unnamed-chunk-4-1.png" width="480" style="display: block; margin: auto;" /></p>
+<p><img src="lecture05_trophic_files/figure-revealjs/unnamed-chunk-5-1.png" width="480" style="display: block; margin: auto;" /></p>
 </div>
 </section>
 <section id="sample-food-webs-1" class="slide level2">
 <h2>Sample food webs</h2>
 <p>Which of the following is more sensitive to the top predator deletion?</p>
 <div id="left">
-<p><img src="lecture05_trophic_files/figure-revealjs/unnamed-chunk-5-1.png" width="480" style="display: block; margin: auto;" /></p>
+<p><img src="lecture05_trophic_files/figure-revealjs/unnamed-chunk-6-1.png" width="480" style="display: block; margin: auto;" /></p>
 </div>
 <div id="right">
-<p><img src="lecture05_trophic_files/figure-revealjs/unnamed-chunk-6-1.png" width="480" style="display: block; margin: auto;" /></p>
+<p><img src="lecture05_trophic_files/figure-revealjs/unnamed-chunk-7-1.png" width="480" style="display: block; margin: auto;" /></p>
 </div>
 </section>
 <section id="complexity-destabilizes-the-system" class="slide level2">
@@ -767,7 +807,7 @@ Dissect the stomach and see what’s in there</p>
 </section>
 <section id="fractionation-2" class="slide level2">
 <h2>Fractionation</h2>
-<p><img src="lecture05_trophic_files/figure-revealjs/unnamed-chunk-7-1.png" width="480" style="display: block; margin: auto;" /></p>
+<p><img src="lecture05_trophic_files/figure-revealjs/unnamed-chunk-8-1.png" width="480" style="display: block; margin: auto;" /></p>
 </section>
 <section id="two-sources" class="slide level2">
 <h2>Two sources</h2>
@@ -803,7 +843,7 @@ Y &amp;= 3.0, X_1 = 1.0, and ~ X_2 = 3.0
 <p><span class="math inline">\(Y\)</span> is the weighted mean of <span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span><br />
 (<span class="math inline">\(\alpha\)</span> is the proportional contribution of <span class="math inline">\(X_1\)</span>)</p>
 <p>This is the basis of <strong>mixing model</strong></p>
-<p><img src="lecture05_trophic_files/figure-revealjs/unnamed-chunk-8-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p><img src="lecture05_trophic_files/figure-revealjs/unnamed-chunk-9-1.png" width="768" style="display: block; margin: auto;" /></p>
 </section>
 <section id="mixing-model-1" class="slide level2">
 <h2>Mixing model</h2>
@@ -890,10 +930,10 @@ Y &amp;= 3.0, X_1 = 1.0, and ~ X_2 = 3.0
 <h2>Variation in stable isotope signatures</h2>
 <p>Recall: carbon may reflect the basal resources, while nitrogen may reflect the vertical position in a food web</p>
 <div id="left">
-<p><img src="lecture05_trophic_files/figure-revealjs/unnamed-chunk-9-1.png" width="480" style="display: block; margin: auto;" /></p>
+<p><img src="lecture05_trophic_files/figure-revealjs/unnamed-chunk-10-1.png" width="480" style="display: block; margin: auto;" /></p>
 </div>
 <div id="right">
-<p><img src="lecture05_trophic_files/figure-revealjs/unnamed-chunk-10-1.png" width="480" style="display: block; margin: auto;" /></p>
+<p><img src="lecture05_trophic_files/figure-revealjs/unnamed-chunk-11-1.png" width="480" style="display: block; margin: auto;" /></p>
 </div>
 <p><small>*Points represent isotope signatures of individuals</small></p>
 </section>
@@ -927,19 +967,19 @@ Y &amp;= 3.0, X_1 = 1.0, and ~ X_2 = 3.0
 <section id="r-exercise-install-siar" class="slide level2">
 <h2>R exercise: install SIAR</h2>
 <p>Install <code>siar</code> &amp; <code>tidyverse</code> packages</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;siar&quot;</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;tidyverse&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;siar&quot;</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;tidyverse&quot;</span>)</span></code></pre></div>
 <p>Call packages in the current R session<br />
 This will add additional functions to R</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(siar)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(siar)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
 <p><small>functions in packages must be called through <code>library()</code> everytime you open a new R session; otherwise you’ll get error messages</small></p>
 </section>
 <section id="r-exercise-read-data" class="slide level2">
 <h2>R exercise: read data</h2>
 <p>Download <code>sample_data.csv</code> and read it into R</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/sample_data.csv&quot;</span>)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dat)</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/sample_data.csv&quot;</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dat)</span></code></pre></div>
 <pre><code>##         site     date     species   d13C  d15N
 ## 1 tottabetsu 6/9/2014 grasshopper -28.03 -0.04
 ## 2 tottabetsu 6/9/2014 grasshopper -27.86  2.53
@@ -951,19 +991,19 @@ This will add additional functions to R</p>
 <section id="r-exercise-data-formatting" class="slide level2">
 <h2>R exercise: data formatting</h2>
 <p>Check <code>species</code> column</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(dat<span class="sc">$</span>species)</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(dat<span class="sc">$</span>species)</span></code></pre></div>
 <pre><code>## [1] &quot;grasshopper&quot;  &quot;L_noguchii&quot;   &quot;B_stenoderus&quot;</code></pre>
 </section>
 <section id="r-exercise-data-formatting-1" class="slide level2">
 <h2>R exercise: data formatting</h2>
 <p>Filter rows</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># L. nogutii</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>dat_ln <span class="ot">&lt;-</span> <span class="fu">filter</span>(dat, species <span class="sc">==</span> <span class="st">&quot;L_noguchii&quot;</span>)</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(dat_ln<span class="sc">$</span>species)</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># L. nogutii</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>dat_ln <span class="ot">&lt;-</span> <span class="fu">filter</span>(dat, species <span class="sc">==</span> <span class="st">&quot;L_noguchii&quot;</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(dat_ln<span class="sc">$</span>species)</span></code></pre></div>
 <pre><code>## [1] &quot;L_noguchii&quot;</code></pre>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># B. stenoderus</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>dat_bs <span class="ot">&lt;-</span> <span class="fu">filter</span>(dat, species <span class="sc">==</span> <span class="st">&quot;B_stenoderus&quot;</span>)</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(dat_bs<span class="sc">$</span>species)</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># B. stenoderus</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>dat_bs <span class="ot">&lt;-</span> <span class="fu">filter</span>(dat, species <span class="sc">==</span> <span class="st">&quot;B_stenoderus&quot;</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(dat_bs<span class="sc">$</span>species)</span></code></pre></div>
 <pre><code>## [1] &quot;B_stenoderus&quot;</code></pre>
 </section>
 <section id="r-exercise-convex-hull" class="slide level2">
@@ -971,13 +1011,13 @@ This will add additional functions to R</p>
 <p>Calculate convex hull with <code>convexhull</code></p>
 <p><code>x</code> carbon data<br />
 <code>y</code> nitrogen data</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>estln <span class="ot">&lt;-</span> <span class="fu">convexhull</span>(<span class="at">x =</span> dat_ln<span class="sc">$</span>d13C, <span class="at">y =</span> dat_ln<span class="sc">$</span>d15N)</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>estbs <span class="ot">&lt;-</span> <span class="fu">convexhull</span>(<span class="at">x =</span> dat_bs<span class="sc">$</span>d13C, <span class="at">y =</span> dat_bs<span class="sc">$</span>d15N)</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>estln <span class="ot">&lt;-</span> <span class="fu">convexhull</span>(<span class="at">x =</span> dat_ln<span class="sc">$</span>d13C, <span class="at">y =</span> dat_ln<span class="sc">$</span>d15N)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>estbs <span class="ot">&lt;-</span> <span class="fu">convexhull</span>(<span class="at">x =</span> dat_bs<span class="sc">$</span>d13C, <span class="at">y =</span> dat_bs<span class="sc">$</span>d15N)</span></code></pre></div>
 </section>
 <section id="r-exercise-covex-hull" class="slide level2">
 <h2>R exercise: covex hull</h2>
 <p>Inspect <em>L. noguchii</em></p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>estln</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>estln</span></code></pre></div>
 <pre><code>## $TA
 ##          [,1]
 ## [1,] 12.95555
@@ -994,7 +1034,7 @@ This will add additional functions to R</p>
 <section id="r-exercise-covex-hull-1" class="slide level2">
 <h2>R exercise: covex hull</h2>
 <p>Inspect <em>B. stenoderus</em></p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>estbs</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>estbs</span></code></pre></div>
 <pre><code>## $TA
 ##        [,1]
 ## [1,] 12.545
@@ -1011,25 +1051,25 @@ This will add additional functions to R</p>
 <section id="r-exercise-visualize" class="slide level2">
 <h2>R exercise: visualize</h2>
 <p>Visualize the convex hulls</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set plot region</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="dv">0</span>, <span class="at">type =</span> <span class="st">&quot;n&quot;</span>,</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlim =</span> <span class="fu">range</span>(dat_ln<span class="sc">$</span>d13C, dat_bs<span class="sc">$</span>d13C),</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylim =</span> <span class="fu">range</span>(dat_ln<span class="sc">$</span>d15N, dat_bs<span class="sc">$</span>d15N),</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">&quot;delta N&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;delta C&quot;</span>)</span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="co"># for L.noguchii</span></span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(d15N <span class="sc">~</span> d13C, <span class="at">data =</span> dat_ln, <span class="at">pch =</span> <span class="dv">19</span>) <span class="co"># add points</span></span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="fu">polygon</span>(estln<span class="sc">$</span>xcoords, estln<span class="sc">$</span>ycoords) <span class="co"># draw polygon</span></span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="co"># for B.stenoderus</span></span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(d15N <span class="sc">~</span> d13C, <span class="at">data =</span> dat_bs, <span class="at">pch =</span> <span class="dv">21</span>,</span>
-<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="cn">NA</span>, <span class="at">bg =</span> <span class="fu">grey</span>(<span class="dv">0</span>, <span class="fl">0.2</span>)) <span class="co"># add points</span></span>
-<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a><span class="fu">polygon</span>(estbs<span class="sc">$</span>xcoords, estbs<span class="sc">$</span>ycoords,</span>
-<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>        <span class="at">col =</span> <span class="fu">grey</span>(<span class="dv">0</span>, <span class="fl">0.2</span>), <span class="at">border =</span> <span class="fu">grey</span>(<span class="dv">0</span>, <span class="fl">0.5</span>)) <span class="co"># draw polygon</span></span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set plot region</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="dv">0</span>, <span class="at">type =</span> <span class="st">&quot;n&quot;</span>,</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlim =</span> <span class="fu">range</span>(dat_ln<span class="sc">$</span>d13C, dat_bs<span class="sc">$</span>d13C),</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylim =</span> <span class="fu">range</span>(dat_ln<span class="sc">$</span>d15N, dat_bs<span class="sc">$</span>d15N),</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">&quot;delta N&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;delta C&quot;</span>)</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="co"># for L.noguchii</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(d15N <span class="sc">~</span> d13C, <span class="at">data =</span> dat_ln, <span class="at">pch =</span> <span class="dv">19</span>) <span class="co"># add points</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a><span class="fu">polygon</span>(estln<span class="sc">$</span>xcoords, estln<span class="sc">$</span>ycoords) <span class="co"># draw polygon</span></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a><span class="co"># for B.stenoderus</span></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(d15N <span class="sc">~</span> d13C, <span class="at">data =</span> dat_bs, <span class="at">pch =</span> <span class="dv">21</span>,</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="cn">NA</span>, <span class="at">bg =</span> <span class="fu">grey</span>(<span class="dv">0</span>, <span class="fl">0.2</span>)) <span class="co"># add points</span></span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a><span class="fu">polygon</span>(estbs<span class="sc">$</span>xcoords, estbs<span class="sc">$</span>ycoords,</span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>        <span class="at">col =</span> <span class="fu">grey</span>(<span class="dv">0</span>, <span class="fl">0.2</span>), <span class="at">border =</span> <span class="fu">grey</span>(<span class="dv">0</span>, <span class="fl">0.5</span>)) <span class="co"># draw polygon</span></span></code></pre></div>
 </section>
 <section id="r-exercise-visualize-1" class="slide level2">
 <h2>R exercise: visualize</h2>
-<p><img src="lecture05_trophic_files/figure-revealjs/unnamed-chunk-20-1.png" width="480" style="display: block; margin: auto;" /></p>
+<p><img src="lecture05_trophic_files/figure-revealjs/unnamed-chunk-21-1.png" width="480" style="display: block; margin: auto;" /></p>
 </section></section>
     </div>
   </div>

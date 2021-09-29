@@ -134,37 +134,65 @@ The term $dy$ represents the death rate of the predator
 
 ## Prediction 
 
-Population cycle
+Unfortunately, the discrete equivalent does not exist (some closely-related models exist, such as the Nicholson-Bailey model) - we will use R package `deSolve` to solve the equations
 
-<div id="left">
-```{r}
+```{r, echo = T}
+library(deSolve)
 
-x <- y <- NULL; x[1] <- y[1] <- 10
-a <- 0.1
-b <- 0.03
-c <- 0.1
-d <- 0.01
+# parameters
+param <- c(r = 1,
+           b = 0.1,
+           c = 0.1,
+           d = 0.1)
 
-for(t in 1:199){
-  x[t+1] <- exp(a - b*y[t])*x[t]
-  y[t+1] <- exp(d*x[t] - c)*y[t]
+# initial values for state variables
+state <- c(x = 5,
+           y = 5)
+
+```
+
+## Prediction 
+
+```{r, echo=TRUE}
+# function
+lotka_voltera <- function(t, state, param) {
+  with(as.list(c(state, param)), {
+    
+    # prey
+    dx <- r * x - c * x * y
+    
+    # predator
+    dy <- b * (c * x * y) - d * y
+    
+    list(c(dx, dy))
+  })
 }
 
-plot(x, type="l", col = "salmon",
-     ylab = "Density", xlab = "Time",
-     axes = F)
-lines(y, col = "steelblue")
-box(bty = "l")
 ```
-</div>
 
-<div id="right">
-```{r}
-plot(x, y, type = "l", col = "salmon", axes = F,
-     ylab = "Predator density", xlab = "Prey density")
-box(bty = "l")
+## Prediction 
+
+```{r, echo = TRUE}
+
+times <- seq(0, 100, by = 0.01)
+
+pred <- ode(y = state,
+            times = times,
+            func = lotka_voltera,
+            parms = param)
+
+df_pred <- data.frame(pred)
+
 ```
-</div>
+
+## Prediction
+
+Make figures
+
+1. figure 1 - time on x-axis and prey and predator density on y-axis
+
+2. figure 2 - prey density on x-axis and predator density on y-axis
+
 
 ## Food web complexity
 
@@ -188,22 +216,30 @@ Which of the following is more sensitive to the basal species deletion?
 
 <div id="left">
 ```{r}
-fw.plot(S = 3, type = "linear", segment = F, size.var = F)
+set.seed(1)
+M1 <- rbind(c(0,0,0,1,0),
+            c(0,0,0,1,1),
+            c(0,0,0,1,1),
+            c(0,0,0,0,1),
+            c(0,0,0,0,0))
+
+fw.plot(M = M1, type = "defined", segment = F)
 ```
 </div>
 
 <div id="right">
 ```{r}
 set.seed(1)
-M2 <- rbind(c(0,0,0,1,0),
+M2 <- rbind(c(0,0,1,0,0),
             c(0,0,0,1,0),
-            c(0,0,0,1,0),
+            c(0,0,0,0,1),
             c(0,0,0,0,1),
             c(0,0,0,0,0))
 
 fw.plot(M = M2, type = "defined", segment = F)
 ```
 </div>
+
 
 ## Sample food webs
 
@@ -211,23 +247,29 @@ Which of the following is more sensitive to the top predator deletion?
 
 <div id="left">
 ```{r}
-fw.plot(S = 3, type = "linear", segment = F, size.var = F)
+set.seed(1)
+M1 <- rbind(c(0,0,0,1,0),
+            c(0,0,0,1,1),
+            c(0,0,0,1,1),
+            c(0,0,0,0,1),
+            c(0,0,0,0,0))
+
+fw.plot(M = M1, type = "defined", segment = F)
 ```
 </div>
 
 <div id="right">
 ```{r}
 set.seed(1)
-M2 <- rbind(c(0,0,0,1,0),
+M2 <- rbind(c(0,0,1,0,0),
             c(0,0,0,1,0),
-            c(0,0,0,1,0),
+            c(0,0,0,0,1),
             c(0,0,0,0,1),
             c(0,0,0,0,0))
 
 fw.plot(M = M2, type = "defined", segment = F)
 ```
 </div>
-
 
 
 ## Complexity destabilizes the system
